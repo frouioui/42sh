@@ -30,5 +30,6 @@ void check_env_variable(char **args, char **env)
 		if (args[i][0] == ENV_VARIABLE_CHAR && args[i][1] != '\0') {
 			args[i] = set_args_variable(args[i], env);
 		}
+		prinf("%s\n", args[i]);
 	}
 }
