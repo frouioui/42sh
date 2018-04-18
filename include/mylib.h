@@ -8,6 +8,7 @@
 #ifndef LIBMY_H
 #define LIBMY_H
 
+#include <stdbool.h>
 #include "shell.h"
 
 int my_strlen(char *);
