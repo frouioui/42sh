@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include "mylib.h"
 #include "shell.h"
 #include "execution.h"
@@ -25,8 +26,7 @@ static char *get_name_variable(char *env, char *name, int *i)
 
 char *cd_special_cases(char *folder, char *env, int *changed)
 {
-	char *name = malloc(sizeof(char) * (my_strlen(env) + my_strlen(folder)
-		+ 1));
+	char *name = malloc(sizeof(char) * (strlen(env) + strlen(folder) + 1));
 	int i = 0;
 	int a = 0;
 
@@ -77,7 +77,7 @@ void go_home_cd(shell_t *shell)
 	int i = 0;
 	int j = 0;
 
-	name == NULL ? name = my_strcpy(NULL, shell->backup->home) : 0;
+	name == NULL ? name = strdup(shell->backup->home) : 0;
 	for (i = i; shell->env[a] && shell->env[a][i] != '=' &&
 		shell->env[a][i]; i++);
 	if (shell->env[a] != NULL && chdir(name) != -1) {

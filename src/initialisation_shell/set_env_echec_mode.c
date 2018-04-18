@@ -6,9 +6,9 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "shell.h"
 #include "echec.h"
-#include "mylib.h"
 
 char **set_env_echec_mode(void)
 {
@@ -18,10 +18,10 @@ char **set_env_echec_mode(void)
 	if (env == NULL)
 		return (NULL);
 	for (int i = 0; i < ENV_SIZE_ECHEC; i++) {
-		env[i] = malloc(sizeof(char) * (my_strlen(echec[i]) + 1));
+		env[i] = malloc(sizeof(char) * (strlen(echec[i]) + 1));
 		if (env[i] == NULL)
 			return (NULL);
-		env[i] = my_strcpy(env[i], echec[i]);
+		env[i] = strcpy(env[i], echec[i]);
 	}
 	return (env);
 }

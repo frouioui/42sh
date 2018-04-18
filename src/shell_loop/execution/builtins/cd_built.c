@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <errno.h>
+#include <string.h>
 #include "shell.h"
 #include "instruction.h"
 #include "execution.h"
@@ -39,7 +40,7 @@ static unsigned int clear_folder_name(char *folder)
 
 static void change_env_roll_back(char *env, int roll_back)
 {
-	unsigned int i = my_strlen(env);
+	unsigned int i = strlen(env);
 
 	while (i > 0 && roll_back > 0) {
 		if (env[i] == '/') {
@@ -56,8 +57,7 @@ static void change_env_roll_back(char *env, int roll_back)
 
 static char *add_folder_name_env(char *env, char *folder)
 {
-	char *new = malloc(sizeof(char) * (my_strlen(env) +
-					my_strlen(folder) + 2));
+	char *new = malloc(sizeof(char) * (strlen(env) + strlen(folder) + 2));
 	unsigned int i = 0;
 	unsigned int j = 0;
 
@@ -102,19 +102,19 @@ static char *change_directory(char *folder, char *env, shell_t *shell)
 int cd_built(shell_t *shell, pipe_t *pipe)
 {
 	unsigned int pos = get_line_env_zero(shell->env, "PWD");
-	char *folder = pipe->args[1] ? my_strcpy(NULL, pipe->args[1]) : NULL;
+	char *folder = pipe->args[1] ? strdup(pipe->args[1]) : NULL;
 	char *buffer = my_get_env(shell->env, "PWD");
 
 	folder != NULL && folder[0] == '.' ?
 	pos = check_rollback_path(shell, pipe->full_instruction, pos) : 0;
-	if (folder != NULL && pos != 0 && my_strcmp(folder, "-")) {
+	if (folder != NULL && pos != 0 && strcmp(folder, "-") != 0) {
 		save_old_pwd(shell->env);
 		buffer = change_directory(folder, shell->env[pos], shell);
 		(chdir(buffer + 4) == -1) ? folder_error(shell, errno, folder)
 			: 0;
 		(chdir(buffer + 4) != -1) && shell->env[pos] ? shell->env[pos]
 			= buffer : 0;
-	} else if (folder == NULL || my_strcmp(folder, "-") == 0) {
+	} else if (folder == NULL || strcmp(folder, "-") == 0) {
 		folder == NULL ? go_home_cd(shell) : 0;
 		folder != NULL ? go_back_cd(shell) : 0;
 		put_new_old_pwd(shell, buffer);

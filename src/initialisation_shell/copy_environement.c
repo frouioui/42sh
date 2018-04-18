@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "shell.h"
 #include "mylib.h"
 
@@ -17,10 +18,10 @@ char **copy_environement(char **origin)
 	if (env == NULL)
 		return (NULL);
 	for (unsigned int i = 0; i < number_row; i++) {
-		env[i] = malloc(sizeof(char) * (my_strlen(origin[i]) + 1));
+		env[i] = malloc(sizeof(char) * (strlen(origin[i]) + 1));
 		if (env[i] == NULL)
 			return (NULL);
-		my_strcpy(env[i], origin[i]);
+		strcpy(env[i], origin[i]);
 		env[i + 1] = NULL;
 	}
 	env[number_row] = NULL;

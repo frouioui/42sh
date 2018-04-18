@@ -6,6 +6,8 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #include "shell.h"
 #include "execution.h"
 #include "instruction.h"
@@ -18,9 +20,8 @@ static char **update_env_variable(char **env, int pos, char *str)
 	char *buffer = NULL;
 
 	env[pos] ? buffer = my_getenv_root(env[pos]) : 0;
-	env[pos] == NULL ? env[pos] = my_strcpy(NULL, str) : free(env[pos]);
-	env[pos] = malloc(sizeof(char) * (my_strlen(buffer) +
-					my_strlen(str) + 1));
+	env[pos] == NULL ? env[pos] = strdup(str) : free(env[pos]);
+	env[pos] = malloc(sizeof(char) * (strlen(buffer) + strlen(str) + 1));
 	for (i = 0; buffer[i]; i++)
 		env[pos][i] = buffer[i];
 	while (str[j]) {
@@ -52,8 +53,8 @@ static char **add_env_variable(char **env, char **args, int pos)
 	int j = 0;
 	int i = 0;
 
-	env = realloc_env(env, pos, sizeof(char) * (my_strlen(args[1]) +
-			my_strlen(args[2]) + 10));
+	env = realloc_env(env, pos, sizeof(char) * (strlen(args[1]) +
+			strlen(args[2]) + 10));
 	while (args[1][i]) {
 		env[pos][j] = args[1][i];
 		i++;
@@ -75,8 +76,8 @@ static int check_setenv_variable(shell_t *shell, char *arg)
 {
 	for (int i = 0; arg[i]; i++) {
 		if (ALPHANUM(arg[i]) == 0) {
-			my_putstr("setenv: Variable name must contain "\
-			"alphanumeric characters.\n");
+			puts("setenv: Variable name must contain "\
+			"alphanumeric characters.");
 			shell->code = 1;
 			return (-1);
 		}

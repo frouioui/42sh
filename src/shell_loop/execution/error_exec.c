@@ -5,10 +5,9 @@
 ** Display the error command not find.
 */
 
-#include "mylib.h"
+#include <stdio.h>
 
 void display_error_execution(char *filename)
 {
-	my_putstr(filename);
-	my_putstr(": Command not found.\n");
+	printf("%s: Command not found.\n", filename);
 }

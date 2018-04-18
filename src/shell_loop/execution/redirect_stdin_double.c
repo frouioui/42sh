@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 #include "execution.h"
 #include "instruction.h"
 #include "mylib.h"
@@ -19,8 +20,8 @@ static void get_user_stdin_input(pipe_t *pipe, char *arg)
 {
 	char *input = NULL;
 
-	while ((input = get_next_line(0)) != NULL && my_strcmp(input, arg)) {
-		if (write(pipe->pipe[1], input, my_strlen(input)) == -1)
+	while ((input = get_next_line(0)) != NULL && strcmp(input, arg) != 0) {
+		if (write(pipe->pipe[1], input, strlen(input)) == -1)
 			perror("write");
 		write(pipe->pipe[1], "\n", 1);
 		free(input);

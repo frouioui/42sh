@@ -11,12 +11,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 #include "instruction.h"
 #include "mylib.h"
 
 static char *cut_filename(char *instruction, redirect_t redirect)
 {
-	char *filename = malloc(sizeof(char) * my_strlen(instruction));
+	char *filename = malloc(sizeof(char) * strlen(instruction));
 	int i = 0;
 	int a = 0;
 

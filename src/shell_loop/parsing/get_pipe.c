@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "shell.h"
 #include "instruction.h"
 #include "mylib.h"
@@ -35,7 +36,7 @@ static unsigned int get_full_pipe(pipe_t **pipe, instruction_t *inst)
 
 	for (unsigned int i = 0; i < inst->number_of_pipe; i++) {
 		pipe[i]->full_instruction = malloc(sizeof(char) *
-		(my_strlen(inst->full_instruction) + 2));
+		(strlen(inst->full_instruction) + 2));
 		if (pipe[i]->full_instruction == NULL)
 			return (FAILURE);
 		for (int a = 0; inst->full_instruction[j] &&

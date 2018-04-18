@@ -5,11 +5,11 @@
 ** Fix all the extra space at the begining and the end of string
 */
 
-#include "mylib.h"
+#include <string.h>
 
 void fix_extra_spaces(char *str)
 {
-	int size = my_strlen(str) - 1;
+	int size = strlen(str) - 1;
 	int i;
 	int a;
 

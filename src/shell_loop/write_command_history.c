@@ -10,7 +10,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include "mylib.h"
+#include <string.h>
 #include "shell.h"
 #include "instruction.h"
 
@@ -25,7 +25,7 @@ void write_command_history(bool bonus, command_line_t *cmd)
 	if (fd != -1) {
 		for (unsigned int i = 0; i < cmd->number_instruction; i++) {
 			write(fd, cmd->instruction[i]->full_instruction,
-			my_strlen(cmd->instruction[i]->full_instruction));
+			strlen(cmd->instruction[i]->full_instruction));
 			write(fd, "\n", 1);
 		}
 		close(fd);

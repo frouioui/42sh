@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "shell.h"
 #include "mylib.h"
 #include "echec.h"
@@ -13,13 +14,13 @@
 static void set_default_mode_backup(backup_t *backup)
 {
 	if (backup->path == NULL)
-		backup->path = my_strcpy(NULL, PATH_ECHEC);
+		backup->path = strdup(PATH_ECHEC);
 	if (backup->home == NULL)
-		backup->home = my_strcpy(NULL, PATH_HOME);
+		backup->home = strdup(PATH_HOME);
 	if (backup->user == NULL)
-		backup->user = my_strcpy(NULL, USER);
+		backup->user = strdup(USER);
 	if (backup->current_pwd == NULL)
-		backup->current_pwd = my_strcpy(NULL, PWD);
+		backup->current_pwd = strdup(PWD);
 }
 
 backup_t *initialisation_backup(char **env)

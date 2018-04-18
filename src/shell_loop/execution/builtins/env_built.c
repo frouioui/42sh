@@ -5,15 +5,13 @@
 ** Function that display the whole environement
 */
 
+#include <stdio.h>
 #include "shell.h"
 #include "instruction.h"
-#include "mylib.h"
 
 int env_built(shell_t *shell, pipe_t *pipe)
 {
-	for (int i = 0; shell->env[i]; i++) {
-		my_putstr(shell->env[i]);
-		my_putchar('\n');
-	}
+	for (int i = 0; shell->env[i]; i++)
+		puts(shell->env[i]);
 	return (0);
 }

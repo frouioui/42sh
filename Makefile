@@ -5,7 +5,7 @@
 ## Makefile of the 42sh project
 ##
 
-## ---- NAMES ---- ##
+## ---- BINARIES NAMES ---- ##
 
 BINARY_NAME	=	42sh
 
@@ -79,7 +79,35 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 
 SRC_MAIN	=	$(PATH_SRC)/main.c
 
-SRCS_TEST	=
+SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
+			$(PATH_TEST)/shell/copy_environement_test.c \
+			$(PATH_TEST)/shell/destroy_shell_test.c \
+			$(PATH_TEST)/shell/display_prompt_test.c \
+			$(PATH_TEST)/shell/initialisation_backup_test.c \
+			$(PATH_TEST)/shell/initialisation_shell_test.c \
+			$(PATH_TEST)/shell/is_empty_line_test.c \
+			$(PATH_TEST)/shell/set_env_echec_mode_test.c \
+			$(PATH_TEST)/shell/transforme_cmd_test.c \
+			$(PATH_TEST)/shell/write_history_test.c \
+			$(PATH_TEST)/parsing/analyse_redirect_test.c \
+			$(PATH_TEST)/parsing/analyse_redirect_2_test.c \
+			$(PATH_TEST)/parsing/check_env_variable_test.c \
+			$(PATH_TEST)/parsing/get_command_line_1_test.c \
+			$(PATH_TEST)/parsing/get_number_instruction_test.c \
+			$(PATH_TEST)/parsing/get_pipe_number_test.c \
+			$(PATH_TEST)/parsing/get_pipe_test.c \
+			$(PATH_TEST)/lib/my/get_next_line_test.c \
+			$(PATH_TEST)/lib/my/my_putstr_test.c \
+			$(PATH_TEST)/lib/my/my_strcmp_test.c \
+			$(PATH_TEST)/lib/my/my_strlen_test.c \
+			$(PATH_TEST)/execution/cd_builtin_test.c \
+			$(PATH_TEST)/execution/cd_builtin_crash_test.c \
+			$(PATH_TEST)/execution/execute_command_test.c \
+			$(PATH_TEST)/execution/execute_command2_test.c \
+			$(PATH_TEST)/execution/execute_command3_test.c \
+			$(PATH_TEST)/execution/is_builtin_test.c \
+			$(PATH_TEST)/execution/setenv_builtin_test.c \
+			$(PATH_TEST)/execution/setenv_crash_test.c \
 
 ## ---- FLAGS ---- ##
 
@@ -107,20 +135,28 @@ $(BINARY_NAME): $(OBJS)
 
 tests_run:
 	make -C./lib/
-	$(CC) $(SRCS) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAG) $(LIB)
-	./$(BINARY_NAME) --always-succeed
+	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
+	./$(TEST_BINARY_NAME) --always-succeed
 
 debug:
 	make -C./lib/
 	$(CC) $(SRCS) $(SRC_MAIN) -o $(DEBUG_BINARY_NAME) $(HEADER) $(LIB) $(DEBUG_FLAG)
-	./$(DEBUG_BINARY_NAME)
+	gdb -w $(DEBUG_BINARY_NAME)
+
+valgrind:
+	make -C./lib/
+	$(CC) $(SRCS) $(SRC_MAIN) -o $(DEBUG_BINARY_NAME) $(HEADER) $(LIB) $(DEBUG_FLAG)
+	valgrind ./$(DEBUG_BINARY_NAME)
 
 clean:
 	make clean -C./lib/
-	rm -f $(OBJS) *.gc*
+	rm -f $(OBJS) *.gc* a u y b i
 
 fclean: clean
 	make fclean -C./lib/
 	rm -f $(BINARY_NAME) $(DEBUG_BINARY_NAME) $(TEST_BINARY_NAME)
+
+full_clean: fclean
+	rm -f .history* .tags*
 
 re: fclean all

@@ -6,9 +6,9 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "shell.h"
 #include "instruction.h"
-#include "mylib.h"
 
 static instruction_t *new_instruction(char *str)
 {
@@ -17,7 +17,7 @@ static instruction_t *new_instruction(char *str)
 	if (instruction == NULL)
 		return (NULL);
 	instruction->full_instruction = malloc(sizeof(char) *
-		(my_strlen(str) + 1));
+		(strlen(str) + 1));
 	if (instruction->full_instruction == NULL)
 		return (NULL);
 	instruction->valid = true;
@@ -27,9 +27,9 @@ static instruction_t *new_instruction(char *str)
 static unsigned int get_instruction(command_line_t *command, char *input)
 {
 	unsigned int j = 0;
-	int i = 0;
+	unsigned int i = 0;
 
-	while (i < my_strlen(input) && j < command->number_instruction) {
+	while (i < strlen(input) && j < command->number_instruction) {
 		command->instruction[j] = new_instruction(input);
 		if (command->instruction[j] == NULL)
 			return (FAILURE);

@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdio.h>
+#include <stdio.h>
 #include "shell.h"
 #include "instruction.h"
 #include "execution.h"
@@ -61,8 +62,8 @@ void multiple_execution(shell_t *shell, instruction_t *instruction)
 	int *stat = malloc(sizeof(int) * (instruction->number_of_pipe + 2));
 	int actual = instruction->actual_pipe;
 
-	if (instruction->number_of_pipe > 2) {
-		my_putstr("too many pipes in here.\n");
+	if (instruction->number_of_pipe > 2) {  // Wounded to disapear ;)
+		puts("too many pipes in here.");
 		exit(84);
 	}
 	fd = create_pipe(instruction->number_of_pipe);

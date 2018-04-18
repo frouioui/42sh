@@ -14,12 +14,10 @@
 #include "shell.h"
 #include "instruction.h"
 #include "execution.h"
-#include "mylib.h"
 
 void bad_archi(shell_t *shell, char *arg)
 {
-	my_putstr(arg);
-	my_putstr(": Exec format error. Wrong Architecture.\n");
+	printf("%s: Exec format error. Wrong Architecture.\n", arg);
 	shell->code = 1;
 }
 

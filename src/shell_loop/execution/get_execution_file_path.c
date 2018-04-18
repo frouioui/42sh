@@ -8,10 +8,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <string.h>
 #include "shell.h"
 #include "instruction.h"
 #include "execution.h"
-#include "mylib.h"
 
 static int count_rollback(char *user_input)
 {
@@ -30,7 +30,7 @@ static int count_rollback(char *user_input)
 
 static void roll_back_path(char *path, int roll_back)
 {
-	int i = my_strlen(path);
+	int i = strlen(path);
 
 	while (i > 0 && roll_back != 0) {
 		if (path[i] == '/')
@@ -68,8 +68,8 @@ static void *free_file(char *file, char *exec)
 
 char *get_execution_file_path(char *exec, shell_t *shell)
 {
-	char *path = my_strcpy(NULL, shell->backup->current_pwd);
-	char *file = malloc(sizeof(char) * my_strlen(path) + my_strlen(exec));
+	char *path = strdup(shell->backup->current_pwd);
+	char *file = malloc(sizeof(char) * strlen(path) + strlen(exec));
 	int roll_back = count_rollback(exec);
 	int a = 0;
 

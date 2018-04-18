@@ -6,13 +6,13 @@
 */
 
 #include <stdbool.h>
-#include "mylib.h"
+#include <string.h>
 
 bool is_builtins(char *arg)
 {
-	if (my_strcmp(arg, "cd") && my_strcmp(arg, "env") &&
-	my_strcmp(arg, "setenv") && my_strcmp(arg, "exit") &&
-	my_strcmp(arg, "unsetenv")) {
+	if (strcmp(arg, "cd") != 0 && strcmp(arg, "env") != 0 &&
+	strcmp(arg, "setenv") != 0 && strcmp(arg, "exit") != 0 &&
+	strcmp(arg, "unsetenv") != 0) {
 		return (false);
 	}
 	return (true);

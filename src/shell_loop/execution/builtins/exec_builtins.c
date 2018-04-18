@@ -5,9 +5,9 @@
 ** Redirect to the right builtins and exec them, set the error code is error
 */
 
+#include <string.h>
 #include "instruction.h"
 #include "execution.h"
-#include "mylib.h"
 
 int exec_builtins(shell_t *shell, pipe_t *pipe)
 {
@@ -16,7 +16,7 @@ int exec_builtins(shell_t *shell, pipe_t *pipe)
 	{"unsetenv", unsetenv_built}};
 
 	for (unsigned int i = 0; i < NB_BUILTIN; i++)
-		if (my_strcmp(redir[i].name, pipe->args[0]) == 0)
+		if (strcmp(redir[i].name, pipe->args[0]) == 0)
 			return (redir[i].built(shell, pipe));
 	return (-1);
 }

@@ -6,13 +6,13 @@
 */
 
 #include <stdbool.h>
-#include "mylib.h"
+#include "string.h"
 
 bool is_bonus(int argc, char **argv)
 {
 	if (argc != 2)
 		return (false);
-	if (my_strcmp(argv[1], "--bonus") == 0)
+	if (strcmp(argv[1], "--bonus") == 0)
 		return (true);
 	return (false);
 }

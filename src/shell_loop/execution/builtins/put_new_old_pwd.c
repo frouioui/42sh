@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "shell.h"
 #include "mylib.h"
 
@@ -16,7 +17,7 @@ void put_new_old_pwd(shell_t *shell, char *buffer)
 	int j = 0;
 
 	shell->env[pos_old_pwd] = malloc(sizeof(char) *
-		(my_strlen(buffer) + 8));
+		(strlen(buffer) + 8));
 	if (shell->env[pos_old_pwd] == NULL)
 		exit(84);
 	for (int i = 0; name[i]; i++) {

@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "instruction.h"
 #include "mylib.h"
 
@@ -15,7 +16,7 @@ static char *set_args_variable(char *arg, char **env)
 
 	if (variable != NULL) {
 		free(arg);
-		arg = my_strcpy(NULL, variable);
+		arg = strdup(variable);
 		free(variable);
 		return (arg);
 	} else {

@@ -6,12 +6,13 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "instruction.h"
 #include "mylib.h"
 
 static void display_invalid_pipe(void)
 {
-	my_putstr("Invalid null command.\n");
+	puts("Invalid null command.");
 }
 
 static unsigned int seek_next_separator(instruction_t *instruction, int *i)

@@ -6,23 +6,23 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "instruction.h"
-#include "mylib.h"
 
 static void display_error_invalid_pipe(void)
 {
-	my_putstr("Invalid null command.\n");
+	puts("Invalid null command.");
 }
 
 static void display_error_invalid_redirect(void)
 {
-	my_putstr("Missing name for redirect.\n");
+	puts("Missing name for redirect.");
 }
 
 static void display_error_ambiguous_redirect(void)
 {
-	my_putstr("Ambiguous output redriect.\n");
-	my_putstr("Ambiguous input redriect.\n");
+	puts("Ambiguous output redriect.");
+	puts("Ambiguous input redriect.");
 }
 
 void display_error_instruction(instruction_t *instruction)

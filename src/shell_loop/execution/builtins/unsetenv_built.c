@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "shell.h"
 #include "instruction.h"
 #include "mylib.h"
@@ -13,7 +14,7 @@
 static int display_unsetenv_error(shell_t *shell)
 {
 	shell->code = 1;
-	my_putstr("unsetenv: Too few arguments.\n");
+	puts("unsetenv: Too few arguments.");
 	return (0);
 }
 

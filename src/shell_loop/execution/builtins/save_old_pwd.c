@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include "shell.h"
 #include "mylib.h"
 
@@ -18,7 +19,7 @@ void save_old_pwd(char **env)
 
 	current == NULL ? current = my_strcpy(NULL, "\0") : 0;
 	free(env[pos_old_pwd]);
-	env[pos_old_pwd] = malloc(sizeof(char) * (my_strlen(current) + 8));
+	env[pos_old_pwd] = malloc(sizeof(char) * (strlen(current) + 8));
 	if (env[pos_old_pwd] == NULL)
 		exit(84);
 	for (int i = 0; name[i]; i++) {

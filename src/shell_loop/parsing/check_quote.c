@@ -5,7 +5,7 @@
 ** Check the quote in the sub strings of the pipe
 */
 
-#include "mylib.h"
+#include <string.h>
 
 static void remove_first(char *arg)
 {
@@ -21,7 +21,7 @@ void check_quote(char **args)
 	for (unsigned int i = 0; args[i]; i++) {
 		if (args[i][0] == '"')
 			remove_first(args[i]);
-		if (args[i][my_strlen(args[i]) - 1] == '"')
-			args[i][my_strlen(args[i]) - 1] = '\0';
+		if (args[i][strlen(args[i]) - 1] == '"')
+			args[i][strlen(args[i]) - 1] = '\0';
 	}
 }
