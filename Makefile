@@ -103,6 +103,7 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/lib/my/my_strlen_test.c \
 			$(PATH_TEST)/execution/cd_builtin_test.c \
 			$(PATH_TEST)/execution/cd_builtin_crash_test.c \
+			$(PATH_TEST)/execution/echo_builtin_test.c \
 			$(PATH_TEST)/execution/execute_command_test.c \
 			$(PATH_TEST)/execution/execute_command2_test.c \
 			$(PATH_TEST)/execution/execute_command3_test.c \
