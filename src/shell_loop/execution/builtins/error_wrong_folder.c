@@ -9,10 +9,14 @@
 #include <errno.h>
 #include <stdio.h>
 #include "shell.h"
+#include "mylib.h"
 
 void display_folder_error(shell_t *shell, char *folder, char *str)
 {
-	printf("%s: %s\n", folder, str);
+	my_putstr(folder);
+	my_putstr(": ");
+	my_putstr(str);
+	my_putchar('\n');
 	shell->code = 1;
 }
 

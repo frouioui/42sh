@@ -12,7 +12,7 @@
 
 static void display_invalid_pipe(void)
 {
-	puts("Invalid null command.");
+	my_putstr("Invalid null command.\n");
 }
 
 static unsigned int seek_next_separator(instruction_t *instruction, int *i)
