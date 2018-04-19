@@ -51,6 +51,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/parsing/check_quote.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/cd_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/env_built.c \
+		$(PATH_SRC)/shell_loop/execution/builtins/echo_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/setenv_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/unsetenv_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/exit_built.c \
