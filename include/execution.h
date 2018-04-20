@@ -41,6 +41,7 @@ void check_sig(shell_t *, int);
 void bad_archi(shell_t *, char *);
 char *get_redirect_filename(pipe_t *);
 void redirect_stdin_double(pipe_t *);
+unsigned int is_condition_valid(instruction_t **, unsigned int);
 
 /* --- builtins functions --- */
 int exec_builtins(shell_t *, pipe_t *);
