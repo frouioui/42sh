@@ -10,7 +10,13 @@
 
 #include <stdbool.h>
 
+#define INSTRUCTION_SEPARATOR_ALL(s, i) (s[i] == ';' || (s[i] == '|' &&\
+			s[i + 1] == '|') || (s[i] == '&' && s[i + 1] == '&'))
+#define INSTRUCTION_SEPARATOR_ONE(s, i) (s[i] == ';' || s[i] == '|' ||\
+			s[i] == '&')
 #define INSTRUCTION_SEPARATOR  ';'
+#define OR_INSTRUCTION_SEPARATOR  '|'
+#define AND_INSTRUCTION_SEPARATOR  '&'
 #define PIPE_SEPARATOR '|'
 #define ENV_VARIABLE_CHAR '$'
 #define REDIRECT_CHAR(c) (c == '>' || c == '<')

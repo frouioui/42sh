@@ -29,21 +29,21 @@ static unsigned int get_instruction(command_line_t *command, char *input)
 	unsigned int j = 0;
 	unsigned int i = 0;
 
-	while (i < strlen(input) && j < command->number_instruction) {
+	while (input[i] && j < command->number_instruction) {
 		command->instruction[j] = new_instruction(input);
-		if (command->instruction[j] == NULL)
+		if (!command->instruction[j])
 			return (FAILURE);
-		for (int a = 0; input[i] && input[i] != INSTRUCTION_SEPARATOR;
-		a++) {
+		for (int a = 0; input[i] &&
+		INSTRUCTION_SEPARATOR_ALL(input, i) == 0; a++) {
 			command->instruction[j]->full_instruction[a]
 			= input[i];
 			i++;
 			command->instruction[j]->full_instruction[a + 1] = 0;
 		}
 		fix_extra_spaces(command->instruction[j]->full_instruction);
-		for (i; input[i] && input[i] == ';' && input[i] == ' '; i++);
+		for (i; input[i] && (INSTRUCTION_SEPARATOR_ONE(input, i)
+			|| input[i] == ' '); i++);
 		j++;
-		i++;
 	}
 	return (SUCCESS);
 }

@@ -94,6 +94,7 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/parsing/analyse_redirect_2_test.c \
 			$(PATH_TEST)/parsing/check_env_variable_test.c \
 			$(PATH_TEST)/parsing/get_command_line_1_test.c \
+			$(PATH_TEST)/parsing/get_command_line_2_test.c \
 			$(PATH_TEST)/parsing/get_number_instruction_test.c \
 			$(PATH_TEST)/parsing/get_pipe_number_test.c \
 			$(PATH_TEST)/parsing/get_pipe_test.c \
