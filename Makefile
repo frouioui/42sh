@@ -78,6 +78,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/execution/check_sig.c \
 		$(PATH_SRC)/shell_loop/execution/display_error_instruction.c \
 		$(PATH_SRC)/shell_loop/execution/redirect_stdin_double.c \
+		$(PATH_SRC)/shell_loop/execution/check_condition_instruction.c \
 
 SRC_MAIN	=	$(PATH_SRC)/main.c
 

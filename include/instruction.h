@@ -66,6 +66,7 @@ typedef struct pipe_s {
 
 typedef struct instruction_s {
 	char *full_instruction;
+	unsigned char last_code;
 	unsigned int number_of_pipe;
 	unsigned int actual_pipe;
 	bool valid;
