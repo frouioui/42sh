@@ -85,13 +85,13 @@ Test(get_command_line_2, test_pipe_valid_command)
 
 Test(get_command_line_2, test_pipe_not_valid_command)
 {
-	char inst[2][30] = {"/bin/ls || grep", "cat toto"};
+	char inst[2][30] = {"/bin/ls | | grep", "cat toto"};
 	char *user_input = NULL;
 	char **env = malloc(sizeof(char) * 1);
 	command_line_t *command = NULL;
 
 	cr_redirect_stdout();
-	user_input = my_strcpy(user_input, "/bin/ls || grep ; cat toto");
+	user_input = my_strcpy(user_input, "/bin/ls | | grep ; cat toto");
 	env[0] = my_strcpy(env[0], "HOME=/home/gildas");
 	command = get_command_line(false, user_input, env);
 	cr_assert_not_null(command);
@@ -106,7 +106,7 @@ Test(get_command_line_2, test_pipe_not_valid_command)
 	cr_assert_eq(command->instruction[1]->number_of_pipe, 0);
 }
 
-Test(get_command_line_2, test_pipe_redirect_valid_command)
+Test(get_command_line_3, test_pipe_redirect_valid_command)
 {
 	char inst[2][30] = {"/bin/ls $HOME", "cat toto > salut"};
 	char *user_input = NULL;

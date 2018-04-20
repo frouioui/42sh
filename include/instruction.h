@@ -10,7 +10,16 @@
 
 #include <stdbool.h>
 
+#define INSTRUCTION_SEPARATOR_ALL(s, i) (s[i] == ';' || (s[i] == '|' &&\
+			s[i + 1] == '|') || (s[i] == '&' && s[i + 1] == '&'))
+#define INSTRUCTION_SEPARATOR_ONE(s, i) (s[i] == ';' || s[i] == '|' ||\
+			s[i] == '&')
 #define INSTRUCTION_SEPARATOR  ';'
+#define OR_INSTRUCTION_SEPARATOR  '|'
+#define AND_INSTRUCTION_SEPARATOR  '&'
+#define IS_AND_CONDITION(s, i) (s[i] == '&' && s[i + 1] == '&')
+#define IS_OR_CONDITION(s, i) (s[i] == '|' && s[i + 1] == '|')
+#define IS_NO_CONDITION(s, i) (s[i] == ';')
 #define PIPE_SEPARATOR '|'
 #define ENV_VARIABLE_CHAR '$'
 #define REDIRECT_CHAR(c) (c == '>' || c == '<')
@@ -36,6 +45,12 @@ typedef enum error_syntax_s {
 	AMBIGUOUS_REDIRECT
 } error_syntax_t;
 
+typedef enum condition_s {
+	NO,
+	AND,
+	OR
+} condition_t;
+
 typedef struct pipe_s {
 	char *full_instruction;
 	char **args;
@@ -56,6 +71,7 @@ typedef struct instruction_s {
 	bool valid;
 	error_syntax_t error;
 	pipe_t **pipe;
+	condition_t condition;
 } instruction_t;
 
 typedef struct command_line_s {
@@ -79,5 +95,7 @@ void display_error_instruction(instruction_t *);
 bool is_empty_input(char *);
 char *apply_transformation(bool, char *);
 void check_quote(char **);
+void get_condition(instruction_t *, char *);
+instruction_t *new_instruction(char *str);
 
 #endif /* end of include guard: INSTRUCTION_H */

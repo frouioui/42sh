@@ -23,12 +23,12 @@ Test(apply_transformation, hst_1)
 		"PWD=/home/marvin"};
 	FILE *fp;
 
-	close(open(".history", O_RDWR | O_TRUNC));
 	for (int i = 0; i < 4; i++) {
 		env[i] = malloc(sizeof(char) * my_strlen(str[i]));
 		env[i] = my_strcpy(env[i], str[i]);
 	}
 	env[4] = NULL;
+	close(open(".history", O_RDWR | O_TRUNC));
 	write_command_history(true, get_command_line(true, "exitt", env));
 	fp = fopen (".history","r");
 	cr_assert_file_contents_eq_str(fp, "exitt\n");
@@ -44,12 +44,12 @@ Test(apply_transformation, hst_2)
 		"PWD=/home/marvin"};
 	FILE *fp;
 
-	close(open(".history", O_RDWR | O_TRUNC));
 	for (int i = 0; i < 4; i++) {
 		env[i] = malloc(sizeof(char) * my_strlen(str[i]));
 		env[i] = my_strcpy(env[i], str[i]);
 	}
 	env[4] = NULL;
+	close(open(".history", O_RDWR | O_TRUNC));
 	write_command_history(true, get_command_line(true, "ls -l", env));
 	write_command_history(true, get_command_line(true, "env", env));
 	fp = fopen (".history","r");
@@ -66,12 +66,12 @@ Test(apply_transformation, hst_3)
 		"PWD=/home/marvin"};
 	FILE *fp;
 
-	close(open(".history", O_RDWR | O_TRUNC));
 	for (int i = 0; i < 4; i++) {
 		env[i] = malloc(sizeof(char) * my_strlen(str[i]));
 		env[i] = my_strcpy(env[i], str[i]);
 	}
 	env[4] = NULL;
+	close(open(".history", O_RDWR | O_TRUNC));
 	write_command_history(true, get_command_line(true, "find *", env));
 	write_command_history(true, get_command_line(true, "env", env));
 	write_command_history(true, get_command_line(true, "echo toto", env));
