@@ -48,5 +48,5 @@ Test(get_pipe_1, 2_pipes_value, .timeout = 0.2)
 	cr_assert_str_eq(pipe[0]->args[1], "-l");
 	cr_assert_str_eq(pipe[1]->full_instruction, "grep \"tty\"");
 	cr_assert_str_eq(pipe[1]->args[0], "grep");
-	cr_assert_str_eq(pipe[1]->args[1], "tty");
+	cr_assert_str_eq(pipe[1]->args[1], "\"tty\"");
 }

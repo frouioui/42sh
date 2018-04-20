@@ -49,8 +49,10 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/parsing/check_env_variable.c \
 		$(PATH_SRC)/shell_loop/parsing/fix_extra_space.c \
 		$(PATH_SRC)/shell_loop/parsing/check_quote.c \
+		$(PATH_SRC)/shell_loop/parsing/get_condition.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/cd_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/env_built.c \
+		$(PATH_SRC)/shell_loop/execution/builtins/echo_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/setenv_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/unsetenv_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/exit_built.c \
@@ -76,6 +78,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/execution/check_sig.c \
 		$(PATH_SRC)/shell_loop/execution/display_error_instruction.c \
 		$(PATH_SRC)/shell_loop/execution/redirect_stdin_double.c \
+		$(PATH_SRC)/shell_loop/execution/check_condition_instruction.c \
 
 SRC_MAIN	=	$(PATH_SRC)/main.c
 
@@ -93,18 +96,20 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/parsing/analyse_redirect_2_test.c \
 			$(PATH_TEST)/parsing/check_env_variable_test.c \
 			$(PATH_TEST)/parsing/get_command_line_1_test.c \
+			$(PATH_TEST)/parsing/get_command_line_2_test.c \
 			$(PATH_TEST)/parsing/get_number_instruction_test.c \
 			$(PATH_TEST)/parsing/get_pipe_number_test.c \
 			$(PATH_TEST)/parsing/get_pipe_test.c \
+			$(PATH_TEST)/parsing/get_condition_test.c \
 			$(PATH_TEST)/lib/my/get_next_line_test.c \
 			$(PATH_TEST)/lib/my/my_putstr_test.c \
 			$(PATH_TEST)/lib/my/my_strcmp_test.c \
 			$(PATH_TEST)/lib/my/my_strlen_test.c \
 			$(PATH_TEST)/execution/cd_builtin_test.c \
 			$(PATH_TEST)/execution/cd_builtin_crash_test.c \
+			$(PATH_TEST)/execution/echo_builtin_test.c \
 			$(PATH_TEST)/execution/execute_command_test.c \
 			$(PATH_TEST)/execution/execute_command2_test.c \
-			$(PATH_TEST)/execution/execute_command3_test.c \
 			$(PATH_TEST)/execution/is_builtin_test.c \
 			$(PATH_TEST)/execution/setenv_builtin_test.c \
 			$(PATH_TEST)/execution/setenv_crash_test.c \

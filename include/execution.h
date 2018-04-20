@@ -15,7 +15,7 @@
 #include "shell.h"
 #include "instruction.h"
 
-#define NB_BUILTIN 5
+#define NB_BUILTIN 6
 
 /* --- functions redirection sturcture --- */
 typedef struct redirect_flag_s {
@@ -41,11 +41,13 @@ void check_sig(shell_t *, int);
 void bad_archi(shell_t *, char *);
 char *get_redirect_filename(pipe_t *);
 void redirect_stdin_double(pipe_t *);
+unsigned int is_condition_valid(instruction_t **, unsigned int);
 
 /* --- builtins functions --- */
 int exec_builtins(shell_t *, pipe_t *);
 bool is_builtins(char *);
 int cd_built(shell_t *, pipe_t *);
+int echo_built(shell_t *, pipe_t *);
 int env_built(shell_t *, pipe_t *);
 int exit_built(shell_t *, pipe_t *);
 int setenv_built(shell_t *, pipe_t *);

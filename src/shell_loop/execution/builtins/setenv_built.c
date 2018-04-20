@@ -53,8 +53,8 @@ static char **add_env_variable(char **env, char **args, int pos)
 	int j = 0;
 	int i = 0;
 
-	env = realloc_env(env, pos, sizeof(char) * (strlen(args[1]) +
-			strlen(args[2]) + 10));
+	env = realloc_env(env, pos, sizeof(char) * (my_strlen(args[1]) +
+			my_strlen(args[2]) + 10));
 	while (args[1][i]) {
 		env[pos][j] = args[1][i];
 		i++;
@@ -76,8 +76,8 @@ static int check_setenv_variable(shell_t *shell, char *arg)
 {
 	for (int i = 0; arg[i]; i++) {
 		if (ALPHANUM(arg[i]) == 0) {
-			puts("setenv: Variable name must contain "\
-			"alphanumeric characters.");
+			my_putstr("setenv: Variable name must contain "\
+			"alphanumeric characters.\n");
 			shell->code = 1;
 			return (-1);
 		}
