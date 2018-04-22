@@ -62,10 +62,6 @@ void multiple_execution(shell_t *shell, instruction_t *instruction)
 	int *stat = malloc(sizeof(int) * (instruction->number_of_pipe + 2));
 	int actual = instruction->actual_pipe;
 
-	if (instruction->number_of_pipe > 2) {  // Wounded to disapear ;)
-		puts("too many pipes in here.");
-		exit(84);
-	}
 	fd = create_pipe(instruction->number_of_pipe);
 	if (fd == NULL)
 		return;
@@ -73,8 +69,9 @@ void multiple_execution(shell_t *shell, instruction_t *instruction)
 		exit(84);
 	if (pid == 0)
 		exec_pipe(shell, instruction, fd, pid);
-	else
+	else {
 		wait_all(stat, shell, instruction, fd);
+	}
 	free_pipes(fd);
 	free(stat);
 }

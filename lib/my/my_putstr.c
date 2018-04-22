@@ -11,6 +11,8 @@ void my_putstr(char *str)
 {
 	int i = 0;
 
+	if (!str)
+		return;
 	while (str[i] != '\0') {
 		my_putchar(str[i]);
 		i++;
