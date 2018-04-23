@@ -139,6 +139,10 @@ $(BINARY_NAME): $(OBJS)
 	make -C./lib/
 	$(CC) -o $(BINARY_NAME) $(HEADER) $(OBJS) $(LIB)
 
+tests_compile:
+	make -C./lib/
+	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
+
 tests_run:
 	make -C./lib/
 	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
