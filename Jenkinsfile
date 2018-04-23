@@ -19,19 +19,9 @@ pipeline {
 				sh 'coding_style > coding_style_log.txt'
 			}
 		}
-		stage('Unit_Test') {
-			steps {
-				/* Compiling unit tests. Makefile rule : tests_compile */
-				echo 'Running Unit Test'
-				sh 'make fclean && make tests_compile > make_test_log.txt'
-				/* Execute unit tests binary. Binary name : 42sh_test */
-				timeout(time: 1.5, unit: 'MINUTES') {
-					sh './42sh_test || true'
-				}
-				/* Coverage */
-				sh 'gcovr -r . > coverage_test_log.txt'
-			}
-		}
+		/*
+		* Integrate the testing stage here.
+		*/
 		stage('Report') {
 			steps {
 				echo 'Sending report to student'
@@ -41,6 +31,7 @@ pipeline {
 	post {
 		always {
 			archiveArtifacts artifacts: '*_log.txt', fingerprint: true
+			emailext attachLog: true, attachmentsPattern: '*_log.txt', body: 'Check out the given files.', subject: 'PSU_42sh_2017 Report', to: 'florent.poinsard@epitech.eu, cecile.cadoul@epitech.eu, florian.davasse@epitech.eu, julien.ollivier@epitech.eu'
 		}
 	}
 }
