@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 #include "shell.h"
 #include "execution.h"
 #include "instruction.h"
@@ -72,12 +73,14 @@ static char **add_env_variable(char **env, char **args, int pos)
 	return (env);
 }
 
-static int check_setenv_variable(shell_t *shell, char *arg)
+static int check_setenv_variable(shell_t *shell, char *arg, int fd)
 {
+	char str[] = "setenv: Variable name must contain alphanumeric"\
+		" characters.\n";
+
 	for (int i = 0; arg[i]; i++) {
 		if (ALPHANUM(arg[i]) == 0) {
-			my_putstr("setenv: Variable name must contain "\
-			"alphanumeric characters.\n");
+			write(fd, str, strlen(str));
 			shell->code = 1;
 			return (-1);
 		}
@@ -91,7 +94,7 @@ int setenv_built(shell_t *shell, pipe_t *pipe)
 
 	if (pipe->args[1] == NULL)
 		return (env_built(shell, pipe));
-	if (check_setenv_variable(shell, pipe->args[1]) == -1)
+	if (check_setenv_variable(shell, pipe->args[1], pipe->fd) == -1)
 		return (0);
 	pos = get_line_env(shell->env, pipe->args[1]);
 	if (pipe->args[2] == NULL)

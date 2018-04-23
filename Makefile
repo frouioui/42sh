@@ -64,6 +64,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/save_old_pwd.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/realloc_env.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/destroy_cd_resources.c \
+		$(PATH_SRC)/shell_loop/execution/builtins/builtins_redirect_pipe.c \
 		$(PATH_SRC)/shell_loop/execution/get_redirected.c \
 		$(PATH_SRC)/shell_loop/execution/multiple_execution.c \
 		$(PATH_SRC)/shell_loop/execution/execute_command.c \
