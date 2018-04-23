@@ -8,7 +8,7 @@ BUFFER2_TCSH="buffer2_tcsh.txt"
 BUFFER2_42SH="buffer2_42sh.txt"
 RESULT_BUFFER=0
 
-function init_repo() {
+init_repo() {
 	if [ -f $RESULTS ]; then
 		rm $RESULTS
 	fi
@@ -28,7 +28,7 @@ function init_repo() {
 	fi
 }
 
-function clean_up_repo() {
+clean_up_repo() {
 	rm $BUFFER_42SH $BUFFER_TCSH $BUFFER2_42SH $BUFFER2_TCSH
 	make fclean
 	if [[ $? -ne 0 ]]; then
@@ -38,12 +38,12 @@ function clean_up_repo() {
 	fi
 }
 
-function display_result() {
+display_result() {
 	clear
 	cat $RESULTS
 }
 
-function check_return() {
+check_return() {
 	if [[ $1 -ne $2 ]]; then
 		RESULT_BUFFER=1
 	elif [[ $1 -eq $2 ]]; then
@@ -52,7 +52,7 @@ function check_return() {
 }
 
 # cd_builtin
-function cd_builtin_easy() {
+cd_builtin_easy() {
 	echo -ne "cd ..\nenv" | ./$BINARY > $BUFFER_42SH
 	check_return "$?" "0"
 	if [[ $RESULT_BUFFER -eq 1 ]]; then
@@ -70,7 +70,7 @@ function cd_builtin_easy() {
 	fi
 }
 
-function cd_builtin_home() {
+cd_builtin_home() {
 	echo -ne "cd\nenv" | ./$BINARY > $BUFFER_42SH
 	check_return "$?" "0"
 	if [[ $RESULT_BUFFER -eq 1 ]]; then
@@ -88,7 +88,7 @@ function cd_builtin_home() {
 	fi
 }
 
-function cd_builtin_error() {
+cd_builtin_error() {
 	echo -ne "cd toto" | ./$BINARY > $BUFFER_42SH
 	check_return "$?" "1"
 	if [[ $RESULT_BUFFER -eq 1 ]]; then
@@ -104,7 +104,7 @@ function cd_builtin_error() {
 }
 
 # exec_binary
-function non_existing_binary() {
+non_existing_binary() {
 	echo -ne "./toto" | ./$BINARY > $BUFFER_42SH
 	check_return "$?" "1"
 	if [[ $RESULT_BUFFER -eq 1 ]]; then
@@ -119,7 +119,7 @@ function non_existing_binary() {
 	fi
 }
 
-function non_existing_binary_2() {
+non_existing_binary_2() {
 	echo -ne "./../../Delivery/toto" | ./$BINARY > $BUFFER_42SH
 	check_return "$?" "1"
 	if [[ $RESULT_BUFFER -eq 1 ]]; then
@@ -134,7 +134,7 @@ function non_existing_binary_2() {
 	fi
 }
 
-function ls_command() {
+ls_command() {
 	echo -ne "ls" | ./$BINARY > $BUFFER_42SH
 	check_return "$?" "0"
 	if [[ $RESULT_BUFFER -eq 1 ]]; then
@@ -149,7 +149,7 @@ function ls_command() {
 	fi
 }
 
-function cat_command() {
+cat_command() {
 	echo -ne "cat 42sh_tester" | ./$BINARY > $BUFFER_42SH
 	check_return "$?" "0"
 	if [[ $RESULT_BUFFER -eq 1 ]]; then
@@ -165,7 +165,7 @@ function cat_command() {
 }
 
 # parsing
-function easy_parsing() {
+easy_parsing() {
 	echo -ne "cd         \t   ..\nenv" | ./$BINARY > $BUFFER_42SH
 	check_return "$?" "0"
 	if [[ $RESULT_BUFFER -eq 1 ]]; then
@@ -183,7 +183,7 @@ function easy_parsing() {
 	fi
 }
 
-function easy_parsing_2() {
+easy_parsing_2() {
 	echo -ne "  cd    \t   \t         \t   ..   \t \n      env " | ./$BINARY > $BUFFER_42SH
 	check_return "$?" "0"
 	if [[ $RESULT_BUFFER -eq 1 ]]; then
@@ -201,7 +201,7 @@ function easy_parsing_2() {
 	fi
 }
 
-function easy_parsing_3() {
+easy_parsing_3() {
 	echo -ne "  cd\t    \t   \t         \t   \t..\t   \t \n      env " | ./$BINARY > $BUFFER_42SH
 	check_return "$?" "0"
 	if [[ $RESULT_BUFFER -eq 1 ]]; then
@@ -219,14 +219,14 @@ function easy_parsing_3() {
 	fi
 }
 
-function cd_builtin() {
+cd_builtin() {
 	echo "------ CD BUILTIN ------" >> $RESULTS
 	cd_builtin_easy
 	cd_builtin_home
 	cd_builtin_error
 }
 
-function exec_binary() {
+exec_binary() {
 	echo "------ EXEC BINARY ------" >> $RESULTS
 	non_existing_binary
 	non_existing_binary_2
@@ -234,14 +234,14 @@ function exec_binary() {
 	cat_command
 }
 
-function parsing() {
+parsing() {
 	echo "------ PARSING ------" >> $RESULTS
 	easy_parsing
 	easy_parsing_2
 	easy_parsing_3
 }
 
-function basic_test() {
+basic_test() {
 	echo "--> BASIC TEST" >> $RESULTS
 	cd_builtin
 	exec_binary

@@ -34,7 +34,6 @@ pipeline {
 		always {
 			archiveArtifacts artifacts: '*_log.txt', fingerprint: true
 			emailext attachLog: true, attachmentsPattern: '*_log.txt', body: 'Check out the given files.', subject: 'PSU_42sh_2017 Report', to: 'florent.poinsard@epitech.eu, cecile.cadoul@epitech.eu, florian.davasse@epitech.eu, julien.ollivier@epitech.eu'
-			junit 'test_report_log.txt'
 		}
 	}
 }
