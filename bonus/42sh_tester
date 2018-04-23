@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 RESULTS="test_report_log.txt"
 BINARY="42sh"
