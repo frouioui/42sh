@@ -86,7 +86,7 @@ Test(execute_command_4, bad_syntax, .timeout = 0.2)
 	cr_redirect_stdout();
 	shell->command_line = get_command_line(false, "echo|||toto",
 		shell->env);
-	cr_assert_eq(execute_command(shell, shell->command_line), 1);
+	cr_assert_eq(execute_command(shell, shell->command_line), 0);
 }
 
 Test(execute_command_5, bad_syntax, .timeout = 0.2)

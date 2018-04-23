@@ -66,6 +66,7 @@ pipe_t **get_pipe(bool bonus, instruction_t *instruction, char **env)
 		if (pipe[i] == NULL)
 			return (NULL);
 		pipe[i]->valid = true;
+		pipe[i]->fd = 1;
 		pipe[i + 1] = NULL;
 	}
 	if (get_full_pipe(pipe, instruction) == FAILURE)

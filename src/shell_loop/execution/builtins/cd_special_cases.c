@@ -46,7 +46,7 @@ char *cd_special_cases(char *folder, char *env, int *changed)
 	return (env);
 }
 
-void go_back_cd(shell_t *shell)
+void go_back_cd(shell_t *shell, int fd)
 {
 	char *name = my_get_env(shell->env, "OLDPWD");
 	unsigned int a = get_line_env(shell->env, "PWD");
@@ -66,11 +66,11 @@ void go_back_cd(shell_t *shell)
 		shell->env[a][i] = '\0';
 	} else if (shell->env[a] != NULL) {
 		shell->env[a][i] == '=' ? i++ : 0;
-		folder_error(shell, 0, name);
+		folder_error(shell, 0, name, fd);
 	}
 }
 
-void go_home_cd(shell_t *shell)
+void go_home_cd(shell_t *shell, int fd)
 {
 	char *name = my_get_env(shell->env, "HOME");
 	unsigned int a = get_line_env(shell->env, "PWD");
@@ -87,11 +87,12 @@ void go_home_cd(shell_t *shell)
 		shell->env[a][i] = '\0';
 	} else if (shell->env[a] != NULL) {
 		shell->env[a][i] == '=' ? i++ : 0;
-		folder_error(shell, 0, name);
+		folder_error(shell, 0, name, fd);
 	}
 }
 
-unsigned int check_rollback_path(shell_t *shell, char *user, unsigned int pos)
+unsigned int check_rollback_path(shell_t *shell, char *user, unsigned int pos,
+	int fd)
 {
 	int i = 0;
 	int number_dot = 0;
@@ -107,7 +108,7 @@ unsigned int check_rollback_path(shell_t *shell, char *user, unsigned int pos)
 		} else if (user[i] == '/' && number_dot == 2) {
 			number_dot = 0;
 		} else {
-			folder_error(shell, 0, user);
+			folder_error(shell, 0, user, fd);
 			return (0);
 		}
 	}

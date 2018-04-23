@@ -12,7 +12,7 @@
 #include "instruction.h"
 
 static void dup_first(shell_t *shell, pipe_t *pipe, int **fd,
-unsigned int actual)
+	unsigned int actual)
 {
 	int *fd1 = fd[actual];
 
@@ -29,7 +29,7 @@ unsigned int actual)
 }
 
 static void dup_last(shell_t *shell, pipe_t *pipe, int **fd,
-unsigned int actual)
+	unsigned int actual)
 {
 	int *fd1 = fd[actual - 1];
 
@@ -46,7 +46,7 @@ unsigned int actual)
 }
 
 static void dup_between(shell_t *shell, pipe_t *pipe, int **fd,
-unsigned int actual)
+	unsigned int actual)
 {
 	int *fd1 = fd[actual];
 	int *fd2 = fd[actual - 1];
@@ -71,7 +71,7 @@ unsigned int actual)
 }
 
 int dup_my_pipe(shell_t *shell, instruction_t *instruction,
-unsigned int actual, int **fd)
+	unsigned int actual, int **fd)
 {
 	if (actual == 0) {
 		dup_first(shell, instruction->pipe[actual], fd, actual);
@@ -79,7 +79,7 @@ unsigned int actual, int **fd)
 		dup_last(shell, instruction->pipe[actual], fd, actual);
 	} else {
 		dup_between(shell, instruction->pipe[actual], fd,
-		actual);
+			actual);
 	}
 	return (0);
 }

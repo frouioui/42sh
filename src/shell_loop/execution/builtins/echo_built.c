@@ -7,7 +7,7 @@
 
 #include <stdbool.h>
 #include <string.h>
-#include <stdio.h>
+#include <unistd.h>
 #include "shell.h"
 #include "mylib.h"
 
@@ -28,18 +28,19 @@ int echo_built(shell_t *shell, pipe_t *pipe)
 	bool n_option = false;
 
 	if (pipe->args[1] == NULL)
-		my_putstr("\n");
+		write(pipe->fd, "\n", 1);
 	else {
 		check_quote(pipe->args);
 		n_option = search_option(pipe, &index);
 		while (pipe->args[index + 1] != NULL) {
-			my_putstr(pipe->args[index]);
-			my_putstr(" ");
+			write(pipe->fd, pipe->args[index],
+				strlen(pipe->args[index]));
+			write(pipe->fd, " ", 1);
 			index += 1;
 		}
-		my_putstr(pipe->args[index]);
+		write(pipe->fd, pipe->args[index], strlen(pipe->args[index]));
 		if (n_option != true)
-			my_putstr("\n");
+			write(pipe->fd, "\n", 1);
 	}
 	return (0);
 }
