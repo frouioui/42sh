@@ -35,13 +35,10 @@ pipeline {
 			archiveArtifacts artifacts: '*_log.txt', fingerprint: true
 		}
 		failure {
-			emailext attachLog: true, attachmentsPattern: '*_log.txt', body: 'Check out the given files.', subject: 'PSU_42sh_2017 [FAILURE]', to: 'florent.poinsard@epitech.eu, cecile.cadoul@epitech.eu, florian.davasse@epitech.eu, julien.ollivier@epitech.eu'
-		}
-		changed {
-			emailext attachLog: true, attachmentsPattern: '*_log.txt', body: 'Check out the given files.', subject: 'PSU_42sh_2017 [NEW VERSION OK]', to: 'florent.poinsard@epitech.eu, cecile.cadoul@epitech.eu, florian.davasse@epitech.eu, julien.ollivier@epitech.eu'
+			emailext attachLog: true, attachmentsPattern: '*_log.txt', body: 'Check out the given files.', subject: 'PSU_42sh_2017 [FAILURE]', to: 'florent.poinsard@epitech.eu, florian.davasse@epitech.eu'
 		}
 		success {
-			emailext attachLog: true, attachmentsPattern: '*_log.txt', body: 'Check out the given files.', subject: 'PSU_42sh_2017 [SUCCESS]', to: 'florent.poinsard@epitech.eu, cecile.cadoul@epitech.eu, florian.davasse@epitech.eu, julien.ollivier@epitech.eu'
+			emailext attachLog: true, attachmentsPattern: '*_log.txt', body: 'Check out the given files.', subject: 'PSU_42sh_2017 [SUCCESS]', to: 'florent.poinsard@epitech.eu, florian.davasse@epitech.eu'
 		}
 	}
 }

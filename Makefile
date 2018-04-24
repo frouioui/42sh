@@ -51,6 +51,9 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/parsing/fix_extra_space.c \
 		$(PATH_SRC)/shell_loop/parsing/check_quote.c \
 		$(PATH_SRC)/shell_loop/parsing/get_condition.c \
+		$(PATH_SRC)/shell_loop/parsing/alias/get_alias.c \
+		$(PATH_SRC)/shell_loop/parsing/alias/get_alias_from_file.c \
+		$(PATH_SRC)/shell_loop/parsing/alias/get_size_alias_file.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/cd_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/env_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/echo_built.c \
@@ -95,6 +98,8 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/shell/set_env_echec_mode_test.c \
 			$(PATH_TEST)/shell/transforme_cmd_test.c \
 			$(PATH_TEST)/shell/write_history_test.c \
+			$(PATH_TEST)/shell/get_alias_from_file_test.c \
+			$(PATH_TEST)/shell/get_alias_test.c \
 			$(PATH_TEST)/parsing/analyse_redirect_test.c \
 			$(PATH_TEST)/parsing/analyse_redirect_2_test.c \
 			$(PATH_TEST)/parsing/check_env_variable_test.c \
@@ -134,7 +139,7 @@ CDFLAG	=	-W -Wextra
 
 OBJS	=	$(SRCS:.c=.o) $(SRC_MAIN:.c=.o)
 
-## ---- RULES ---- ##
+## ---- MAIN RULE ---- ##
 
 all: $(BINARY_NAME)
 
@@ -146,7 +151,7 @@ $(BINARY_NAME): $(OBJS)
 
 tests_auto:
 	cp bonus/42sh_tester .
-	./42sh_tester
+	./42sh_tester -j1 --always-succeed
 
 tests_compile:
 	make -C./lib/
@@ -155,12 +160,12 @@ tests_compile:
 tests_run:
 	make -C./lib/
 	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
-	./$(TEST_BINARY_NAME) --always-succeed
+	./$(TEST_BINARY_NAME) --always-succeed -j1
 
 tests_full:
 	make -C./lib/
 	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
-	./$(TEST_BINARY_NAME) --always-succeed 2> unit_report.txt
+	./$(TEST_BINARY_NAME) --always-succeed -j1 2> unit_report.txt
 	cp bonus/42sh_tester .
 	./42sh_tester > /dev/null
 	clear
@@ -169,10 +174,12 @@ tests_full:
 show_coverage:
 	make -C./lib/
 	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
-	./$(TEST_BINARY_NAME) --always-succeed
+	./$(TEST_BINARY_NAME) --always-succeed -j1
 	lcov --directory ./ -c -o rapport.info
 	genhtml -o ./report -t "code coverage report" rapport.info
 	xdg-open ./report/index.html &>/dev/null
+
+## -- SMART TOOLS RULES -- ##
 
 debug:
 	make -C./lib/
@@ -183,6 +190,11 @@ valgrind:
 	make -C./lib/
 	$(CC) $(SRCS) $(SRC_MAIN) -o $(DEBUG_BINARY_NAME) $(HEADER) $(LIB) $(DEBUG_FLAG)
 	valgrind ./$(DEBUG_BINARY_NAME)
+
+wc:
+	wc $(SRCS) $(SRC_MAIN) $(SRCS_TEST) include/*
+
+## -- CLEANING RULES -- ##
 
 clean:
 	make clean -C./lib/
