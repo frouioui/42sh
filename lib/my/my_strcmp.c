@@ -24,3 +24,17 @@ int my_strcmp(char *s1, char *s2)
 	}
 	return (0);
 }
+
+int my_strcmp_env(char *str, char *env)
+{
+	int i = 0;
+
+	if (str == NULL || env == NULL)
+		return (1);
+	while (str[i] != ) {
+		if ((s1[i] != s2[i]) || s1[i] == '\0' || s2[i] == '\0')
+			return (1);
+		i = i + 1;
+	}
+	return (0);
+}

@@ -9,6 +9,8 @@
 #define SHELL_H
 
 #include <stdbool.h>
+#include <stdio.h>
+#include <string.h>
 #include "instruction.h"
 
 #define PATH_HISTORY_FILE "./.history"

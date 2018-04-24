@@ -9,12 +9,11 @@
 
 int find_option_env(char **env, char *str)
 {
-	if (str == NULL)
+	if (str == NULL || env == NULL)
 		return (-1);
 	for (int i = 0; env[i] != NULL; i++) {
-		//for (int i = 0; env[i] != NULL; i++);
-		if (!my_strcmp(str, env[i]))
+		if (!strcmp(str, env[i]))
 			return (i);
 	}
-	return (-1);
+	return (-2);
 }
