@@ -72,6 +72,6 @@ Test(execute_command_12, simple_pipe, .timeout = 0.2)
 	shell->command_line = get_command_line(false, "echo a | grep a > b",
 		shell->env);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
-	fp = fopen ("b","rw");
+	fp = fopen("b","rw");
 	cr_assert_file_contents_eq_str(fp, "a\n");
 }

@@ -14,7 +14,8 @@ int exec_builtins(shell_t *shell, pipe_t *pipe)
 {
 	redir_builtins_t redir[NB_BUILTIN] = {{"cd", cd_built},
 	{"env", env_built}, {"setenv", setenv_built}, {"exit", exit_built},
-	{"unsetenv", unsetenv_built}, {"echo", echo_built}};
+	{"unsetenv", unsetenv_built}, {"echo", echo_built},
+	{"history", history_built}};
 	int err = 0;
 
 	for (unsigned int i = 0; i < NB_BUILTIN; i++) {
