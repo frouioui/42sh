@@ -33,6 +33,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/initialisation_shell/initialisation_backup.c \
 		$(PATH_SRC)/initialisation_shell/is_bonus_shell.c \
 		$(PATH_SRC)/shell_loop/transformation/apply_transformation.c \
+		$(PATH_SRC)/shell_loop/transformation/history/history.c \
 		$(PATH_SRC)/shell_loop/parsing/get_command_line.c \
 		$(PATH_SRC)/shell_loop/parsing/get_number_instruction.c \
 		$(PATH_SRC)/shell_loop/shell_loop.c \
