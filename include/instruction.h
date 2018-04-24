@@ -104,4 +104,8 @@ instruction_t *new_instruction(char *);
 char *apply_transformation(bool, char *);
 char *get_history(char **);
 
+/* --- functions for the history --- */
+unsigned int size_history(void);
+char **get_whole_history(void);
+
 #endif /* end of include guard: INSTRUCTION_H */

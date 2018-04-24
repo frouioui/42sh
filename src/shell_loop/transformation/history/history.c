@@ -13,8 +13,9 @@
 #include <string.h>
 #include <stdio.h>
 #include "mylib.h"
+#include "instruction.h"
 
-static unsigned int size_history(void)
+unsigned int size_history(void)
 {
 	unsigned int size = 0;
 	int fd = open(PATH_HISTORY_FILE, O_RDONLY);
@@ -30,7 +31,7 @@ static unsigned int size_history(void)
 	return (size);
 }
 
-static char **get_whole_history(void)
+char **get_whole_history(void)
 {
 	char **history = malloc(sizeof(char *) * (size_history() + 1));
 	char *buffer = NULL;
@@ -88,7 +89,7 @@ char *get_history(char **args)
 
 	if (history == NULL)
 		return (NULL);
-	if (!(target = get_target(args[0])) || target >= size ||
+	if (!(target = get_target(args[0])) || target > size ||
 		!(args[0] = strdup(history[size - target]))) {
 		free_array_string(history);
 		return (NULL);
@@ -97,5 +98,6 @@ char *get_history(char **args)
 		free_array_string(history);
 		return (NULL);
 	}
+	fix_extra_spaces(new);
 	return (new);
 }

@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "instruction.h"
 #include "mylib.h"
 
 char *apply_transformation(bool bonus, char *user_input)

@@ -32,17 +32,17 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/initialisation_shell/set_env_echec_mode.c \
 		$(PATH_SRC)/initialisation_shell/initialisation_backup.c \
 		$(PATH_SRC)/initialisation_shell/is_bonus_shell.c \
-		$(PATH_SRC)/shell_loop/transformation/apply_transformation.c \
-		$(PATH_SRC)/shell_loop/transformation/history/history.c \
-		$(PATH_SRC)/shell_loop/parsing/get_command_line.c \
-		$(PATH_SRC)/shell_loop/parsing/get_number_instruction.c \
 		$(PATH_SRC)/shell_loop/shell_loop.c \
 		$(PATH_SRC)/shell_loop/write_command_history.c \
 		$(PATH_SRC)/shell_loop/free_command.c \
 		$(PATH_SRC)/shell_loop/update_backup.c \
 		$(PATH_SRC)/shell_loop/free_array_string.c \
+		$(PATH_SRC)/shell_loop/transformation/apply_transformation.c \
+		$(PATH_SRC)/shell_loop/transformation/history/history.c \
 		$(PATH_SRC)/shell_loop/prompt/display_bonus_prompt.c \
 		$(PATH_SRC)/shell_loop/prompt/display_prompt.c \
+		$(PATH_SRC)/shell_loop/parsing/get_command_line.c \
+		$(PATH_SRC)/shell_loop/parsing/get_number_instruction.c \
 		$(PATH_SRC)/shell_loop/parsing/get_pipe_number.c \
 		$(PATH_SRC)/shell_loop/parsing/fill_up_instruction.c \
 		$(PATH_SRC)/shell_loop/parsing/get_pipe.c \
@@ -66,6 +66,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/realloc_env.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/destroy_cd_resources.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/builtins_redirect_pipe.c \
+		$(PATH_SRC)/shell_loop/execution/builtins/history_built.c \
 		$(PATH_SRC)/shell_loop/execution/get_redirected.c \
 		$(PATH_SRC)/shell_loop/execution/multiple_execution.c \
 		$(PATH_SRC)/shell_loop/execution/execute_command.c \
@@ -115,6 +116,7 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/execution/is_builtin_test.c \
 			$(PATH_TEST)/execution/setenv_builtin_test.c \
 			$(PATH_TEST)/execution/setenv_crash_test.c \
+			$(PATH_TEST)/execution/history_builtin_test.c \
 
 ## ---- FLAGS ---- ##
 
@@ -141,6 +143,7 @@ $(BINARY_NAME): $(OBJS)
 	$(CC) -o $(BINARY_NAME) $(HEADER) $(OBJS) $(LIB)
 
 ## -- TESTING RULES -- ##
+
 tests_auto:
 	cp bonus/42sh_tester .
 	./42sh_tester
@@ -175,7 +178,7 @@ valgrind:
 
 clean:
 	make clean -C./lib/
-	rm -f $(OBJS) *.gc* a u y b i *.txt 42sh_tester
+	rm -f $(OBJS) *.gc* a u y b i z *.txt 42sh_tester
 
 fclean: clean
 	make fclean -C./lib/
