@@ -166,6 +166,14 @@ tests_full:
 	clear
 	cat unit_report.txt test_report_log.txt
 
+show_coverage:
+	make -C./lib/
+	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
+	./$(TEST_BINARY_NAME) --always-succeed
+	lcov --directory ./ -c -o rapport.info
+	genhtml -o ./report -t "code coverage report" rapport.info
+	xdg-open ./report/index.html &>/dev/null
+
 debug:
 	make -C./lib/
 	$(CC) $(SRCS) $(SRC_MAIN) -o $(DEBUG_BINARY_NAME) $(HEADER) $(LIB) $(DEBUG_FLAG)
@@ -178,7 +186,7 @@ valgrind:
 
 clean:
 	make clean -C./lib/
-	rm -f $(OBJS) *.gc* a u y b i z *.txt 42sh_tester
+	rm -f $(OBJS) *.gc* a u y b i z buf buf2 *.txt 42sh_tester -Rf report rapport.info
 
 fclean: clean
 	make fclean -C./lib/
