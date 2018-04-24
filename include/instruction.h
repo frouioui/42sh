@@ -77,6 +77,7 @@ typedef struct instruction_s {
 } instruction_t;
 
 typedef struct command_line_s {
+	char *full_command;
 	unsigned int number_instruction;
 	instruction_t **instruction;
 	bool valid;
