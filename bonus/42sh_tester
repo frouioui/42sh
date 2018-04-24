@@ -30,7 +30,6 @@ init_repo() {
 
 clean_up_repo() {
 	rm $BUFFER_42SH $BUFFER_TCSH $BUFFER2_42SH $BUFFER2_TCSH
-	make fclean
 	if [[ $? -ne 0 ]]; then
 		echo "Got an error when cleaning the repo."
 		echo "Got an error when cleaning the repo." >> $RESULTS
