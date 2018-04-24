@@ -99,26 +99,30 @@ static char *change_directory(char *folder, char *env, shell_t *shell)
 	return (env);
 }
 
-int cd_built(shell_t *shell, pipe_t *pipe)
+/*
+** The char *fl defines the folder's name.
+** The pipe_t *p variables defines the current given pipe.
+*/
+int cd_built(shell_t *shell, pipe_t *p)
 {
 	unsigned int pos = get_line_env_zero(shell->env, "PWD");
-	char *folder = pipe->args[1] ? strdup(pipe->args[1]) : NULL;
-	char *buffer = my_get_env(shell->env, "PWD");
+	char *fl = p->args[1] ? strdup(p->args[1]) : NULL;
+	char *buf = my_get_env(shell->env, "PWD");
 
-	folder != NULL && folder[0] == '.' ?
-	pos = check_rollback_path(shell, pipe->full_instruction, pos) : 0;
-	if (folder != NULL && pos != 0 && strcmp(folder, "-") != 0) {
+	fl != NULL && fl[0] == '.' ?
+	pos = check_rollback_path(shell, p->full_instruction, pos, p->fd) : 0;
+	if (fl != NULL && pos != 0 && strcmp(fl, "-") != 0) {
 		save_old_pwd(shell->env);
-		buffer = change_directory(folder, shell->env[pos], shell);
-		(chdir(buffer + 4) == -1) ? folder_error(shell, errno, folder)
+		buf = change_directory(fl, shell->env[pos], shell);
+		(chdir(buf + 4) < 0) ? folder_error(shell, errno, fl, p->fd)
 			: 0;
-		(chdir(buffer + 4) != -1) && shell->env[pos] ? shell->env[pos]
-			= buffer : 0;
-	} else if (folder == NULL || strcmp(folder, "-") == 0) {
-		folder == NULL ? go_home_cd(shell) : 0;
-		folder != NULL ? go_back_cd(shell) : 0;
-		put_new_old_pwd(shell, buffer);
+		(chdir(buf + 4) != -1) && shell->env[pos] ? shell->env[pos]
+			= buf : 0;
+	} else if (fl == NULL || strcmp(fl, "-") == 0) {
+		fl == NULL ? go_home_cd(shell, p->fd) : 0;
+		fl != NULL ? go_back_cd(shell, p->fd) : 0;
+		put_new_old_pwd(shell, buf);
 	} else
-		folder_error(shell, 0, folder);
+		folder_error(shell, 0, fl, p->fd);
 	return (0);
 }

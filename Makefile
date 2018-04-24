@@ -64,6 +64,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/save_old_pwd.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/realloc_env.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/destroy_cd_resources.c \
+		$(PATH_SRC)/shell_loop/execution/builtins/builtins_redirect_pipe.c \
 		$(PATH_SRC)/shell_loop/execution/get_redirected.c \
 		$(PATH_SRC)/shell_loop/execution/multiple_execution.c \
 		$(PATH_SRC)/shell_loop/execution/execute_command.c \
@@ -138,10 +139,28 @@ $(BINARY_NAME): $(OBJS)
 	make -C./lib/
 	$(CC) -o $(BINARY_NAME) $(HEADER) $(OBJS) $(LIB)
 
+## -- TESTING RULES -- ##
+tests_auto:
+	cp bonus/42sh_tester .
+	./42sh_tester
+
+tests_compile:
+	make -C./lib/
+	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
+
 tests_run:
 	make -C./lib/
 	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
 	./$(TEST_BINARY_NAME) --always-succeed
+
+tests_full:
+	make -C./lib/
+	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
+	./$(TEST_BINARY_NAME) --always-succeed 2> unit_report.txt
+	cp bonus/42sh_tester .
+	./42sh_tester > /dev/null
+	clear
+	cat unit_report.txt test_report_log.txt
 
 debug:
 	make -C./lib/
@@ -155,7 +174,7 @@ valgrind:
 
 clean:
 	make clean -C./lib/
-	rm -f $(OBJS) *.gc* a u y b i
+	rm -f $(OBJS) *.gc* a u y b i *.txt 42sh_tester
 
 fclean: clean
 	make fclean -C./lib/

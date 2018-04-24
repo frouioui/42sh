@@ -39,7 +39,7 @@ static int exec_parent(shell_t *shell, instruction_t *inst, int **fd)
 		inst->pipe[actual]->args, shell->env) == -1)
 			errno == 8 ? bad_archi(shell, inst->pipe[actual]->
 			args[0]) : folder_error(shell,
-				errno, inst->pipe[actual]-> args[0]);
+				errno, inst->pipe[actual]-> args[0], 1);
 		exit(1);
 	}
 	return (shell->state);

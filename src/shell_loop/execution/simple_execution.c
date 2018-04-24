@@ -26,7 +26,7 @@ static void execute_child(shell_t *shell, pipe_t *pipe)
 		redirect_pipe(shell->bonus, pipe);
 		if (execve(pipe->path_exec, pipe->args, shell->env) == -1)
 			errno == 8 ? bad_archi(shell, pipe->args[0])
-			: folder_error(shell, errno, pipe->args[0]);
+			: folder_error(shell, errno, pipe->args[0], 1);
 		exit(shell->code);
 	} else {
 		!wait(&status) ? perror(pipe->args[0]) : 0;
