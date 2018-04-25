@@ -23,5 +23,6 @@ unsigned int get_line_env(char **, char *);
 unsigned int get_line_env_zero(char **, char *);
 char *my_getenv_root(char *);
 int my_atoi(char *);
+char *my_strcat(char *, char *);
 
 #endif /* end of include guard: LIBMY_H */
