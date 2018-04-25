@@ -13,7 +13,35 @@
 #include <unistd.h>
 #include "shell.h"
 #include "instruction.h"
+#include "execution.h"
 
+/*
+** Get the full alias (its key and its value) from the pipe's args.
+** Exemple :
+** "ll ls -l colors"
+** Will become : [ll] [ls -l colors].
+*/
+char *get_full_alias(char **args)
+{
+	char *alias = NULL;
+	int size = 0;
+
+	for (int i = 1; args[i]; i++)
+	size += strlen(args[i]) + 1;
+	alias = malloc(sizeof(char) * (size * 2));
+	if (alias == NULL)
+	return (NULL);
+	alias[0] = '\0';
+	for (int i = 1; args[i]; i++) {
+		alias = strcat(alias, args[i]);
+		alias = strcat(alias, " \0");
+	}
+	return (alias);
+}
+
+/*
+** Simply opens the file and returns its fd.
+*/
 static int open_alias(char *path)
 {
 	int fd = open(path, O_RDWR | O_CREAT | O_APPEND,
@@ -22,6 +50,9 @@ static int open_alias(char *path)
 	return (fd);
 }
 
+/*
+** Display all the alias until EOF.
+*/
 static void display_alias(shell_t *shell, pipe_t *pipe)
 {
 	int fd = open_alias(shell->paths[0]);
@@ -34,24 +65,9 @@ static void display_alias(shell_t *shell, pipe_t *pipe)
 	close(fd);
 }
 
-static char *get_full_alias(char **args)
-{
-	char *alias = NULL;
-	int size = 0;
-
-	for (int i = 1; args[i]; i++)
-		size += strlen(args[i]) + 1;
-	alias = malloc(sizeof(char) * size);
-	if (alias == NULL)
-		return (NULL);
-	alias[0] = '\0';
-	for (int i = 1; args[i]; i++) {
-		alias = strcat(alias, args[i]);
-		alias = strcat(alias, " ");
-	}
-	return (alias);
-}
-
+/*
+** Create a simple alias at the end of the alias file.
+*/
 static void create_alias(shell_t *shell, pipe_t *pipe)
 {
 	char *full_alias = get_full_alias(pipe->args);
@@ -64,12 +80,17 @@ static void create_alias(shell_t *shell, pipe_t *pipe)
 	write(fd, "\n", 1);
 }
 
+/*
+** Main function of the alias builtin, display the alias if no arg and change
+** or add alias if there are args in the pipe.
+*/
 int alias_built(shell_t *shell, pipe_t *pipe)
 {
 	if (pipe->args[1] == NULL) {
 		display_alias(shell, pipe);
 		return (0);
 	}
-	create_alias(shell, pipe);
+	if (update_alias(shell, pipe) == false)
+		create_alias(shell, pipe);
 	return (0);
 }

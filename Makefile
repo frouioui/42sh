@@ -71,6 +71,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/builtins_redirect_pipe.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/history_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/alias_built.c \
+		$(PATH_SRC)/shell_loop/execution/builtins/update_alias.c \
 		$(PATH_SRC)/shell_loop/execution/get_redirected.c \
 		$(PATH_SRC)/shell_loop/execution/multiple_execution.c \
 		$(PATH_SRC)/shell_loop/execution/execute_command.c \

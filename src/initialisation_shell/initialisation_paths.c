@@ -14,8 +14,18 @@ static char *init_alias_home(char **env)
 {
 	char *home = my_get_env(env, "HOME");
 	char *path = my_strcpy(NULL, "/.alias");
-	char *alias = strcat(home, path);
+	char *alias = malloc(sizeof(char) * (strlen(path) + strlen(home) + 1));
+	int i = 0;
 
+	for (int a = 0; home[a]; a++) {
+		alias[i] = home[a];
+		i++;
+	}
+	for (int a = 0; path[a]; a++) {
+		alias[i] = path[a];
+		i++;
+	}
+	alias[i] = '\0';
 	return (alias);
 }
 

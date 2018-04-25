@@ -11,7 +11,7 @@
 #include "alias.h"
 #include "mylib.h"
 
-static bool alias_match(char *arg, char **key)
+bool alias_match(char *arg, char **key)
 {
 	if (arg == NULL || key == NULL || key[0] == NULL)
 		return (false);
