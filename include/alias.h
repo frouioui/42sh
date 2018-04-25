@@ -8,11 +8,11 @@
 #ifndef ALIAS_H
 #define ALIAS_H
 
-#define ALIAS_FILE ".alias"
+#define ALIAS_FILE "/.alias"
 
-char *get_alias(char **, char *);
-char ***get_alias_from_file(void);
-int get_size_alias_file(void);
+char *get_alias(char **, char *, char *);
+char ***get_alias_from_file(char *);
+int get_size_alias_file(char *);
 char *get_alias_match(char **, char *, char ***);
 
 #endif /* end of include guard: ALIAS_H */

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "shell.h"
 #include "echec.h"
+#include "mylib.h"
 
 shell_t *initialisation_shell(int argc, char **argv, char **env)
 {
@@ -26,6 +27,7 @@ shell_t *initialisation_shell(int argc, char **argv, char **env)
 	shell->command_line = NULL;
 	shell->code = 0;
 	shell->state = OK;
+	shell->paths = init_paths(shell->env);
 	if (shell->backup == NULL)
 		return (NULL);
 	return (shell);

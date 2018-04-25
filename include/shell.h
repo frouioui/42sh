@@ -11,7 +11,7 @@
 #include <stdbool.h>
 #include "instruction.h"
 
-#define PATH_HISTORY_FILE "./.history"
+#define PATH_HISTORY_FILE "/.history"
 
 #define SUCCESS 0
 #define SKIP 21
@@ -38,6 +38,7 @@ typedef struct shell_s {
 	state_t state;
 	int code;
 	bool bonus;
+	char **paths;
 } shell_t;
 
 int check_args(int);
@@ -54,5 +55,6 @@ int destroy_shell(shell_t *);
 void write_command_history(bool, command_line_t *);
 bool is_bonus(int, char **);
 void display_bonus_prompt(int, char *, char *, char *);
+char **init_paths(char **);
 
 #endif /* end of include guard: SHELL_H */
