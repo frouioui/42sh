@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "alias.h"
 #include "instruction.h"
 #include "mylib.h"
 
@@ -24,6 +25,7 @@ char *apply_transformation(bool bonus, char *user_input)
 		if (user_input == NULL)
 			return (buffer);
 	}
+	user_input = get_alias(args, user_input);
 	free(buffer);
 	free_array_string(args);
 	return (user_input);

@@ -21,7 +21,6 @@ static unsigned int get_args_pipe(pipe_t **pipe, char **env)
 		if (pipe[i]->args == NULL)
 			return (FAILURE);
 		check_env_variable(pipe[i]->args, env);
-		pipe[i]->args = get_alias(pipe[i]->args);
 	}
 	return (SUCCESS);
 }

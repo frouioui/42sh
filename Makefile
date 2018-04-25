@@ -31,7 +31,6 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/initialisation_shell/initialisation_shell.c \
 		$(PATH_SRC)/initialisation_shell/set_env_echec_mode.c \
 		$(PATH_SRC)/initialisation_shell/initialisation_backup.c \
-		$(PATH_SRC)/initialisation_shell/is_bonus_shell.c \
 		$(PATH_SRC)/shell_loop/shell_loop.c \
 		$(PATH_SRC)/shell_loop/write_command_history.c \
 		$(PATH_SRC)/shell_loop/free_command.c \
@@ -39,6 +38,9 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/free_array_string.c \
 		$(PATH_SRC)/shell_loop/transformation/apply_transformation.c \
 		$(PATH_SRC)/shell_loop/transformation/history/history.c \
+		$(PATH_SRC)/shell_loop/transformation/alias/get_alias.c \
+		$(PATH_SRC)/shell_loop/transformation/alias/get_alias_from_file.c \
+		$(PATH_SRC)/shell_loop/transformation/alias/get_size_alias_file.c \
 		$(PATH_SRC)/shell_loop/prompt/display_bonus_prompt.c \
 		$(PATH_SRC)/shell_loop/prompt/display_prompt.c \
 		$(PATH_SRC)/shell_loop/parsing/get_command_line.c \
@@ -51,9 +53,6 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/parsing/fix_extra_space.c \
 		$(PATH_SRC)/shell_loop/parsing/check_quote.c \
 		$(PATH_SRC)/shell_loop/parsing/get_condition.c \
-		$(PATH_SRC)/shell_loop/parsing/alias/get_alias.c \
-		$(PATH_SRC)/shell_loop/parsing/alias/get_alias_from_file.c \
-		$(PATH_SRC)/shell_loop/parsing/alias/get_size_alias_file.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/cd_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/env_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/echo_built.c \

@@ -17,7 +17,8 @@ Test(get_alias, one_alias_in_file)
 {
 	char **args = malloc(sizeof(char *) * 2);
 	char **args2 = NULL;
-	char str[] = "ll ls -l\n";
+	char str[] = "ll";
+	char *buf = NULL;
 	int fd = open(".alias", O_WRONLY | O_TRUNC | O_CREAT,
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
 
@@ -27,9 +28,6 @@ Test(get_alias, one_alias_in_file)
 		write(fd, str, strlen(str));
 		close(fd);
 	}
-	args2 = get_alias(args);
-	cr_assert_not_null(args[0]);
-	cr_assert_not_null(args[1]);
-	cr_assert_str_eq(args2[0], "ls");
-	cr_assert_str_eq(args2[1], "-l");
+	buf = get_alias(args, str);
+	cr_assert_str_eq(buf, "ls -l");
 }

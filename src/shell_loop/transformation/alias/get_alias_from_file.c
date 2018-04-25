@@ -36,19 +36,22 @@ static char **get_value_alias(char **value, char **content)
 {
 	int a = 0;
 
-	value = malloc(sizeof(char) * (my_number_row(content) + 2));
+	value = malloc(sizeof(char *) * (my_number_row(content) + 2));
 	if (value == NULL)
 		return (NULL);
 	for (unsigned int i = 0; content[i]; i++) {
 		value[i] = malloc(sizeof(char) * (strlen(content[i]) + 1));
+		value[i + 1] = NULL;
 		if (value[i] == NULL)
 			return (value);
 		for (a = 0; content[i][a] && SPACE_TAB(content[i][a]); a++);
 		for (a = a; content[i][a] && !SPACE_TAB(content[i][a]); a++);
 		for (a = a; content[i][a] && SPACE_TAB(content[i][a]); a++);
-		for (int j = 0; content[i][a]; a++)
-			value[i][j++] = content[i][a];
-		value[i][a] = '\0';
+		for (int j = 0; content[i][a]; a++) {
+			value[i][j] = content[i][a];
+			value[i][j + 1] = '\0';
+			j++;
+		}
 	}
 	return (value);
 }
@@ -58,17 +61,20 @@ static char **get_key_alias(char **key, char **content)
 	int a = 0;
 	int j = 0;
 
-	key = malloc(sizeof(char) * (my_number_row(content) + 2));
+	key = malloc(sizeof(char *) * (my_number_row(content) + 2));
 	if (key == NULL)
 		return (NULL);
 	for (unsigned int i = 0; content[i]; i++) {
 		key[i] = malloc(sizeof(char) * (strlen(content[i]) + 1));
+		key[i + 1] = NULL;
 		if (key[i] == NULL)
 			return (key);
 		for (a = 0; content[i][a] && SPACE_TAB(content[i][a]); a++);
-		for (j = 0; content[i][a] && !SPACE_TAB(content[i][a]); a++)
-			key[i][j++] = content[i][a];
-		key[i][j] = '\0';
+		for (j = 0; content[i][a] && !SPACE_TAB(content[i][a]); a++) {
+			key[i][j] = content[i][a];
+			key[i][j + 1] = '\0';
+			j++;
+		}
 	}
 	return (key);
 }

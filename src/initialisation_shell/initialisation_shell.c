@@ -21,7 +21,7 @@ shell_t *initialisation_shell(int argc, char **argv, char **env)
 		shell->env = set_env_echec_mode();
 	if (shell->env == NULL)
 		return (NULL);
-	shell->bonus = argv != NULL ? is_bonus(argc, argv) : 0;
+	shell->bonus = true;
 	shell->backup = initialisation_backup(shell->env);
 	shell->command_line = NULL;
 	shell->code = 0;

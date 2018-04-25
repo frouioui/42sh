@@ -20,32 +20,40 @@ static bool alias_match(char *arg, char **key)
 	return (false);
 }
 
-char **get_alias_match(char **args, char ***alias)
+static void free_alias(char ***alias)
 {
-	char **new_args = NULL;
+	for (int i = 0; alias[1][i] && alias[0][i]; i++) {
+		free(alias[1][i]);
+		free(alias[0][i]);
+	}
+	free(alias[1]);
+	free(alias[0]);
+	free(alias);
+}
+
+char *get_alias_match(char **args, char *user_input, char ***alias)
+{
 	char *new_input = NULL;
 
 	for (int i = 0; alias[0][i] && new_input == NULL; i++) {
-		if (strcmp(args[i], alias[0][i]) == 0) {
+		if (strcmp(args[0], alias[0][i]) == 0) {
 			new_input = strdup(alias[1][i]);
 		}
 	}
+	free_alias(alias);
 	if (new_input == NULL) {
-		free_array_string(args);
-		return (NULL);
+		return (user_input);
 	}
-	new_args = cut_line(new_input);
-	free_array_string(args);
-	free(new_input);
-	return (new_args);
+	free(user_input);
+	return (new_input);
 }
 
-char **get_alias(char **args)
+char *get_alias(char **args, char *user_input)
 {
 	char ***alias = get_alias_from_file();
 
 	if (alias_match(args[0], alias[0]) == true) {
-		return (get_alias_match(args, alias));
+		return (get_alias_match(args, user_input, alias));
 	}
-	return (args);
+	return (user_input);
 }
