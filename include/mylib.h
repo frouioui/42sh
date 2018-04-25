@@ -26,5 +26,6 @@ char *my_getenv_root(char *);
 int my_atoi(char *);
 bool my_ischar(char c);
 int my_strcmp_env(char *str, char *env);
+char *my_get_env_parse(char **, int);
 
 #endif /* end of include guard: LIBMY_H */

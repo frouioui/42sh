@@ -18,7 +18,7 @@ int my_strcmp_env(char *str, char *env)
 		if (str[i] != env[i])
 			return (1);
 	}
-	if (env[i] != '=')
+	if (env[i] != '=' || str[i] != '\0')
 		return (1);
 	return (0);
 }
