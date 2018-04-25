@@ -102,7 +102,7 @@ void get_condition(instruction_t *, char *);
 instruction_t *new_instruction(char *);
 
 /* --- functions for direct transformation (inside shell_loop) --- */
-char *apply_transformation(bool, char *);
+char *apply_transformation(bool, char *, char **);
 char *get_history(char **);
 
 /* --- functions for the history --- */

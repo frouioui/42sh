@@ -63,18 +63,21 @@ static char *concatenate_user_input(char **args)
 {
 	char *new = NULL;
 	int size = 0;
+	char *space = strdup(" ");
 
 	for (int i = 0; args[i] != NULL; i++)
 		size += my_strlen(args[i]);
-	new = malloc(sizeof(char) * (size + 1));
+	new = malloc(sizeof(char) * (size + 2));
 	if (new == NULL)
 		return (NULL);
+	new[0] = 0;
 	for (int cur = 0; args[cur] != NULL; cur++) {
 		new = strcat(new, args[cur]);
-		new = strcat(new, " ");
+		new = strcat(new, space);
 		if (new == NULL)
 			return (NULL);
 	}
+	free(space);
 	my_putstr(args[0]);
 	my_putchar('\n');
 	return (new);

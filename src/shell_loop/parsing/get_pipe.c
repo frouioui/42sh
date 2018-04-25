@@ -9,6 +9,7 @@
 #include <string.h>
 #include "shell.h"
 #include "instruction.h"
+#include "alias.h"
 #include "mylib.h"
 
 static unsigned int get_args_pipe(pipe_t **pipe, char **env)
