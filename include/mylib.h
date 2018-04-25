@@ -24,5 +24,7 @@ unsigned int get_line_env(char **, char *);
 unsigned int get_line_env_zero(char **, char *);
 char *my_getenv_root(char *);
 int my_atoi(char *);
+bool my_ischar(char c);
+int my_strcmp_env(char *str, char *env);
 
 #endif /* end of include guard: LIBMY_H */

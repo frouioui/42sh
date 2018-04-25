@@ -26,7 +26,7 @@ CC	=	gcc $(HEADER)
 
 HEADER	=	-I../include/
 
-CDFLAG	=	-W -Wextra
+CFLAGS	=	-W -Wextra -g3
 
 all:	$(NAME)
 

@@ -143,7 +143,7 @@ tests_run:
 debug:
 	make -C./lib/
 	$(CC) $(SRCS) $(SRC_MAIN) -o $(DEBUG_BINARY_NAME) $(HEADER) $(LIB) $(DEBUG_FLAG)
-	gdb -w $(DEBUG_BINARY_NAME)
+	env -i gdb -w $(DEBUG_BINARY_NAME)
 
 valgrind:
 	make -C./lib/

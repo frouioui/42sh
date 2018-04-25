@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "instruction.h"
+#include "mylib.h"
 
 #define PATH_HISTORY_FILE "./.history"
 
@@ -57,5 +58,6 @@ void write_command_history(bool, command_line_t *);
 bool is_bonus(int, char **);
 void display_bonus_prompt(int, char *, char *, char *);
 int find_option_env(char **env, char *str);
+int find_separator_env(char *str);
 
 #endif /* end of include guard: SHELL_H */
