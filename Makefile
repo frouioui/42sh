@@ -54,6 +54,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/parsing/fix_extra_space.c \
 		$(PATH_SRC)/shell_loop/parsing/check_quote.c \
 		$(PATH_SRC)/shell_loop/parsing/get_condition.c \
+		$(PATH_SRC)/shell_loop/parsing/find_option_env.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/cd_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/env_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/echo_built.c \
@@ -109,6 +110,7 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/parsing/get_pipe_number_test.c \
 			$(PATH_TEST)/parsing/get_pipe_test.c \
 			$(PATH_TEST)/parsing/get_condition_test.c \
+			$(PATH_TEST)/parsing/find_option_env_test.c \
 			$(PATH_TEST)/lib/my/get_next_line_test.c \
 			$(PATH_TEST)/lib/my/my_putstr_test.c \
 			$(PATH_TEST)/lib/my/my_strcmp_test.c \
