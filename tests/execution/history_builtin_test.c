@@ -21,7 +21,7 @@ static shell_t *create_env(void)
 	shell_t *shell = NULL;
 	pipe_t *pipe = malloc(sizeof(pipe_t));
 	char **env = malloc(sizeof(char *) * (5));
-	char str[4][17] = {"PATH=/bin", "USER=pflorent", "HOME=/home",
+	char str[4][17] = {"PATH=/bin", "USER=pflorent", "HOME=.",
 		"PWD=/home/marvin"};
 
 	for (int i = 0; i < 4; i++) {
@@ -39,9 +39,9 @@ Test(history_built, display_full_history)
 	shell_t *shell = create_env();
 	FILE *fp = NULL;
 
-	close(open(".history", O_RDWR | O_TRUNC));
-	write_command_history(1, get_command_line(true, "echo a > z",
-		shell->env));
+	close(open(shell->paths[1], O_RDONLY | O_TRUNC));
+	write_command_history(get_command_line(true, "echo a > z",
+		shell->env), shell->paths);
 	shell->command_line = get_command_line(true, "history > buf",
 		shell->env);
 	execute_command(shell, shell->command_line);
@@ -54,11 +54,11 @@ Test(history_built, display_full_history_2)
 	shell_t *shell = create_env();
 	FILE *fp = NULL;
 
-	close(open(".history", O_RDWR | O_TRUNC));
-	write_command_history(1, get_command_line(true, "echo a > z",
-		shell->env));
-	write_command_history(1, get_command_line(true, "vald",
-		shell->env));
+	close(open(shell->paths[1], O_RDONLY | O_TRUNC));
+	write_command_history(get_command_line(true, "echo a > z",
+		shell->env), shell->paths);
+	write_command_history(get_command_line(true, "vald",
+		shell->env), shell->paths);
 	shell->command_line = get_command_line(true, "history > buf2",
 		shell->env);
 	execute_command(shell, shell->command_line);
@@ -71,13 +71,13 @@ Test(history_built, display_2)
 	shell_t *shell = create_env();
 	FILE *fp = NULL;
 
-	close(open(".history", O_RDWR | O_TRUNC));
-	write_command_history(1, get_command_line(true, "echo a > z",
-		shell->env));
-	write_command_history(1, get_command_line(true, "vald",
-		shell->env));
-	write_command_history(1, get_command_line(true, "valdgrind ; toto",
-		shell->env));
+	close(open(shell->paths[1], O_RDONLY | O_TRUNC));
+	write_command_history(get_command_line(true, "echo a > z",
+		shell->env), shell->paths);
+	write_command_history(get_command_line(true, "vald",
+		shell->env), shell->paths);
+	write_command_history(get_command_line(true, "valdgrind ; toto",
+		shell->env), shell->paths);
 	shell->command_line = get_command_line(true, "history 2 > buf2",
 		shell->env);
 	execute_command(shell, shell->command_line);
@@ -90,13 +90,13 @@ Test(history_built, display_too_big)
 	shell_t *shell = create_env();
 	FILE *fp = NULL;
 
-	close(open(".history", O_RDWR | O_TRUNC));
-	write_command_history(1, get_command_line(true, "echo a > z",
-		shell->env));
-	write_command_history(1, get_command_line(true, "vald",
-		shell->env));
-	write_command_history(1, get_command_line(true, "valdgrind ; toto",
-		shell->env));
+	close(open(shell->paths[1], O_RDONLY | O_TRUNC));
+	write_command_history(get_command_line(true, "echo a > z",
+		shell->env), shell->paths);
+	write_command_history(get_command_line(true, "vald",
+		shell->env), shell->paths);
+	write_command_history(get_command_line(true, "valdgrind ; toto",
+		shell->env), shell->paths);
 	shell->command_line = get_command_line(true, "history 24 > buf2",
 		shell->env);
 	execute_command(shell, shell->command_line);

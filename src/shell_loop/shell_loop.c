@@ -29,7 +29,7 @@ unsigned int redirect_loop(shell_t *shell, char *user_input)
 		if (shell->command_line == NULL)
 			return (FAILURE);
 		shell->code = execute_command(shell, shell->command_line);
-		write_command_history(shell->bonus, shell->command_line);
+		write_command_history(shell->command_line, shell->paths);
 		free_command(shell->command_line);
 		update_backup(shell);
 		free(user_input);

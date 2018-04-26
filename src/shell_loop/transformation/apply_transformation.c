@@ -21,7 +21,7 @@ char *apply_transformation(bool bonus, char *user_input, char **paths)
 	if (!(args = cut_line(user_input)) || !(buffer = strdup(user_input)))
 		return (NULL);
 	if (HISTORY_FLAG(args[0])) {
-		user_input = get_history(args);
+		user_input = get_history(args, paths);
 		if (user_input == NULL)
 			return (buffer);
 	}

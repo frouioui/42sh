@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include "shell.h"
 #include "instruction.h"
 #include "execution.h"
 #include "mylib.h"
@@ -15,7 +16,7 @@
 /* integration of the shell struct for future use (variable size_history) */
 static void display_full_history(shell_t *shell, int fd)
 {
-	char **history = get_whole_history();
+	char **history = get_whole_history(shell->paths);
 
 	if (history == NULL)
 		return;
@@ -28,8 +29,8 @@ static void display_full_history(shell_t *shell, int fd)
 /* integration of the shell struct for future use (variable size_history) */
 static void display_line_history(shell_t *shell, int fd, int line_display)
 {
-	char **history = get_whole_history();
-	unsigned int size = size_history();
+	char **history = get_whole_history(shell->paths);
+	unsigned int size = size_history(shell->paths);
 
 	if (history == NULL)
 		return;

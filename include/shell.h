@@ -55,7 +55,7 @@ int display_prompt(shell_t *shell);
 void free_array_string(char **);
 void update_backup(shell_t *);
 int destroy_shell(shell_t *);
-void write_command_history(bool, command_line_t *);
+void write_command_history(command_line_t *, char **);
 bool is_bonus(int, char **);
 void display_bonus_prompt(int, char *, char *, char *);
 int find_option_env(char **env, char *str);
