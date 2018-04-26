@@ -103,10 +103,10 @@ instruction_t *new_instruction(char *);
 
 /* --- functions for direct transformation (inside shell_loop) --- */
 char *apply_transformation(bool, char *, char **);
-char *get_history(char **);
+char *get_history(char **, char **);
 
 /* --- functions for the history --- */
-unsigned int size_history(void);
-char **get_whole_history(void);
+unsigned int size_history(char **);
+char **get_whole_history(char **);
 
 #endif /* end of include guard: INSTRUCTION_H */

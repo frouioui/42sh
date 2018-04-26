@@ -13,7 +13,7 @@
 static char *init_alias_home(char **env)
 {
 	char *home = my_get_env(env, "HOME");
-	char *path = my_strcpy(NULL, "/.alias");
+	char *path = my_strcpy(NULL, "/.alias42");
 	char *alias = NULL;
 	int i = 0;
 
@@ -34,11 +34,36 @@ static char *init_alias_home(char **env)
 	return (alias);
 }
 
+static char *init_history_home(char **env)
+{
+	char *home = my_get_env(env, "HOME");
+	char *path = my_strcpy(NULL, "/.history42");
+	char *history = NULL;
+	int i = 0;
+
+	if (home == NULL)
+		home = my_strcpy(NULL, ".\0");
+	history = malloc(sizeof(char) * (strlen(path) + strlen(home) + 1));
+	if (history == NULL)
+		return (NULL);
+	for (int a = 0; home[a]; a++) {
+		history[i] = home[a];
+		i++;
+	}
+	for (int a = 0; path[a]; a++) {
+		history[i] = path[a];
+		i++;
+	}
+	history[i] = '\0';
+	return (history);
+}
+
 char **init_paths(char **env)
 {
-	char **paths = malloc(sizeof(char *) * 2);
+	char **paths = malloc(sizeof(char *) * 3);
 
 	paths[0] = init_alias_home(env);
-	paths[1] = NULL;
+	paths[1] = init_history_home(env);
+	paths[2] = NULL;
 	return (paths);
 }
