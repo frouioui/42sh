@@ -14,13 +14,11 @@
 #include "shell.h"
 #include "instruction.h"
 
-void write_command_history(bool bonus, command_line_t *cmd)
+void write_command_history(command_line_t *cmd, char **paths)
 {
 	int fd = 0;
 
-	if (bonus == false)
-		return;
-	fd = open(PATH_HISTORY_FILE, O_WRONLY | O_CREAT | O_APPEND,
+	fd = open(paths[1], O_WRONLY | O_CREAT | O_APPEND,
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
 	if (fd != -1) {
 		write(fd, cmd->full_command, strlen(cmd->full_command));

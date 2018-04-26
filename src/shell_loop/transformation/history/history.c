@@ -15,10 +15,11 @@
 #include "mylib.h"
 #include "instruction.h"
 
-unsigned int size_history(void)
+/* Gets the size of the whole history and returns it. */
+unsigned int size_history(char **paths)
 {
 	unsigned int size = 0;
-	int fd = open(PATH_HISTORY_FILE, O_RDONLY);
+	int fd = open(paths[1], O_RDONLY);
 	char *buffer = NULL;
 
 	if (fd == -1)
@@ -31,12 +32,13 @@ unsigned int size_history(void)
 	return (size);
 }
 
-char **get_whole_history(void)
+/* Returns the whole history file in a (char **) */
+char **get_whole_history(char **paths)
 {
-	char **history = malloc(sizeof(char *) * (size_history() + 1));
+	char **history = malloc(sizeof(char *) * (size_history(paths) + 1));
 	char *buffer = NULL;
 	int i = 0;
-	int fd = open(PATH_HISTORY_FILE, O_RDONLY);
+	int fd = open(paths[1], O_RDONLY);
 
 	if (history == NULL || fd == -1) {
 		my_putstr("We could not find the history file.\n");
@@ -83,11 +85,11 @@ static char *concatenate_user_input(char **args)
 	return (new);
 }
 
-char *get_history(char **args)
+char *get_history(char **args, char **paths)
 {
 	char *new = NULL;
-	char **history = get_whole_history();
-	unsigned int size = size_history();
+	char **history = get_whole_history(paths);
+	unsigned int size = size_history(paths);
 	unsigned int target = 0;
 
 	if (history == NULL)
