@@ -99,8 +99,6 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/shell/initialisation_shell_test.c \
 			$(PATH_TEST)/shell/is_empty_line_test.c \
 			$(PATH_TEST)/shell/set_env_echec_mode_test.c \
-			$(PATH_TEST)/shell/transforme_cmd_test.c \
-			$(PATH_TEST)/shell/write_history_test.c \
 			$(PATH_TEST)/parsing/analyse_redirect_test.c \
 			$(PATH_TEST)/parsing/analyse_redirect_2_test.c \
 			$(PATH_TEST)/parsing/check_env_variable_test.c \

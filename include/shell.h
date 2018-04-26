@@ -14,7 +14,7 @@
 #include "instruction.h"
 #include "mylib.h"
 
-#define PATH_HISTORY_FILE "/.history"
+#define PATH_HISTORY_FILE ".history"
 
 #define SUCCESS 0
 #define SKIP 21
