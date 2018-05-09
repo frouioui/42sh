@@ -9,6 +9,7 @@
 #include <string.h>
 #include "shell.h"
 #include "instruction.h"
+#include "globbing.h"
 #include "alias.h"
 #include "mylib.h"
 
@@ -73,6 +74,8 @@ pipe_t **get_pipe(bool bonus, instruction_t *instruction, char **env)
 	if (get_full_pipe(pipe, instruction) == FAILURE)
 		return (NULL);
 	if (get_args_pipe(pipe, env) == FAILURE)
+		return (NULL);
+	if (get_glob_args(pipe) == FAILURE)
 		return (NULL);
 	if (get_redirect(bonus, pipe, instruction->number_of_pipe) == FAILURE)
 		return (NULL);

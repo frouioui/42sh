@@ -55,6 +55,10 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/parsing/check_quote.c \
 		$(PATH_SRC)/shell_loop/parsing/get_condition.c \
 		$(PATH_SRC)/shell_loop/parsing/find_option_env.c \
+		$(PATH_SRC)/shell_loop/parsing/add_path_args.c \
+		$(PATH_SRC)/shell_loop/parsing/get_glob_args.c \
+		$(PATH_SRC)/shell_loop/parsing/glob_linked_list.c \
+		$(PATH_SRC)/shell_loop/parsing/search_match_args.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/cd_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/env_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/echo_built.c \
