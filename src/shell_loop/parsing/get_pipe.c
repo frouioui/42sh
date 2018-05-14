@@ -68,13 +68,12 @@ pipe_t **get_pipe(bool bonus, instruction_t *instruction, char **env)
 			return (NULL);
 		pipe[i]->valid = true;
 		pipe[i]->fd = 1;
+		pipe[i]->path_exec = NULL;
 		pipe[i + 1] = NULL;
 	}
-	if (get_full_pipe(pipe, instruction) == FAILURE)
-		return (NULL);
-	if (get_args_pipe(pipe, env) == FAILURE)
-		return (NULL);
-	if (get_redirect(bonus, pipe, instruction->number_of_pipe) == FAILURE)
+	if (get_full_pipe(pipe, instruction) == FAILURE ||
+	get_args_pipe(pipe, env) == FAILURE ||
+	get_redirect(bonus, pipe, instruction->number_of_pipe) == FAILURE)
 		return (NULL);
 	return (pipe);
 }

@@ -127,6 +127,7 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/execution/exit_built_test.c \
 			$(PATH_TEST)/execution/env_built_test.c \
 			$(PATH_TEST)/execution/roll_back_path_test.c \
+			$(PATH_TEST)/execution/alias_built_test.c \
 
 ## ---- FLAGS ---- ##
 
@@ -203,7 +204,7 @@ wc:
 
 clean:
 	make clean -C./lib/
-	rm -f $(OBJS) *.gc* a u y b i z buf buf2 *.txt 42sh_tester -Rf report rapport.info
+	rm -f $(OBJS) *.gc* a u y b i z buf buf2 *.txt alias_test* 42sh_tester -Rf report rapport.info
 
 fclean: clean
 	make fclean -C./lib/

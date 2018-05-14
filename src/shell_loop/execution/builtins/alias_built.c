@@ -30,7 +30,7 @@ char *get_full_alias(char **args)
 	size += strlen(args[i]) + 1;
 	alias = malloc(sizeof(char) * (size * 2));
 	if (alias == NULL)
-	return (NULL);
+		return (NULL);
 	alias[0] = '\0';
 	for (int i = 1; args[i]; i++) {
 		alias = strcat(alias, args[i]);
@@ -78,10 +78,12 @@ static void create_alias(shell_t *shell, pipe_t *pipe)
 	fix_extra_spaces(full_alias);
 	write(fd, full_alias, strlen(full_alias));
 	write(fd, "\n", 1);
+	free(full_alias);
+	close(fd);
 }
 
 /*
-** Main function of the alias builtin, display the alias if no arg and change
+** Main function of the alias builtin, display the alias if no arg, and change
 ** or add alias if there are args in the pipe.
 */
 int alias_built(shell_t *shell, pipe_t *pipe)
@@ -90,7 +92,7 @@ int alias_built(shell_t *shell, pipe_t *pipe)
 		display_alias(shell, pipe);
 		return (0);
 	}
-	if (update_alias(shell, pipe) == false)
+	if (pipe->args[2] != NULL && update_alias(shell, pipe) == false)
 		create_alias(shell, pipe);
 	return (0);
 }
