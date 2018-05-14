@@ -29,13 +29,14 @@ static char **read_alias_file(char *home)
 	while ((content[i] = get_next_line(fd)) != NULL)
 		i++;
 	content[i] = NULL;
+	close(fd);
 	return (content);
 }
 
 static char **get_value_alias(char **content)
 {
 	int a = 0;
-	char **value = malloc(sizeof(char *) * (my_number_row(content) + 2));
+	char **value = malloc(sizeof(char *) * (my_number_row(content) + 1));
 
 	if (value == NULL)
 		return (NULL);
@@ -60,7 +61,7 @@ static char **get_key_alias(char **content)
 {
 	int a = 0;
 	int j = 0;
-	char **key = malloc(sizeof(char *) * (my_number_row(content) + 3));
+	char **key = malloc(sizeof(char *) * (my_number_row(content) + 1));
 
 	if (key == NULL)
 		return (NULL);
@@ -84,19 +85,22 @@ static char **get_key_alias(char **content)
 */
 char ***get_alias_from_file(char *home)
 {
-	char ***alias = malloc(sizeof(char **) * 3);
+	char ***alias = malloc(sizeof(char **) * 2);
 	char **content = read_alias_file(home);
 
-	if (alias == NULL || content == NULL)
+	if (alias == NULL || content == NULL) {
+		content != NULL ? free_array_string(content) : 0;
 		return (NULL);
+	}
 	alias[0] = get_key_alias(content);
 	alias[1] = get_value_alias(content);
 	if (alias[0] == NULL || alias[1] == NULL) {
+		alias[0] != NULL ? free_array_string(alias[0]) : 0;
+		alias[1] != NULL ? free_array_string(alias[1]) : 0;
 		free(alias);
 		free_array_string(content);
 		return (NULL);
 	}
-	alias[2] = NULL;
 	free_array_string(content);
 	return (alias);
 }

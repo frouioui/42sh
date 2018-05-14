@@ -23,6 +23,7 @@ int destroy_shell(shell_t *shell)
 
 	destroy_backup(shell->backup);
 	free_array_string(shell->env);
+	free_array_string(shell->paths);
 	free(shell);
 	return (code);
 }

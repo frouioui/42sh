@@ -22,15 +22,13 @@ static char *init_alias_home(char **env)
 	alias = malloc(sizeof(char) * (strlen(path) + strlen(home) + 1));
 	if (alias == NULL)
 		return (NULL);
-	for (int a = 0; home[a]; a++) {
+	for (int a = 0; home[a]; a++, i++)
 		alias[i] = home[a];
-		i++;
-	}
-	for (int a = 0; path[a]; a++) {
+	for (int a = 0; path[a]; a++, i++)
 		alias[i] = path[a];
-		i++;
-	}
 	alias[i] = '\0';
+	free(home);
+	free(path);
 	return (alias);
 }
 
@@ -46,15 +44,13 @@ static char *init_history_home(char **env)
 	history = malloc(sizeof(char) * (strlen(path) + strlen(home) + 1));
 	if (history == NULL)
 		return (NULL);
-	for (int a = 0; home[a]; a++) {
+	for (int a = 0; home[a]; a++, i++)
 		history[i] = home[a];
-		i++;
-	}
-	for (int a = 0; path[a]; a++) {
+	for (int a = 0; path[a]; a++, i++)
 		history[i] = path[a];
-		i++;
-	}
 	history[i] = '\0';
+	free(home);
+	free(path);
 	return (history);
 }
 

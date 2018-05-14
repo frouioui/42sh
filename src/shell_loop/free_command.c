@@ -12,6 +12,8 @@
 static void free_pipe(pipe_t *pipe)
 {
 	free(pipe->full_instruction);
+	if (pipe->path_exec != NULL)
+		free(pipe->path_exec);
 	free_array_string(pipe->args);
 }
 
@@ -31,6 +33,7 @@ void free_command(command_line_t *command)
 		free_instruction(command->instruction[i]);
 		free(command->instruction[i]);
 	}
+	free(command->full_command);
 	free(command->instruction);
 	free(command);
 }

@@ -50,6 +50,6 @@ char *my_get_env_parse(char **env, int pos)
 
 	for (i = 0; env[pos][i] != '=' && env[pos][i] != '\0'; i++);
 	elem = malloc(strlen(env[pos]) - i);
-	strcpy(elem, 1+i+env[pos]);
+	strcpy(elem, 1 + i + env[pos]);
 	return (elem);
 }

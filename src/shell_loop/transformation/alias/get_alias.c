@@ -22,17 +22,6 @@ bool alias_match(char *arg, char **key)
 	return (false);
 }
 
-static void free_alias(char ***alias)
-{
-	for (int i = 0; alias[1][i] && alias[0][i]; i++) {
-		free(alias[1][i]);
-		free(alias[0][i]);
-	}
-	free(alias[1]);
-	free(alias[0]);
-	free(alias);
-}
-
 static char *add_end_string(char **args, char *new_input)
 {
 	char *end = NULL;
@@ -58,16 +47,17 @@ static char *add_end_string(char **args, char *new_input)
 char *get_alias_match(char **args, char *user_input, char ***alias)
 {
 	char *new_input = NULL;
+	int i = 0;
 
-	for (int i = 0; alias[0][i] && new_input == NULL; i++) {
+	for (i = 0; alias[0][i] && strlen(alias[1][i]) && !new_input; i++) {
 		if (strcmp(args[0], alias[0][i]) == 0) {
 			new_input = strdup(alias[1][i]);
 		}
 	}
-	free_alias(alias);
-	if (new_input == NULL) {
+	if (alias[0][i] != NULL && strlen(alias[1][i]) == 0)
 		return (user_input);
-	}
+	if (new_input == NULL)
+		return (user_input);
 	new_input = add_end_string(args, new_input);
 	free(user_input);
 	return (new_input);
@@ -82,9 +72,17 @@ char *get_alias_match(char **args, char *user_input, char ***alias)
 char *get_alias(char **args, char *user_input, char *home)
 {
 	char ***alias = get_alias_from_file(home);
+	char *new_input = NULL;
 
-	if (alias && alias_match(args[0], alias[0]) == true) {
-		return (get_alias_match(args, user_input, alias));
+	if (alias != NULL && alias_match(args[0], alias[0]) == true) {
+		new_input = get_alias_match(args, user_input, alias);
+		free_array_string(alias[0]);
+		free_array_string(alias[1]);
+		free(alias);
+		return (new_input);
 	}
+	free_array_string(alias[0]);
+	free_array_string(alias[1]);
+	free(alias);
 	return (user_input);
 }

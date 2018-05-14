@@ -69,9 +69,8 @@ void multiple_execution(shell_t *shell, instruction_t *instruction)
 		exit(84);
 	if (pid == 0)
 		exec_pipe(shell, instruction, fd, pid);
-	else {
+	else
 		wait_all(stat, shell, instruction, fd);
-	}
 	free_pipes(fd);
 	free(stat);
 }
