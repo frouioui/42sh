@@ -12,7 +12,7 @@ static int compare_traget(char *line, char *target)
 	int i = 0;
 
 	while (line[i] != '=' && line[i] != '\0' && target[i]
-			&& line[i] == target[i])
+		&& line[i] == target[i])
 		i++;
 	if (line[i] == '=' && target[i] == '\0')
 		return (1);

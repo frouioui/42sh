@@ -15,9 +15,8 @@ char *my_getenv_root(char *str)
 
 	if (root == NULL)
 		return (NULL);
-	for (i = 0; str[i] && str[i] != '='; i++) {
+	for (i = 0; str[i] && str[i] != '='; i++)
 		root[i] = str[i];
-	}
 	root[i++] = '=';
 	root[i] = '\0';
 	return (root);

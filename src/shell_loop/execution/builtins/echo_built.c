@@ -27,9 +27,9 @@ int echo_built(shell_t *shell, pipe_t *pipe)
 	int index = 1;
 	bool n_option = false;
 
-	if (pipe->args[1] == NULL)
+	if (pipe->args[1] == NULL) {
 		write(pipe->fd, "\n", 1);
-	else {
+	} else {
 		check_quote(pipe->args);
 		n_option = search_option(pipe, &index);
 		while (pipe->args[index + 1] != NULL) {
