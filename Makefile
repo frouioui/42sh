@@ -119,9 +119,14 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/execution/execute_command_test.c \
 			$(PATH_TEST)/execution/execute_command2_test.c \
 			$(PATH_TEST)/execution/is_builtin_test.c \
+			$(PATH_TEST)/execution/unsetenv_built_test.c \
 			$(PATH_TEST)/execution/setenv_builtin_test.c \
 			$(PATH_TEST)/execution/setenv_crash_test.c \
 			$(PATH_TEST)/execution/history_builtin_test.c \
+			$(PATH_TEST)/execution/display_error_execution_test.c \
+			$(PATH_TEST)/execution/exit_built_test.c \
+			$(PATH_TEST)/execution/env_built_test.c \
+			$(PATH_TEST)/execution/roll_back_path_test.c \
 
 ## ---- FLAGS ---- ##
 
