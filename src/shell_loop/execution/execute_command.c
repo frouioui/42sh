@@ -35,13 +35,20 @@ static void execute_instruction(shell_t *shell, command_line_t *command,
 	command->instruction[nb]->last_code = shell->code;
 }
 
+/*
+** Main execution loop, call is_condition_valid each time to check the
+** condition of the current instruction.
+** The variable nb is the current instruction being executed.
+*/
 unsigned int execute_command(shell_t *shell, command_line_t *command)
 {
 	for (unsigned int nb = 0; command->instruction[nb] &&
 	shell->state == OK; nb++) {
-		if (is_condition_valid(command->instruction, nb)) {
+		if (is_condition_valid(command->instruction, nb) == true) {
 			execute_instruction(shell, command,
 			command->instruction, nb);
+		} else {
+			condition_not_valid(command->instruction, nb);
 		}
 	}
 	return (shell->code);
