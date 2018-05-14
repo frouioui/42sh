@@ -22,6 +22,7 @@ instruction_t *new_instruction(char *str)
 		return (NULL);
 	instruction->valid = true;
 	instruction->condition = NO;
+	instruction->last_code = 0;
 	return (instruction);
 }
 
