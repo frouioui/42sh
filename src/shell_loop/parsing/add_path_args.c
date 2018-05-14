@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** PSU_42sh_2017
 ** File description:
-** Globbings functions
+** Add new path in pipe structure
 */
 
 #include <stdlib.h>

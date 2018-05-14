@@ -11,39 +11,23 @@
 #include <stdlib.h>
 #include <string.h>
 
-static int insert_link(args_list_t *tmp, char *new_path)
+args_list_t *add_new_path(args_list_t *old_args, args_list_t *new_args,
+args_list_t **tmp)
 {
-	args_list_t *new_arg = malloc(sizeof(*new_arg));
+	args_list_t *old_tmp = old_args;
+	args_list_t *new_tmp = new_args;
 
-	if (!new_arg)
-		return (FAILURE);
-	new_arg->arg = strdup(new_path);
-	if (!new_arg->arg)
-		return (FAILURE);
-	if (tmp->next != NULL) {
-		new_arg->next = tmp->next->next;
-		free(tmp->next->arg);
-		free(tmp->next);
-	} else
-		new_arg->next = NULL;
-	tmp->next = new_arg;
-	return (SUCCESS);
-}
-
-args_list_t *add_new_path(args_list_t *list, char *pattern, char **glob_path)
-{
-	args_list_t *tmp = list;
-
-	while (tmp->next != NULL && strcmp(tmp->next->arg, pattern) != 0)
-		tmp = tmp->next;
-	for (int i = 0; glob_path[i] != NULL; i += 1) {
-		if (insert_link(tmp, glob_path[i]) == FAILURE) {
-			free_args_list(list);
-			return (NULL);
-		}
-		tmp = tmp->next;
-	}
-	return (list);
+	while (old_tmp->next != NULL &&
+	strcmp(old_tmp->next->arg, (*tmp)->arg) != 0)
+		old_tmp = old_tmp->next;
+	*tmp = old_tmp->next->next;
+	while (new_tmp->next != NULL)
+		new_tmp = new_tmp->next;
+	new_tmp->next = old_tmp->next->next;
+	free(old_tmp->next->arg);
+	free(old_tmp->next);
+	old_tmp->next = new_args;
+	return (old_args);
 }
 
 static args_list_t *add_new_arg(args_list_t *list, char *arg)
@@ -65,12 +49,12 @@ static args_list_t *add_new_arg(args_list_t *list, char *arg)
 	return (list);
 }
 
-args_list_t *built_list(pipe_t *pipe)
+args_list_t *built_list(char **args)
 {
 	args_list_t *args_list = NULL;
 
-	for (int i = 0; pipe->args[i]; i += 1) {
-		if (!(args_list = add_new_arg(args_list, pipe->args[i]))) {
+	for (int i = 0; args[i]; i += 1) {
+		if (!(args_list = add_new_arg(args_list, args[i]))) {
 			free_args_list(args_list);
 			return (NULL);
 		}

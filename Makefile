@@ -198,7 +198,7 @@ debug:
 valgrind:
 	make -C./lib/
 	$(CC) $(SRCS) $(SRC_MAIN) -o $(DEBUG_BINARY_NAME) $(HEADER) $(LIB) $(DEBUG_FLAG)
-	valgrind ./$(DEBUG_BINARY_NAME)
+	valgrind --leak-check=full ./$(DEBUG_BINARY_NAME)
 
 wc:
 	wc $(SRCS) $(SRC_MAIN) $(SRCS_TEST) include/*
@@ -208,6 +208,7 @@ wc:
 clean:
 	make clean -C./lib/
 	rm -f $(OBJS) *.gc* a u y b i z buf buf2 *.txt 42sh_tester -Rf report rapport.info
+	rm -f ./include/*.gch
 
 fclean: clean
 	make fclean -C./lib/

@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** PSU_42sh_2017
 ** File description:
-** Globbings functions
+** Main globbings functions
 */
 
 #include <stdlib.h>
@@ -12,16 +12,15 @@
 
 static int replace_glob_args(pipe_t *pipe)
 {
-	args_list_t *args_list = built_list(pipe);
+	args_list_t *args_list = built_list(pipe->args);
 	args_list_t *tmp = NULL;
 
 	if (!args_list)
 		return (FAILURE);
 	tmp = args_list;
 	while (tmp != NULL) {
-		if (search_glob_args(args_list, tmp->arg) == FAILURE)
+		if (search_glob_args(args_list, &tmp) == FAILURE)
 			return (FAILURE);
-		tmp = tmp->next;
 	}
 	if (add_path_in_pipe(args_list, pipe) == FAILURE)
 		return (FAILURE);
