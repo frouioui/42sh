@@ -9,6 +9,7 @@
 #include <string.h>
 #include "shell.h"
 #include "instruction.h"
+#include "alias.h"
 #include "mylib.h"
 
 static unsigned int get_args_pipe(pipe_t **pipe, char **env)
@@ -66,6 +67,7 @@ pipe_t **get_pipe(bool bonus, instruction_t *instruction, char **env)
 		if (pipe[i] == NULL)
 			return (NULL);
 		pipe[i]->valid = true;
+		pipe[i]->fd = 1;
 		pipe[i + 1] = NULL;
 	}
 	if (get_full_pipe(pipe, instruction) == FAILURE)

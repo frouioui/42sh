@@ -31,17 +31,21 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/initialisation_shell/initialisation_shell.c \
 		$(PATH_SRC)/initialisation_shell/set_env_echec_mode.c \
 		$(PATH_SRC)/initialisation_shell/initialisation_backup.c \
-		$(PATH_SRC)/initialisation_shell/is_bonus_shell.c \
-		$(PATH_SRC)/shell_loop/transformation/apply_transformation.c \
-		$(PATH_SRC)/shell_loop/parsing/get_command_line.c \
-		$(PATH_SRC)/shell_loop/parsing/get_number_instruction.c \
+		$(PATH_SRC)/initialisation_shell/initialisation_paths.c \
 		$(PATH_SRC)/shell_loop/shell_loop.c \
 		$(PATH_SRC)/shell_loop/write_command_history.c \
 		$(PATH_SRC)/shell_loop/free_command.c \
 		$(PATH_SRC)/shell_loop/update_backup.c \
 		$(PATH_SRC)/shell_loop/free_array_string.c \
+		$(PATH_SRC)/shell_loop/transformation/apply_transformation.c \
+		$(PATH_SRC)/shell_loop/transformation/history/history.c \
+		$(PATH_SRC)/shell_loop/transformation/alias/get_alias.c \
+		$(PATH_SRC)/shell_loop/transformation/alias/get_alias_from_file.c \
+		$(PATH_SRC)/shell_loop/transformation/alias/get_size_alias_file.c \
 		$(PATH_SRC)/shell_loop/prompt/display_bonus_prompt.c \
 		$(PATH_SRC)/shell_loop/prompt/display_prompt.c \
+		$(PATH_SRC)/shell_loop/parsing/get_command_line.c \
+		$(PATH_SRC)/shell_loop/parsing/get_number_instruction.c \
 		$(PATH_SRC)/shell_loop/parsing/get_pipe_number.c \
 		$(PATH_SRC)/shell_loop/parsing/fill_up_instruction.c \
 		$(PATH_SRC)/shell_loop/parsing/get_pipe.c \
@@ -50,6 +54,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/parsing/fix_extra_space.c \
 		$(PATH_SRC)/shell_loop/parsing/check_quote.c \
 		$(PATH_SRC)/shell_loop/parsing/get_condition.c \
+		$(PATH_SRC)/shell_loop/parsing/find_option_env.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/cd_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/env_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/echo_built.c \
@@ -64,6 +69,10 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/save_old_pwd.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/realloc_env.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/destroy_cd_resources.c \
+		$(PATH_SRC)/shell_loop/execution/builtins/builtins_redirect_pipe.c \
+		$(PATH_SRC)/shell_loop/execution/builtins/history_built.c \
+		$(PATH_SRC)/shell_loop/execution/builtins/alias_built.c \
+		$(PATH_SRC)/shell_loop/execution/builtins/update_alias.c \
 		$(PATH_SRC)/shell_loop/execution/get_redirected.c \
 		$(PATH_SRC)/shell_loop/execution/multiple_execution.c \
 		$(PATH_SRC)/shell_loop/execution/execute_command.c \
@@ -90,8 +99,6 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/shell/initialisation_shell_test.c \
 			$(PATH_TEST)/shell/is_empty_line_test.c \
 			$(PATH_TEST)/shell/set_env_echec_mode_test.c \
-			$(PATH_TEST)/shell/transforme_cmd_test.c \
-			$(PATH_TEST)/shell/write_history_test.c \
 			$(PATH_TEST)/parsing/analyse_redirect_test.c \
 			$(PATH_TEST)/parsing/analyse_redirect_2_test.c \
 			$(PATH_TEST)/parsing/check_env_variable_test.c \
@@ -101,6 +108,7 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/parsing/get_pipe_number_test.c \
 			$(PATH_TEST)/parsing/get_pipe_test.c \
 			$(PATH_TEST)/parsing/get_condition_test.c \
+			$(PATH_TEST)/parsing/find_option_env_test.c \
 			$(PATH_TEST)/lib/my/get_next_line_test.c \
 			$(PATH_TEST)/lib/my/my_putstr_test.c \
 			$(PATH_TEST)/lib/my/my_strcmp_test.c \
@@ -111,8 +119,14 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/execution/execute_command_test.c \
 			$(PATH_TEST)/execution/execute_command2_test.c \
 			$(PATH_TEST)/execution/is_builtin_test.c \
+			$(PATH_TEST)/execution/unsetenv_built_test.c \
 			$(PATH_TEST)/execution/setenv_builtin_test.c \
 			$(PATH_TEST)/execution/setenv_crash_test.c \
+			$(PATH_TEST)/execution/history_builtin_test.c \
+			$(PATH_TEST)/execution/display_error_execution_test.c \
+			$(PATH_TEST)/execution/exit_built_test.c \
+			$(PATH_TEST)/execution/env_built_test.c \
+			$(PATH_TEST)/execution/roll_back_path_test.c \
 
 ## ---- FLAGS ---- ##
 
@@ -130,7 +144,7 @@ CDFLAG	=	-W -Wextra
 
 OBJS	=	$(SRCS:.c=.o) $(SRC_MAIN:.c=.o)
 
-## ---- RULES ---- ##
+## ---- MAIN RULE ---- ##
 
 all: $(BINARY_NAME)
 
@@ -138,10 +152,39 @@ $(BINARY_NAME): $(OBJS)
 	make -C./lib/
 	$(CC) -o $(BINARY_NAME) $(HEADER) $(OBJS) $(LIB)
 
+## -- TESTING RULES -- ##
+
+tests_auto:
+	cp bonus/42sh_tester .
+	./42sh_tester -j1 --always-succeed
+
+tests_compile:
+	make -C./lib/
+	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
+
 tests_run:
 	make -C./lib/
 	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
-	./$(TEST_BINARY_NAME) --always-succeed
+	./$(TEST_BINARY_NAME) --always-succeed -j1
+
+tests_full:
+	make -C./lib/
+	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
+	./$(TEST_BINARY_NAME) --always-succeed -j1 2> unit_report.txt
+	cp bonus/42sh_tester .
+	./42sh_tester > /dev/null
+	clear
+	cat unit_report.txt test_report_log.txt
+
+show_coverage:
+	make -C./lib/
+	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
+	./$(TEST_BINARY_NAME) --always-succeed -j1
+	lcov --directory ./ -c -o rapport.info
+	genhtml -o ./report -t "code coverage report" rapport.info
+	xdg-open ./report/index.html &>/dev/null
+
+## -- SMART TOOLS RULES -- ##
 
 debug:
 	make -C./lib/
@@ -153,9 +196,14 @@ valgrind:
 	$(CC) $(SRCS) $(SRC_MAIN) -o $(DEBUG_BINARY_NAME) $(HEADER) $(LIB) $(DEBUG_FLAG)
 	valgrind ./$(DEBUG_BINARY_NAME)
 
+wc:
+	wc $(SRCS) $(SRC_MAIN) $(SRCS_TEST) include/*
+
+## -- CLEANING RULES -- ##
+
 clean:
 	make clean -C./lib/
-	rm -f $(OBJS) *.gc* a u y b i
+	rm -f $(OBJS) *.gc* a u y b i z buf buf2 *.txt 42sh_tester -Rf report rapport.info
 
 fclean: clean
 	make fclean -C./lib/

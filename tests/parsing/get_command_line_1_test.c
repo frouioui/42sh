@@ -100,7 +100,6 @@ Test(get_command_line_2, test_pipe_not_valid_command)
 	cr_assert_not_null(command->instruction[0]);
 	cr_assert_not_null(command->instruction[1]);
 	cr_assert_eq(command->valid, false);
-	cr_assert_eq(command->instruction[0]->number_of_pipe, 0);
 	cr_assert_str_eq(command->instruction[0]->full_instruction, inst[0]);
 	cr_assert_eq(command->instruction[0]->valid, false);
 	cr_assert_eq(command->instruction[1]->number_of_pipe, 0);

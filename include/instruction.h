@@ -27,6 +27,7 @@
 #define DIGIT(c) (c >= '0' && c <= '9')
 #define ALPHA(c) ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 #define ALPHANUM(c) (DIGIT(c) || ALPHA(c))
+#define HISTORY_FLAG(c) (c[0] == '!' && c[1] == '-' && c[2])
 
 typedef enum type_redirect_s {
 	EMPTY_REDIR,
@@ -76,11 +77,13 @@ typedef struct instruction_s {
 } instruction_t;
 
 typedef struct command_line_s {
+	char *full_command;
 	unsigned int number_instruction;
 	instruction_t **instruction;
 	bool valid;
 } command_line_t;
 
+/* --- basic instructions function (parsing) --- */
 void free_command(command_line_t *);
 void free_array_string(char **);
 unsigned int get_number_instruction(char *);
@@ -94,9 +97,16 @@ void check_env_variable(char **, char **);
 void fix_extra_spaces(char *);
 void display_error_instruction(instruction_t *);
 bool is_empty_input(char *);
-char *apply_transformation(bool, char *);
 void check_quote(char **);
 void get_condition(instruction_t *, char *);
-instruction_t *new_instruction(char *str);
+instruction_t *new_instruction(char *);
+
+/* --- functions for direct transformation (inside shell_loop) --- */
+char *apply_transformation(bool, char *, char **);
+char *get_history(char **, char **);
+
+/* --- functions for the history --- */
+unsigned int size_history(char **);
+char **get_whole_history(char **);
 
 #endif /* end of include guard: INSTRUCTION_H */

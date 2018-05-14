@@ -12,7 +12,8 @@ bool is_builtins(char *arg)
 {
 	if (strcmp(arg, "cd") != 0 && strcmp(arg, "env") != 0 &&
 	strcmp(arg, "setenv") != 0 && strcmp(arg, "exit") != 0 &&
-	strcmp(arg, "unsetenv") != 0 && strcmp(arg, "echo") != 0) {
+	strcmp(arg, "unsetenv") != 0 && strcmp(arg, "echo") != 0 &&
+	strcmp(arg, "history") != 0 && strcmp(arg, "alias") != 0) {
 		return (false);
 	}
 	return (true);

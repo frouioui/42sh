@@ -16,6 +16,8 @@ SRC	=	./my/get_next_line.c \
 		./my/my_strcmp.c \
 		./my/my_strcpy.c \
 		./my/my_strlen.c \
+		./my/my_strcat.c \
+		./my/my_ischar.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -25,7 +27,7 @@ CC	=	gcc $(HEADER)
 
 HEADER	=	-I../include/
 
-CDFLAG	=	-W -Wextra
+CFLAGS	=	-W -Wextra -g3
 
 all:	$(NAME)
 

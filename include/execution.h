@@ -15,7 +15,7 @@
 #include "shell.h"
 #include "instruction.h"
 
-#define NB_BUILTIN 6
+#define NB_BUILTIN 8
 
 /* --- functions redirection sturcture --- */
 typedef struct redirect_flag_s {
@@ -52,15 +52,21 @@ int env_built(shell_t *, pipe_t *);
 int exit_built(shell_t *, pipe_t *);
 int setenv_built(shell_t *, pipe_t *);
 int unsetenv_built(shell_t *, pipe_t *);
-void folder_error(shell_t *, int, char *);
-unsigned int check_rollback_path(shell_t *, char *, unsigned int);
-void go_home_cd(shell_t *);
-void go_back_cd(shell_t *);
+void folder_error(shell_t *, int, char *, int);
+unsigned int check_rollback_path(shell_t *, char *, unsigned int, int);
+void go_home_cd(shell_t *, int);
+void go_back_cd(shell_t *, int);
 char *cd_special_cases(char *, char *, int *);
 void save_old_pwd(char **);
 void put_new_old_pwd(shell_t *, char *);
 void restore_redirect(pipe_t *);
 char **realloc_env(char **, int, int);
 int destroy_cd_resources(char *);
+void builtins_redirect_pipe(bool, pipe_t *);
+int history_built(shell_t *, pipe_t *);
+int alias_built(shell_t *, pipe_t *);
+char *get_full_alias(char **);
+bool update_alias(shell_t *, pipe_t *);
+bool alias_match(char *, char **);
 
 #endif /* end of include guard: EXECUTION_H */
