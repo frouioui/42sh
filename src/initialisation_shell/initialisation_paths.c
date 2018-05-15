@@ -54,12 +54,41 @@ static char *init_history_home(char **env)
 	return (history);
 }
 
+static char *init_binding_home(char **env)
+{
+	char *home = my_get_env(env, "HOME");
+	char *path = my_strcpy(NULL, "/.binding42");
+	char *binding = NULL;
+	int i = 0;
+
+	if (home == NULL)
+		home = my_strcpy(NULL, ".\0");
+	binding = malloc(sizeof(char) * (strlen(path) + strlen(home) + 1));
+	if (binding == NULL)
+		return (NULL);
+	for (int a = 0; home[a]; a++, i++)
+		binding[i] = home[a];
+	for (int a = 0; path[a]; a++, i++)
+		binding[i] = path[a];
+	binding[i] = '\0';
+	free(home);
+	free(path);
+	return (binding);
+}
+
 char **init_paths(char **env)
 {
-	char **paths = malloc(sizeof(char *) * 3);
+	char **paths = malloc(sizeof(char *) * 4);
 
+	if (paths == NULL)
+		return (NULL);
 	paths[0] = init_alias_home(env);
 	paths[1] = init_history_home(env);
-	paths[2] = NULL;
+	paths[2] = init_binding_home(env);
+	paths[3] = NULL;
+	if (!paths[0] || !paths[1] || !paths[2]) {
+		free(paths);
+		return (NULL);
+	}
 	return (paths);
 }

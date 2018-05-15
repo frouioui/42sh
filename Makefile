@@ -32,11 +32,16 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/initialisation_shell/set_env_echec_mode.c \
 		$(PATH_SRC)/initialisation_shell/initialisation_backup.c \
 		$(PATH_SRC)/initialisation_shell/initialisation_paths.c \
+		$(PATH_SRC)/initialisation_shell/initialisation_terminal.c \
+		$(PATH_SRC)/initialisation_shell/initialisation_binding.c \
 		$(PATH_SRC)/shell_loop/shell_loop.c \
 		$(PATH_SRC)/shell_loop/write_command_history.c \
 		$(PATH_SRC)/shell_loop/free_command.c \
 		$(PATH_SRC)/shell_loop/update_backup.c \
 		$(PATH_SRC)/shell_loop/free_array_string.c \
+		$(PATH_SRC)/shell_loop/get_input.c \
+		$(PATH_SRC)/shell_loop/binding/is_key_binding.c \
+		$(PATH_SRC)/shell_loop/binding/execute_key_binding.c \
 		$(PATH_SRC)/shell_loop/transformation/apply_transformation.c \
 		$(PATH_SRC)/shell_loop/transformation/history/history.c \
 		$(PATH_SRC)/shell_loop/transformation/alias/get_alias.c \
@@ -131,7 +136,7 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 
 ## ---- FLAGS ---- ##
 
-LIB	=	-L./lib/ -lmy
+LIB	=	-L./lib/ -lmy -lncurses
 
 TEST_FLAGS	=	-lcriterion --coverage
 
