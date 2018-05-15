@@ -9,6 +9,7 @@
 #include <string.h>
 #include "shell.h"
 #include "instruction.h"
+#include "globbing.h"
 #include "alias.h"
 #include "mylib.h"
 

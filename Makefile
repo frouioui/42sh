@@ -55,6 +55,10 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/parsing/check_quote.c \
 		$(PATH_SRC)/shell_loop/parsing/get_condition.c \
 		$(PATH_SRC)/shell_loop/parsing/find_option_env.c \
+		$(PATH_SRC)/shell_loop/parsing/add_path_args.c \
+		$(PATH_SRC)/shell_loop/parsing/get_glob_args.c \
+		$(PATH_SRC)/shell_loop/parsing/glob_linked_list.c \
+		$(PATH_SRC)/shell_loop/parsing/search_match_args.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/cd_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/env_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/echo_built.c \
@@ -109,6 +113,9 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/parsing/get_pipe_test.c \
 			$(PATH_TEST)/parsing/get_condition_test.c \
 			$(PATH_TEST)/parsing/find_option_env_test.c \
+			$(PATH_TEST)/parsing/glob_get_args_test.c \
+			$(PATH_TEST)/parsing/glob_symbols_test.c \
+			$(PATH_TEST)/parsing/glob_linked_list_test.c \
 			$(PATH_TEST)/lib/my/get_next_line_test.c \
 			$(PATH_TEST)/lib/my/my_putstr_test.c \
 			$(PATH_TEST)/lib/my/my_strcmp_test.c \
@@ -195,7 +202,7 @@ debug:
 valgrind:
 	make -C./lib/
 	$(CC) $(SRCS) $(SRC_MAIN) -o $(DEBUG_BINARY_NAME) $(HEADER) $(LIB) $(DEBUG_FLAG)
-	valgrind ./$(DEBUG_BINARY_NAME)
+	valgrind --leak-check=full ./$(DEBUG_BINARY_NAME)
 
 wc:
 	wc $(SRCS) $(SRC_MAIN) $(SRCS_TEST) include/*
@@ -205,6 +212,7 @@ wc:
 clean:
 	make clean -C./lib/
 	rm -f $(OBJS) *.gc* a u y b i z buf buf2 *.txt alias_test* 42sh_tester -Rf report rapport.info
+	rm -f ./include/*.gch
 
 fclean: clean
 	make fclean -C./lib/
