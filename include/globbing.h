@@ -18,7 +18,8 @@ typedef struct arg_list_s {
 	struct arg_list_s *next;
 } args_list_t;
 
-// Function to manage globbings
+// Function to manage globbing
+bool search_glob_symbols(char *);
 int get_glob_args(pipe_t **);
 int add_path_in_pipe(args_list_t *, pipe_t *);
 int search_glob_args(args_list_t *, args_list_t **);

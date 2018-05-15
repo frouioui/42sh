@@ -113,6 +113,9 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/parsing/get_pipe_test.c \
 			$(PATH_TEST)/parsing/get_condition_test.c \
 			$(PATH_TEST)/parsing/find_option_env_test.c \
+			$(PATH_TEST)/parsing/glob_get_args_test.c \
+			$(PATH_TEST)/parsing/glob_symbols_test.c \
+			$(PATH_TEST)/parsing/glob_linked_list_test.c \
 			$(PATH_TEST)/lib/my/get_next_line_test.c \
 			$(PATH_TEST)/lib/my/my_putstr_test.c \
 			$(PATH_TEST)/lib/my/my_strcmp_test.c \

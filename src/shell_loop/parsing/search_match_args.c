@@ -16,8 +16,10 @@ static int add_link_to_list(args_list_t *args_list, args_list_t **tmp)
 	args_list_t *new_args = NULL;
 
 	globbing.gl_offs = 0;
-	if (glob((*tmp)->arg, GLOB_TILDE_CHECK, NULL, &globbing) != 0)
+	if (glob((*tmp)->arg, GLOB_TILDE_CHECK, NULL, &globbing) != 0) {
+		*tmp = (*tmp)->next;
 		return (SKIP);
+	}
 	new_args = built_list(globbing.gl_pathv);
 	if (!new_args)
 		return (FAILURE);
@@ -27,7 +29,7 @@ static int add_link_to_list(args_list_t *args_list, args_list_t **tmp)
 	return (SUCCESS);
 }
 
-static bool search_glob_symbols(char *arg)
+bool search_glob_symbols(char *arg)
 {
 	for (int i = 0; arg[i] != '\0'; i += 1) {
 		if (GLOB(arg[i]))
