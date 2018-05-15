@@ -69,11 +69,9 @@ void free_args_list(args_list_t *list)
 	if (!list)
 		return;
 	while (list != NULL && tmp != NULL) {
-		tmp = list->next;
-		free(list->arg);
-		free(list);
-		list = NULL;
-		if (tmp)
-			tmp = tmp->next;
+		tmp = list;
+		list = list->next;
+		free(tmp->arg);
+		free(tmp);
 	}
 }
