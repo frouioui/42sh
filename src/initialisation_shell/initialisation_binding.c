@@ -31,6 +31,8 @@ static void set_default_values_binding(binding_t *binding)
 {
 	binding->clear = DEFAULT_CLEAR_BINDING;
 	binding->exit = DEFAULT_EXIT_BINDING;
+	binding->up = DEFAULT_UP_BINDING;
+	binding->down = DEFAULT_DOWN_BINDING;
 	binding->right = DEFAULT_RIGHT_BINDING;
 	binding->left = DEFAULT_LEFT_BINDING;
 	binding->end = DEFAULT_END_BINDING;

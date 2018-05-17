@@ -18,5 +18,6 @@ char *get_chars_from_term(shell_t *, int);
 char *regular_char(char *, int, int *, int);
 int cursor_moves(char *, int, int *, binding_t *);
 void check_match_direct(char *, int, int *, shell_t *);
+char *history_binding(char *, int, int *, shell_t *);
 
 #endif /* end of include guard: INPUT_H */

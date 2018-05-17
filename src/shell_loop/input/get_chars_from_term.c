@@ -24,10 +24,11 @@ char *get_chars_from_term(shell_t *shell, int fd)
 	while (read(fd, &c, sizeof(int)) && c != EOT && c != '\n') {
 		check_match_direct(input, c, &i, shell);
 		i = cursor_moves(input, c, &i, shell->binding);
-		// Check history
+		input = history_binding(input, c, &i, shell);
 		// Check tabulation
 		input = regular_char(input, c, &i, fd);
 		c = 0;
 	}
+	history_binding(input, c, &i, shell);
 	return (c != EOT ? input : NULL);
 }

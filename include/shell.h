@@ -39,6 +39,8 @@ typedef struct binding_s {
 	int code;
 	int clear;
 	int exit;
+	int up;
+	int down;
 	int right;
 	int left;
 	int end;
@@ -92,9 +94,10 @@ typedef struct redirect_binding_s {
 #ifndef BINDING_DEFAULT_H
 #define BINDING_DEFAULT_H
 
-#define NB_BIND 2
 #define DEFAULT_EXIT_BINDING 16
 #define DEFAULT_CLEAR_BINDING 12
+#define DEFAULT_UP_BINDING 4283163
+#define DEFAULT_DOWN_BINDING 4348699
 #define DEFAULT_RIGHT_BINDING 4414235
 #define DEFAULT_LEFT_BINDING 4479771
 #define DEFAULT_END_BINDING 4610843
