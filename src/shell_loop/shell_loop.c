@@ -22,12 +22,6 @@ bool is_empty_input(char *user_input)
 
 unsigned int redirect_loop(shell_t *shell, char *user_input)
 {
-	if (is_key_binding(shell) == true) {
-		execute_key_binding(shell, shell->binding);
-		free(user_input);
-		shell->binding->code = -1;
-		return (SUCCESS);
-	}
 	if (is_empty_input(user_input) == true) {
 		user_input = apply_transformation(shell->bonus, user_input,
 			shell->paths);
@@ -50,9 +44,8 @@ unsigned int shell_loop(shell_t *shell)
 
 	while (shell->state == OK && display_prompt(shell) &&
 		(user_input = get_input(shell, 0)) != NULL) {
-		printf("\nINPUT = %s\n", user_input);
-		/*if (redirect_loop(shell, user_input) == FAILURE)
-			return (FAILURE);*/
+		if (redirect_loop(shell, user_input) == FAILURE)
+			return (FAILURE);
 	}
 	return (SUCCESS);
 }

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 #include "shell.h"
 #include "input.h"
 #include "mylib.h"
@@ -51,15 +52,16 @@ static int add_in_cursor(char *input, int *i, int c, binding_t *binding)
 	int ratio = 0;
 
 	if (c == binding->suppr) {
-		if ((*i) == (int)strlen(input))
+		if (strlen(input) == 0 || (*i) == (int)strlen(input))
 			return (*i);
-		for (int a = (*i); input[a]; a++) {
+		for (int a = (*i); input[a + 1]; a++, ratio++) {
 			input[a] = input[a + 1];
 		}
-		for (int a = *i; a < strlen(input) - 1; a++, ratio++)
-			my_putstr("\033[1C");
+		input[*i + ratio] = '\0';
+		ratio = 0;
 		my_putstr(CLEAR_END_LINE);
-		for (int a = 0; a != ratio; a++)
+		write(0, input + *i, strlen(input + *i));
+		for (int a = 0; a != (int)strlen(input) - *i; a++)
 			my_putstr("\033[1D");
 	}
 	return (*i);

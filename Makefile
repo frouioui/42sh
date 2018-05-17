@@ -43,8 +43,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/input/get_chars_from_term.c \
 		$(PATH_SRC)/shell_loop/input/regular_char.c \
 		$(PATH_SRC)/shell_loop/input/cursor_moves.c \
-		$(PATH_SRC)/shell_loop/binding/is_key_binding.c \
-		$(PATH_SRC)/shell_loop/binding/execute_key_binding.c \
+		$(PATH_SRC)/shell_loop/input/check_match_direct.c \
 		$(PATH_SRC)/shell_loop/transformation/apply_transformation.c \
 		$(PATH_SRC)/shell_loop/transformation/history/history.c \
 		$(PATH_SRC)/shell_loop/transformation/alias/get_alias.c \

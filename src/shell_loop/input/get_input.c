@@ -15,9 +15,11 @@ char *get_input(shell_t *shell, int fd)
 	char *input = NULL;
 
 	if (shell->term == false) {
-		return (get_next_line(fd));
+		input = get_next_line(fd);
 	} else {
 		input = get_chars_from_term(shell, fd);
 	}
+	if (input != NULL)
+		write(fd, "\n", 1);
 	return (input);
 }

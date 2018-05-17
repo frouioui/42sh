@@ -43,7 +43,7 @@ static char *backspace_input(char *input, int *c, int *i, int fd)
 		write(fd, c, 1);
 		write(fd, CLEAR_END_LINE, 3);
 		write(fd, input + *i, strlen(input + *i));
-		for (int a = 0; a < strlen(input + *i); a++)
+		for (int a = 0; a < (int)strlen(input + *i); a++)
 			my_putstr("\033[1D");
 	}
 	return (input);

@@ -83,8 +83,6 @@ void write_command_history(command_line_t *, char **);
 
 /* --- binding functions / redirection struct / macros --- */
 binding_t *init_bindings(shell_t *shell);
-bool is_key_binding(shell_t *shell);
-void execute_key_binding(shell_t *shell, binding_t *binding);
 
 typedef struct redirect_binding_s {
 	int code;

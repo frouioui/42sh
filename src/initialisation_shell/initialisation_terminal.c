@@ -8,9 +8,9 @@
 #include <string.h>
 #include <stdio.h>
 #include <term.h>
-#include <errno.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "shell.h"
 
 int get_term_caps(struct termios *new, char **env)
@@ -29,8 +29,9 @@ bool init_terminal(shell_t *shell)
 {
 	struct termios new;
 
-	if (isatty(0) && get_term_caps(&new, shell->env) == 1) {
-		printf("bite\n");
+	if (!isatty(0))
+		return (false);
+	if (get_term_caps(&new, shell->env) == 1) {
 		return (false);
 	}
 	new.c_lflag &= ~(ICANON | ECHO);

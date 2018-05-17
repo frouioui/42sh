@@ -22,7 +22,7 @@ char *get_chars_from_term(shell_t *shell, int fd)
 		return (NULL);
 	input[i] = '\0';
 	while (read(fd, &c, sizeof(int)) && c != EOT && c != '\n') {
-		// Check matches special binding that leads to exit the loop
+		check_match_direct(input, c, &i, shell);
 		i = cursor_moves(input, c, &i, shell->binding);
 		// Check history
 		// Check tabulation
