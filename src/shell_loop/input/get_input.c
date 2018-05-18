@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <unistd.h>
 #include "shell.h"
 #include "mylib.h"
 #include "input.h"

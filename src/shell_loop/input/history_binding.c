@@ -20,7 +20,7 @@ static char *get_line_history(shell_t *shell, int hist_i)
 
 	if (history == NULL)
 		return (NULL);
-	if (hist_i > size - 1)
+	if (hist_i > (int)size - 1)
 		return (NULL);
 	i = size - 1 - hist_i;
 	if (history[i] == NULL) {
