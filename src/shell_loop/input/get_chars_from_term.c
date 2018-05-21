@@ -25,7 +25,7 @@ char *get_chars_from_term(shell_t *shell, int fd)
 		check_match_direct(input, c, &i, shell);
 		i = cursor_moves(input, c, &i, shell->binding);
 		input = history_binding(input, c, &i, shell);
-		// Check tabulation
+		input = get_auto_completion(input, c, &i, shell);
 		input = regular_char(input, c, &i, fd);
 		c = 0;
 	}

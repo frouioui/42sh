@@ -16,7 +16,7 @@ char *get_input(shell_t *shell, int fd)
 	char *input = NULL;
 
 	if (shell->term == false) {
-		input = get_next_line(fd);
+		input = get_next_line(0);
 	} else {
 		input = get_chars_from_term(shell, fd);
 	}

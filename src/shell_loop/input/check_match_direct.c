@@ -14,9 +14,9 @@
 static void check_clear(int c, char *input, int *i, shell_t *shell)
 {
 	if (c == shell->binding->clear) {
-		write(0, "\033c", 2);
+		write(1, "\033c", 2);
 		display_prompt(shell);
-		write(0, input, strlen(input));
+		write(1, input, strlen(input));
 	}
 }
 
@@ -27,7 +27,7 @@ static void check_exit(int c, char *input, int *i, shell_t *shell)
 		for (int a = 0; a < *i; a++)
 			my_putstr("\033[1D");
 		my_putstr(CLEAR_END_LINE);
-		write(0, "exit", strlen("exit"));
+		write(1, "exit", strlen("exit"));
 		free(input);
 		input = strdup("exit");
 		*i = strlen(input);

@@ -43,8 +43,7 @@ unsigned int shell_loop(shell_t *shell)
 	char *user_input = NULL;
 
 	while (shell->state == OK && display_prompt(shell) &&
-		(user_input = get_input(shell, 0)) != NULL) {
-		printf("INPUT = %s\n", user_input);
+		(user_input = get_input(shell, 1)) != NULL) {
 		if (redirect_loop(shell, user_input) == FAILURE)
 			return (FAILURE);
 	}

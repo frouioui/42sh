@@ -45,6 +45,9 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/input/cursor_moves.c \
 		$(PATH_SRC)/shell_loop/input/check_match_direct.c \
 		$(PATH_SRC)/shell_loop/input/history_binding.c \
+		$(PATH_SRC)/shell_loop/input/get_completion_folder.c \
+		$(PATH_SRC)/shell_loop/input/get_auto_completion.c \
+		$(PATH_SRC)/shell_loop/input/modify_input_autocompletion.c \
 		$(PATH_SRC)/shell_loop/transformation/apply_transformation.c \
 		$(PATH_SRC)/shell_loop/transformation/history/history.c \
 		$(PATH_SRC)/shell_loop/transformation/alias/get_alias.c \

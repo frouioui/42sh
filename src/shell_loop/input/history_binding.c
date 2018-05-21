@@ -59,7 +59,7 @@ static char *down_history(shell_t *shell, char *input, int *i, int *hist_i)
 	for (int i = 0; i < (int)strlen(input); i++)
 		my_putstr("\033[1D");
 	my_putstr(CLEAR_END_LINE);
-	write(0, new, strlen(new));
+	write(1, new, strlen(new));
 	*i = strlen(new);
 	(*hist_i)--;
 	free(input);

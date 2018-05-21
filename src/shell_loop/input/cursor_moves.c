@@ -60,7 +60,7 @@ static int add_in_cursor(char *input, int *i, int c, binding_t *binding)
 		input[*i + ratio] = '\0';
 		ratio = 0;
 		my_putstr(CLEAR_END_LINE);
-		write(0, input + *i, strlen(input + *i));
+		write(1, input + *i, strlen(input + *i));
 		for (int a = 0; a != (int)strlen(input) - *i; a++)
 			my_putstr("\033[1D");
 	}
