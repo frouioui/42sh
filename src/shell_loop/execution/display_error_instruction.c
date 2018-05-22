@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** PSU_minishell2_2017
+** PSU_42sh_2017
 ** File description:
 ** Display the right error message if the instruction is not valid
 */

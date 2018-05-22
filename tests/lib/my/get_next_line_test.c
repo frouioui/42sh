@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2018
-** my_putchar.c
+** PSU_42sh_2017
 ** File description:
-** florent.poinsard@epitech.eu
+** Test file of the GNL
 */
 
 #include <criterion/criterion.h>

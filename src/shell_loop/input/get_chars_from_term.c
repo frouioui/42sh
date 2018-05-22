@@ -30,5 +30,7 @@ char *get_chars_from_term(shell_t *shell, int fd)
 		c = 0;
 	}
 	history_binding(input, c, &i, shell);
+	if (c == EOT)
+		free(input);
 	return (c != EOT ? input : NULL);
 }

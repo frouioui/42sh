@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2017
-** my_replace_env.c
+** PSU_42sh_2017
 ** File description:
 ** florian.davasse@epitech.eu
 */

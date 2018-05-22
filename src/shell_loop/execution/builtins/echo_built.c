@@ -14,7 +14,7 @@
 static bool search_option(pipe_t *pipe, int *index)
 {
 	if (pipe->args[1] != NULL) {
-	 	if (strcmp(pipe->args[1], "-n") == 0) {
+		if (strcmp(pipe->args[1], "-n") == 0) {
 			*index += 1;
 			return (true);
 		}

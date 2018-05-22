@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2017
-** put_new_old_pwd.c
+** PSU_42sh_2017
 ** File description:
 ** florent.poinsard@epitech.eu
 */

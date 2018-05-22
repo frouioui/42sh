@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** PSU_minishell2_2017
+** PSU_42sh_2017
 ** File description:
 ** Unset the given key on the env. Returns if there is an error.
 */
