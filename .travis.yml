@@ -1,6 +1,12 @@
 language: c
 
-compiler: gcc
+sudo: false
+
+compiler: gcc-8
+
+instal:
+  - gcov
 
 script:
-  - make
+  - make tests_run
+  - gcov *
