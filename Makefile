@@ -184,7 +184,7 @@ tests_auto:
 	./42sh_tester -j1 --always-succeed
 
 tests_compile:
-	gcc $(HEADER) $(CDFLAG) -std=gnu99 $(SRCS) $(SRCS_TEST) ./lib/my/*.c -o $(BINARY_NAME) -lncurses $(TEST_FLAGS)
+	gcc $(HEADER) $(CDFLAG) -std=gnu99 $(SRCS) $(SRCS_TEST) ./lib/my/*.c -o $(TEST_BINARY_NAME) -lncurses $(TEST_FLAGS)
 
 tests_run:
 	make -C./lib/
