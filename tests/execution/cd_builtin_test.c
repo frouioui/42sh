@@ -26,6 +26,8 @@ Test(cd_built_1, check_new_pwd)
 	}
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
+	if (shell == NULL)
+		cr_assert_fail();
 	shell->command_line = get_command_line(false, "cd ../../", shell->env);
 	cd_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_str_eq(shell->env[3], "PWD=/");

@@ -9,6 +9,7 @@
 #include "shell.h"
 #include "mylib.h"
 #include "execution.h"
+#include "input.h"
 
 bool is_empty_input(char *user_input)
 {
@@ -42,7 +43,7 @@ unsigned int shell_loop(shell_t *shell)
 	char *user_input = NULL;
 
 	while (shell->state == OK && display_prompt(shell) &&
-		(user_input = get_next_line(0)) != NULL) {
+		(user_input = get_input(shell, 1, 0)) != NULL) {
 		if (redirect_loop(shell, user_input) == FAILURE)
 			return (FAILURE);
 	}

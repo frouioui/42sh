@@ -24,6 +24,7 @@ static void display_full_history(shell_t *shell, int fd)
 		write(fd, history[i], strlen(history[i]));
 		write(fd, "\n", 1);
 	}
+	free_array_string(history);
 }
 
 /* integration of the shell struct for future use (variable size_history) */
@@ -43,6 +44,7 @@ static void display_line_history(shell_t *shell, int fd, int line_display)
 		write(fd, history[i], strlen(history[i]));
 		write(fd, "\n", 1);
 	}
+	free_array_string(history);
 }
 
 static void error_history(int fd)

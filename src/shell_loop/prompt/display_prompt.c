@@ -51,7 +51,7 @@ int display_prompt(shell_t *shell)
 	char *folder = get_current_folder(shell);
 	char *host = get_current_host(shell);
 
-	if (shell->bonus == false) {
+	if (shell->prompt && shell->bonus == false) {
 		my_putstr("[");
 		user != NULL ? my_putstr(user) : my_putstr("anonyme");
 		my_putstr("@");
@@ -60,7 +60,7 @@ int display_prompt(shell_t *shell)
 		my_putstr(" -> ");
 		folder != NULL ? my_putstr(folder) : 0;
 		my_putstr(" $ ");
-	} else {
+	} else if (shell->prompt) {
 		display_bonus_prompt(shell->code, user, folder, host);
 	}
 	folder != NULL ? free(folder) : 0;
