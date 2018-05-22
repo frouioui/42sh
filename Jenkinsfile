@@ -1,4 +1,5 @@
-/* Jenkinsfile
+/* 
+* Jenkinsfile
 * Test EPITECH plateforme collaborative étudiant
 * florent.poinsard@epitech.eu
 */
