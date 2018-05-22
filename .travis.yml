@@ -13,5 +13,5 @@ script:
   - ./install_criterion.sh
   - cd ../../
   - make tests_compile
-  - ./42sh_tester -j1 --always-succeed
+  - ./42sh_test -j1 --always-succeed
   - gcov *
