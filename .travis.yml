@@ -1,4 +1,4 @@
-language: C11
+language: c
 
 sudo: false
 
