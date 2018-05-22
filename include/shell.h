@@ -11,14 +11,19 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/types.h>
 #include "instruction.h"
+#include "process_gestion.h"
 #include "mylib.h"
 
 #define PATH_HISTORY_FILE ".history"
 
-#define SUCCESS 0
-#define SKIP 21
-#define FAILURE 84
+#define SUCCESS (0)
+#define SKIP (21)
+#define FAILURE (84)
+
+// jobs control
+#define CHANGED_SIGNAL (2)
 
 typedef struct backup_s {
 	char *user;
@@ -42,6 +47,7 @@ typedef struct shell_s {
 	int code;
 	bool bonus;
 	char **paths;
+	running_process_t *process;
 } shell_t;
 
 int check_args(int);
@@ -61,5 +67,10 @@ void display_bonus_prompt(int, char *, char *, char *);
 int find_option_env(char **env, char *str);
 int find_separator_env(char *str);
 char **init_paths(char **);
+// Process Gestion
+bool get_process(struct sigaction *saves[2], pid_t pid, shell_t *shell,
+pipe_t pipe);
+int fg_built(shell_t * /*shell*/, pipe_t * /*pipe*/);
+
 
 #endif /* end of include guard: SHELL_H */

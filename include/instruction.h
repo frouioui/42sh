@@ -52,6 +52,11 @@ typedef enum condition_s {
 	OR
 } condition_t;
 
+typedef enum execution_s {
+	FORGROUND,
+	BACKGROUND
+} execution_t;
+
 typedef struct pipe_s {
 	char *full_instruction;
 	char **args;
@@ -62,6 +67,7 @@ typedef struct pipe_s {
 	bool valid;
 	bool redirect;
 	error_syntax_t error;
+	execution_t running;
 	redirect_t type_redirect;
 } pipe_t;
 

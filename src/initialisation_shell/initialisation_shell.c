@@ -26,6 +26,7 @@ shell_t *initialisation_shell(int argc, char **argv, char **env)
 	shell->backup = initialisation_backup(shell->env);
 	shell->command_line = NULL;
 	shell->code = 0;
+	shell->process = NULL;
 	shell->state = OK;
 	shell->paths = init_paths(shell->env);
 	if (shell->backup == NULL)

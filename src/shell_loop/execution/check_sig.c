@@ -30,9 +30,8 @@ static void display_core_dump(char *base)
 	puts(new);
 }
 
-void check_sig(shell_t *shell, int stat)
+static void check_signal(shell_t *shell, int stat)
 {
-	char *str = NULL;
 	int nb = (stat >= 128 ? stat - 128 : stat);
 
 	if (WIFSIGNALED(stat) && nb == SIGFPE) {
@@ -43,6 +42,28 @@ void check_sig(shell_t *shell, int stat)
 		shell->code = nb + 128;
 		return;
 	}
+}
+
+static void update_process(shell_t *shell, int stat)
+{
+	running_process_t *process = get_the_unset_state(shell->process);
+
+	if (!process)
+		return;
+	if (WIFSIGNALED(stat) || WIFEXITED(stat))
+		process->state = DONE;
+	if (get_or_set_pid(true, 0, false, false).stop)
+		process->state = SUSPEND;
+	if (process->state == DONT_SET)
+		process->state = RUNNING;
+}
+
+void check_sig(shell_t *shell, int stat)
+{
+	char *str = NULL;
+	int nb = (stat >= 128 ? stat - 128 : stat);
+
+	check_signal(shell, stat);
 	if (WIFSIGNALED(stat)) {
 		str = strdup((char *)sys_siglist[nb]);
 		WCOREDUMP(stat) ? display_core_dump(str) : printf("%s\n", str);
@@ -50,4 +71,5 @@ void check_sig(shell_t *shell, int stat)
 	} else if (WIFSTOPPED(stat))
 		puts("Stopped");
 	str != NULL ? free(str) : 0;
+	update_process(shell, stat);
 }

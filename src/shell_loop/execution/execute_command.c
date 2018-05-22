@@ -32,6 +32,7 @@ static void execute_instruction(shell_t *shell, command_line_t *command,
 		shell->code = 1;
 		display_error_instruction(command->instruction[nb]);
 	}
+	update_running_process(&shell->process);
 	command->instruction[nb]->last_code = shell->code;
 }
 
