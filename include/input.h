@@ -14,7 +14,7 @@
 
 #define CLEAR_END_LINE "\033[K"
 
-char *get_input(shell_t *, int);
+char *get_input(shell_t *, int, int);
 char *get_chars_from_term(shell_t *, int);
 char *regular_char(char *, int, int *, int);
 int cursor_moves(char *, int, int *, binding_t *);

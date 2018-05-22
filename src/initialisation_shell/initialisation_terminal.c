@@ -18,7 +18,7 @@ int get_term_caps(struct termios *new, char **env)
 	char *term = my_get_env(env, "TERM");
 
 	if (term == NULL)
-		term = strdup("xterm");
+		return (1);
 	if (tgetent(NULL, term) < 0 || tcgetattr(0, new) < 0)
 		return (1);
 	free(term);
@@ -31,9 +31,8 @@ bool init_terminal(shell_t *shell)
 
 	if (!isatty(0))
 		return (false);
-	if (get_term_caps(&new, shell->env) == 1) {
+	if (get_term_caps(&new, shell->env) == 1)
 		return (false);
-	}
 	new.c_lflag &= ~(ICANON | ECHO);
 	if (tcsetattr(0, TCSANOW, &(new)) == 1)
 		return (false);

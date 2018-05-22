@@ -11,16 +11,17 @@
 #include "mylib.h"
 #include "input.h"
 
-char *get_input(shell_t *shell, int fd)
+// Main input management function
+char *get_input(shell_t *shell, int fd_term, int fd_gnl)
 {
 	char *input = NULL;
 
 	if (shell->term == false) {
-		input = get_next_line(0);
+		input = get_next_line(fd_gnl);
 	} else {
-		input = get_chars_from_term(shell, fd);
+		input = get_chars_from_term(shell, fd_term);
 	}
 	if (input != NULL)
-		write(fd, "\n", 1);
+		write(fd_term, "\n", 1);
 	return (input);
 }
