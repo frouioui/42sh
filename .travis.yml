@@ -1,4 +1,4 @@
-language: c
+language: C11
 
 sudo: false
 
@@ -6,6 +6,7 @@ compiler: gcc-8
 
 instal:
   - gcov
+  - c11
 
 script:
   - make tests_run
