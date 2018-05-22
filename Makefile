@@ -174,6 +174,9 @@ $(BINARY_NAME): $(OBJS)
 	make -C./lib/
 	$(CC) -o $(BINARY_NAME) $(HEADER) $(OBJS) $(LIB)
 
+compile:
+	gcc $(HEADER) $(CDFLAG) -std=gnu99 $(SRCS) $(SRC_MAIN) ./lib/my/*.c -o $(BINARY_NAME) -lncurses
+
 ## -- TESTING RULES -- ##
 
 tests_auto:
@@ -181,8 +184,7 @@ tests_auto:
 	./42sh_tester -j1 --always-succeed
 
 tests_compile:
-	make -C./lib/
-	$(CC) $(SRCS) $(SRCS_TEST) -o $(TEST_BINARY_NAME) $(HEADER) $(TEST_FLAGS) $(LIB)
+	gcc $(HEADER) $(CDFLAG) -std=gnu99 $(SRCS) $(SRCS_TEST) ./lib/my/*.c -o $(BINARY_NAME) -lncurses $(TEST_FLAGS)
 
 tests_run:
 	make -C./lib/
