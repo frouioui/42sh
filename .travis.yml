@@ -8,5 +8,8 @@ instal:
   - gcov
 
 script:
+  - cd bonus/automated_test
+  - chmod +x *.sh
+  - ./install_criterion.sh
   - make tests_compile
   - gcov *
