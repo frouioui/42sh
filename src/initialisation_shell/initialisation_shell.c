@@ -15,7 +15,7 @@ static bool external_init(shell_t *shell)
 {
 	shell->backup = initialisation_backup(shell->env);
 	shell->paths = init_paths(shell->env);
-	shell->term = init_terminal(shell);
+	shell->terminal.term = init_terminal(shell);
 	shell->binding = init_bindings(shell);
 	if (!shell->backup || !shell->paths)
 		return (false);

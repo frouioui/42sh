@@ -31,6 +31,7 @@ bool init_terminal(shell_t *shell)
 
 	if (!isatty(0))
 		return (false);
+	tcgetattr(0, &shell->terminal.old);
 	if (get_term_caps(&new, shell->env) == 1)
 		return (false);
 	new.c_lflag &= ~(ICANON | ECHO);
