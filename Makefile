@@ -32,11 +32,22 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/initialisation_shell/set_env_echec_mode.c \
 		$(PATH_SRC)/initialisation_shell/initialisation_backup.c \
 		$(PATH_SRC)/initialisation_shell/initialisation_paths.c \
+		$(PATH_SRC)/initialisation_shell/initialisation_terminal.c \
+		$(PATH_SRC)/initialisation_shell/initialisation_binding.c \
 		$(PATH_SRC)/shell_loop/shell_loop.c \
 		$(PATH_SRC)/shell_loop/write_command_history.c \
 		$(PATH_SRC)/shell_loop/free_command.c \
 		$(PATH_SRC)/shell_loop/update_backup.c \
 		$(PATH_SRC)/shell_loop/free_array_string.c \
+		$(PATH_SRC)/shell_loop/input/get_input.c \
+		$(PATH_SRC)/shell_loop/input/get_chars_from_term.c \
+		$(PATH_SRC)/shell_loop/input/regular_char.c \
+		$(PATH_SRC)/shell_loop/input/cursor_moves.c \
+		$(PATH_SRC)/shell_loop/input/check_match_direct.c \
+		$(PATH_SRC)/shell_loop/input/history_binding.c \
+		$(PATH_SRC)/shell_loop/input/get_completion_folder.c \
+		$(PATH_SRC)/shell_loop/input/get_auto_completion.c \
+		$(PATH_SRC)/shell_loop/input/modify_input_autocompletion.c \
 		$(PATH_SRC)/shell_loop/transformation/apply_transformation.c \
 		$(PATH_SRC)/shell_loop/transformation/history/history.c \
 		$(PATH_SRC)/shell_loop/transformation/alias/get_alias.c \
@@ -103,6 +114,9 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/shell/initialisation_shell_test.c \
 			$(PATH_TEST)/shell/is_empty_line_test.c \
 			$(PATH_TEST)/shell/set_env_echec_mode_test.c \
+			$(PATH_TEST)/shell/init_terminal_test.c \
+			$(PATH_TEST)/shell/get_input_test.c \
+			$(PATH_TEST)/shell/modify_input_auto_test.c \
 			$(PATH_TEST)/parsing/analyse_redirect_test.c \
 			$(PATH_TEST)/parsing/analyse_redirect_2_test.c \
 			$(PATH_TEST)/parsing/check_env_variable_test.c \
@@ -138,7 +152,7 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 
 ## ---- FLAGS ---- ##
 
-LIB	=	-L./lib/ -lmy
+LIB	=	-L./lib/ -lmy -lncurses
 
 TEST_FLAGS	=	-lcriterion --coverage
 

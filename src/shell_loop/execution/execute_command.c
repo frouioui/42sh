@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** minishell2
+** PSU_42sh_2017
 ** File description:
 ** Main file of the "execution" functions
 */
@@ -51,5 +51,6 @@ unsigned int execute_command(shell_t *shell, command_line_t *command)
 			condition_not_valid(command->instruction, nb);
 		}
 	}
+	shell->prompt = true;
 	return (shell->code);
 }

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** minishell2
+** PSU_42sh_2017
 ** File description:
 ** Inits the whole shell's variable and structures.
 */

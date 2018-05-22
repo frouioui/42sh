@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** get_execution_filename.c
+** PSU_42sh_2017
 ** File description:
 ** Get the filepath of an executable
 */

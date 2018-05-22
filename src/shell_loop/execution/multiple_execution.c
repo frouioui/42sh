@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** minishell2
+** PSU_42sh_2017
 ** File description:
 ** Main file for all the "multiple execution" command (pipes)
 */

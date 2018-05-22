@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** PSU_minishell2_2017
+** PSU_42sh_2017
 ** File description:
 ** Redirect the flow to the right builtin's functions. Returns -1 if error.
 */

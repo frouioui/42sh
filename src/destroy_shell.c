@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** PSU_minishell2_2017
+** PSU_42sh_2017
 ** File description:
 ** Destroy the shell, and returns the last code value.
 */
@@ -24,6 +24,8 @@ int destroy_shell(shell_t *shell)
 	destroy_backup(shell->backup);
 	free_array_string(shell->env);
 	free_array_string(shell->paths);
+	if (shell->binding != NULL)
+		free(shell->binding);
 	free(shell);
 	return (code);
 }

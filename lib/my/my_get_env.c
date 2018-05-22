@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** minishell2
+** PSU_42sh_2017
 ** File description:
 ** Graph a live in the env, depending on the given keyword
 */

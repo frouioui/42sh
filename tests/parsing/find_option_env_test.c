@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2017
-** find_option_env_test.c
+** PSU_42sh_2017
 ** File description:
-** florian.davasse@epitech.eu
+** Test file of the env variables manager
 */
 
 #include <criterion/criterion.h>

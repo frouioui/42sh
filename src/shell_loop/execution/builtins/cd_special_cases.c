@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2017
-** cd_special_cases.c
+** PSU_42sh_2017
 ** File description:
 ** florent.poinsard@epitech.eu
 */

@@ -1,7 +1,8 @@
+##
 ## EPITECH PROJECT, 2017
 ## Makefile
 ## File description:
-## julien.ollivier@epitech.eu
+## Libs Makefile
 ##
 
 SRC	=	./my/get_next_line.c \
@@ -17,7 +18,8 @@ SRC	=	./my/get_next_line.c \
 		./my/my_strcpy.c \
 		./my/my_strlen.c \
 		./my/my_strcat.c \
-		./my/my_ischar.c
+		./my/my_ischar.c \
+		./my/my_seg_path.c \
 
 OBJ	=	$(SRC:.c=.o)
 

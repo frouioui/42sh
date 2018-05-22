@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** minishell2
+** PSU_42sh_2017
 ** File description:
 ** include file of the libmy functions
 */
@@ -28,5 +28,6 @@ bool my_ischar(char c);
 int my_strcmp_env(char *str, char *env);
 char *my_get_env_parse(char **, int);
 char *my_strcat(char *, char *);
+char **my_seg_path(char *);
 
 #endif /* end of include guard: LIBMY_H */
