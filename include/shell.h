@@ -11,6 +11,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include <term.h>
 #include "instruction.h"
 #include "mylib.h"
 
@@ -48,6 +49,11 @@ typedef struct binding_s {
 	int suppr;
 } binding_t;
 
+typedef struct terminal_s {
+	struct termios old;
+	bool term;
+} terminal_t;
+
 typedef struct shell_s {
 	char **env;
 	char **paths;
@@ -56,8 +62,8 @@ typedef struct shell_s {
 	command_line_t *command_line;
 	binding_t *binding;
 	state_t state;
+	terminal_t terminal;
 	bool bonus;
-	bool term;
 	bool prompt;
 } shell_t;
 
