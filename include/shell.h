@@ -44,7 +44,7 @@ typedef struct shell_s {
 	char **paths;
 } shell_t;
 
-int check_args(int);
+int check_args(int, char **);
 char **copy_environement(char **);
 shell_t *initialisation_shell(int, char **, char **);
 char **copy_environement(char **);
