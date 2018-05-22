@@ -2,6 +2,8 @@ language: c
 
 compiler: gcc-8
 
+sudo: required
+
 instal:
   - gcov
 
