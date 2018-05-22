@@ -47,7 +47,7 @@ Test(execute_command_2, invalid_command, .timeout = 0.2)
 	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
 	shell->command_line = get_command_line(false, "exitt", shell->env);
-	cr_assert_eq(execute_command(shell, shell->command_line), 1, "was %d");
+	cr_assert_eq(execute_command(shell, shell->command_line), 1);
 }
 
 Test(execute_command_3, simple_command, .timeout = 0.2)

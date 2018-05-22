@@ -75,7 +75,7 @@ Test(get_command_line_7, and_condition_instruction_check_condition)
 	cr_assert_not_null(command->instruction[0]);
 	cr_assert_not_null(command->instruction[1]);
 	cr_assert_eq(command->valid, true);
-	cr_assert_eq(command->instruction[0]->condition, AND, "current %d");
+	cr_assert_eq(command->instruction[0]->condition, AND);
 	cr_assert_eq(command->instruction[1]->condition, NO);
 }
 
@@ -95,8 +95,8 @@ Test(get_command_line_8, or_and_condition_instruction_check_condition)
 	cr_assert_not_null(command->instruction[0]);
 	cr_assert_not_null(command->instruction[1]);
 	cr_assert_eq(command->valid, true);
-	cr_assert_eq(command->instruction[0]->condition, OR, "current %d");
-	cr_assert_eq(command->instruction[1]->condition, AND, "current %d");
+	cr_assert_eq(command->instruction[0]->condition, OR);
+	cr_assert_eq(command->instruction[1]->condition, AND);
 }
 
 Test(get_command_line_9, or_condition_instruction_check_condition)
@@ -115,6 +115,6 @@ Test(get_command_line_9, or_condition_instruction_check_condition)
 	cr_assert_not_null(command->instruction[0]);
 	cr_assert_not_null(command->instruction[1]);
 	cr_assert_eq(command->valid, true);
-	cr_assert_eq(command->instruction[0]->condition, OR, "current %d");
+	cr_assert_eq(command->instruction[0]->condition, OR);
 	cr_assert_eq(command->instruction[1]->condition, NO);
 }
