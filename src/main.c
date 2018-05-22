@@ -12,7 +12,7 @@ int main(int argc, char **argv, char **env)
 {
 	shell_t *shell = NULL;
 
-	if (check_args(argc) == FAILURE)
+	if (check_args(argc, argv) == FAILURE)
 		return (FAILURE);
 	shell = initialisation_shell(argc, argv, env);
 	if (shell == NULL)
@@ -21,3 +21,7 @@ int main(int argc, char **argv, char **env)
 		return (FAILURE);
 	return (destroy_shell(shell));
 }
+// int main(int argc, char **argv, char **env)
+// {
+// 	check_args(argc, argv);
+// }
