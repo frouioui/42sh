@@ -11,5 +11,7 @@ script:
   - cd bonus/automated_test
   - chmod +x *.sh
   - ./install_criterion.sh
+  - cd ../../
   - make tests_compile
+  - ./42sh_tester -j1 --always-succeed
   - gcov *
