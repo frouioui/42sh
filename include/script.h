@@ -10,6 +10,8 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include "shell.h"
 
 #define SH_CHAR(c) (c == '.' || c == 's' || c == 'h')
 
@@ -17,5 +19,7 @@ bool check_script(char *);
 bool check_script_access(char *);
 bool check_script_name(char *);
 bool check_script_shebang(char *);
+char *run_script(shell_t *, FILE *);
+FILE *open_script(char *);
 
 #endif /* !CRIPTING_H */

@@ -30,5 +30,5 @@ Test(check_args_3, negative_number_args)
 
 Test(check_args_4, valid_args)
 {
-	cr_assert_eq(check_args(2, NULL), SUCCESS);
+	cr_assert_eq(check_args(2, NULL), FAILURE);
 }

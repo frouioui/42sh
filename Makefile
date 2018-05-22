@@ -94,6 +94,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/execution/condition_instruction.c \
 		$(PATH_SRC)/scripting/check_script.c \
 		$(PATH_SRC)/scripting/open_script.c \
+		$(PATH_SRC)/scripting/run_script.c \
 
 SRC_MAIN	=	$(PATH_SRC)/main.c
 

@@ -16,7 +16,7 @@ int check_args(int argc, char **argv)
 		return (FAILURE);
 	}
 	if (argc == 2 && argv[1] && !check_script(argv[1])) {
-		my_putstr("The given argument must a valid script\n");
+		my_putstr("The given argument must be a valid script\n");
 		return (FAILURE);
 	}
 	return (SUCCESS);

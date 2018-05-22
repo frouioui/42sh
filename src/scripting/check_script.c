@@ -8,7 +8,6 @@
 #include "script.h"
 #include <unistd.h>
 #include <string.h>
-#include <stdio.h>
 
 bool check_script_shebang(char *path)
 {

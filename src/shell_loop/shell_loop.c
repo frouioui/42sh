@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "shell.h"
 #include "mylib.h"
+#include "script.h"
 #include "execution.h"
 
 bool is_empty_input(char *user_input)
@@ -37,12 +38,25 @@ unsigned int redirect_loop(shell_t *shell, char *user_input)
 	return (SUCCESS);
 }
 
-unsigned int shell_loop(shell_t *shell)
+char *redirect_script(shell_t *shell, FILE *fd)
+{
+	char *line = NULL;
+	size_t n = 0;
+
+	if (!fd)
+		return (line);
+	if (shell->script)
+		if ((line = run_script(shell, fd)))
+			return (line);
+	return (line = get_next_line(0));
+}
+
+unsigned int shell_loop(shell_t *shell, FILE *fd)
 {
 	char *user_input = NULL;
 
 	while (shell->state == OK && display_prompt(shell) &&
-		(user_input = get_next_line(0)) != NULL) {
+		(user_input = redirect_script(shell, fd)) != NULL) {
 		if (redirect_loop(shell, user_input) == FAILURE)
 			return (FAILURE);
 	}

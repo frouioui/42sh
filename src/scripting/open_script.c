@@ -6,20 +6,14 @@
 */
 
 #include "script.h"
-#include "shell.h"
-#include <stdio.h>
 
-bool run_script(char *path)
+FILE *open_script(char *path)
 {
-	FILE *fd = fopen(path, "r");
+	FILE *fd = NULL;
 
-	if (!fd)
-		return (false);
-	fclose(fd);
-	return (true);
-}
-
-void redirect_script(shell_t *shell, FILE *fd)
-{
-
+	if (!path)
+		return (NULL);
+	if (!(fd = fopen(path, "r")))
+		return (NULL);
+	return (fd);
 }

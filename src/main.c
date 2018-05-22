@@ -7,17 +7,20 @@
 
 #include <stdlib.h>
 #include "shell.h"
+#include "script.h"
 
 int main(int argc, char **argv, char **env)
 {
 	shell_t *shell = NULL;
+	FILE *fd = NULL;
 
 	if (check_args(argc, argv) == FAILURE)
 		return (FAILURE);
+	fd = open_script(argv[1]);
 	shell = initialisation_shell(argc, argv, env);
 	if (shell == NULL)
 		return (FAILURE);
-	if (shell_loop(shell) == FAILURE)
+	if (shell_loop(shell, fd) == FAILURE)
 		return (FAILURE);
 	return (destroy_shell(shell));
 }
