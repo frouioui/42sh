@@ -1,14 +1,12 @@
 language: c
 
-sudo: false
-
 compiler: gcc-8
 
 instal:
   - gcov
 
 script:
-  - cd bonus/automated_test
+  - cd ./bonus/automated_test
   - chmod +x *.sh
   - ./install_criterion.sh
   - cd ../../
