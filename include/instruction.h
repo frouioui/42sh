@@ -29,6 +29,9 @@
 #define ALPHANUM(c) (DIGIT(c) || ALPHA(c))
 #define HISTORY_FLAG(c) (c[0] == '!' && c[1] == '-' && c[2])
 
+// Grammar
+#define NB_PIPE (instruction->number_of_pipe - 1)
+
 typedef enum type_redirect_s {
 	EMPTY_REDIR,
 	STDOUT_SIMPLE,
