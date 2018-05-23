@@ -50,9 +50,12 @@ void exec_pipe(shell_t *shell, instruction_t *instruction, int **fd, pid_t pid)
 	pid_t pid2 = 0;
 	int stat = 0;
 
+	if (UNSET_PIPE)
+		 if (pipe(fd[instruction->actual_pipe]) == SYS_CALL_ERR)
+		 	exit(84);
 	if ((pid2 = fork()) == -1)
 		exit(84);
-	if (pid2 == 0) {
+	if (pid2 != 0) {
 		instruction->actual_pipe++;
 		if (instruction->actual_pipe != NB_PIPE)
 			exec_pipe(shell, instruction, fd, pid2);

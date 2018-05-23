@@ -18,8 +18,8 @@ static void dup_first(shell_t *shell, pipe_t *pipe, int **fd,
 
 	for (int i = 0; fd[i]; i++)
 		if (fd[i] != fd1) {
-			close(fd[i][1]);
-			close(fd[i][0]);
+			(fd[i][1] != -1) ? close(fd[i][1]) : 0;
+			(fd[i][0] != -1) ? close(fd[i][0]) : 0;
 		}
 	if (dup2(fd1[1], 1) == -1)
 		perror("dup");
@@ -35,8 +35,8 @@ static void dup_last(shell_t *shell, pipe_t *pipe, int **fd,
 
 	for (int i = 0; fd[i]; i++)
 		if (fd[i] != fd1) {
-			close(fd[i][1]);
-			close(fd[i][0]);
+			(fd[i][1] != -1) ? close(fd[i][1]) : 0;
+			(fd[i][0] != -1) ? close(fd[i][0]) : 0;
 		}
 	if (dup2(fd1[0], 0) == -1)
 		perror("dup");
@@ -53,8 +53,8 @@ static void dup_between(shell_t *shell, pipe_t *pipe, int **fd,
 
 	for (int i = 0; fd[i]; i++)
 		if (fd[i] != fd1 && fd[i] != fd2) {
-			close(fd[i][1]);
-			close(fd[i][0]);
+			(fd[i][1] != -1) ? close(fd[i][1]) : 0;
+			(fd[i][0] != -1) ? close(fd[i][0]) : 0;
 		}
 	if (pipe->redirect == true)
 		redirect_pipe(shell->bonus, pipe);
@@ -78,8 +78,7 @@ int dup_my_pipe(shell_t *shell, instruction_t *instruction,
 	} else if (actual == instruction->number_of_pipe - 1) {
 		dup_last(shell, instruction->pipe[actual], fd, actual);
 	} else {
-		dup_between(shell, instruction->pipe[actual], fd,
-			actual);
+		dup_between(shell, instruction->pipe[actual], fd, actual);
 	}
 	return (0);
 }

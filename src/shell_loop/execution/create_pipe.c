@@ -19,12 +19,14 @@ int **create_pipe(int nb)
 		fd[i] = malloc(sizeof(int) * 2);
 		if (fd[i] == NULL)
 			return (NULL);
+		fd[i][0] = -1;
+		fd[i][1] = -1;
 		fd[i + 1] = NULL;
-		if (pipe(fd[i]) == -1) {
-			perror("pipe");
-			exit(84);
-			return (NULL);
-		}
+		// if (pipe(fd[i]) == -1) {
+		// 	perror("pipe");
+		// 	exit(84);
+		// 	return (NULL);
+		// }
 	}
 	return (fd);
 }

@@ -69,6 +69,7 @@ pipe_t **get_pipe(bool bonus, instruction_t *instruction, char **env)
 			return (NULL);
 		pipe[i]->valid = true;
 		pipe[i]->fd = 1;
+		pipe[i]->type_redirect = EMPTY_REDIR;
 		pipe[i]->path_exec = NULL;
 		pipe[i + 1] = NULL;
 	}

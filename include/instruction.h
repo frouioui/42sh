@@ -28,6 +28,8 @@
 #define ALPHA(c) ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 #define ALPHANUM(c) (DIGIT(c) || ALPHA(c))
 #define HISTORY_FLAG(c) (c[0] == '!' && c[1] == '-' && c[2])
+#define UNSET_PIPE (fd[instruction->actual_pipe][0] == -1 || \
+fd[instruction->actual_pipe][1] == -1)
 
 // Grammar
 #define NB_PIPE (instruction->number_of_pipe - 1)
