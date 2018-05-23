@@ -43,7 +43,6 @@ static char *concate_key_value(char *arg)
 	return (full);
 }
 
-
 static int set_one_variable(shell_t *shell, char *arg)
 {
 	char *full = concate_key_value(arg);
