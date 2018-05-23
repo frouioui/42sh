@@ -34,6 +34,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/initialisation_shell/initialisation_paths.c \
 		$(PATH_SRC)/initialisation_shell/initialisation_terminal.c \
 		$(PATH_SRC)/initialisation_shell/initialisation_binding.c \
+		$(PATH_SRC)/initialisation_shell/initialisation_local.c \
 		$(PATH_SRC)/shell_loop/shell_loop.c \
 		$(PATH_SRC)/shell_loop/write_command_history.c \
 		$(PATH_SRC)/shell_loop/free_command.c \
@@ -88,6 +89,8 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/history_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/alias_built.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/update_alias.c \
+		$(PATH_SRC)/shell_loop/execution/builtins/set_built.c \
+		$(PATH_SRC)/shell_loop/execution/builtins/unset_built.c \
 		$(PATH_SRC)/shell_loop/execution/get_redirected.c \
 		$(PATH_SRC)/shell_loop/execution/multiple_execution.c \
 		$(PATH_SRC)/shell_loop/execution/execute_command.c \
@@ -134,6 +137,7 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/lib/my/my_putstr_test.c \
 			$(PATH_TEST)/lib/my/my_strcmp_test.c \
 			$(PATH_TEST)/lib/my/my_strlen_test.c \
+			$(PATH_TEST)/execution/set_built_test.c \
 			$(PATH_TEST)/execution/cd_builtin_test.c \
 			$(PATH_TEST)/execution/cd_builtin_crash_test.c \
 			$(PATH_TEST)/execution/echo_builtin_test.c \

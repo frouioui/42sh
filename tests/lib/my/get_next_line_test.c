@@ -14,11 +14,11 @@
 Test(get_next_line_1, test_small_file)
 {
 	int fd = open("./tests/lib/my/test_gnl_1", O_RDONLY);
-	char tab[5][20] = {"salut", "comment", "ca va", "ici", "okay\tokay"};
+	char arr[5][20] = {"salut", "comment", "ca va", "ici", "okay\tokay"};
 
 	if (fd != 1) {
 		for (int line = 0; line < 5; line++) {
-			cr_assert_str_eq(get_next_line(fd), tab[line]);
+			cr_assert_str_eq(get_next_line(fd), arr[line]);
 		}
 	}
 }
@@ -26,11 +26,11 @@ Test(get_next_line_1, test_small_file)
 Test(get_next_line_2, test_small_file)
 {
 	int fd = open("./tests/lib/my/test_gnl_2", O_RDONLY);
-	char tab[2][20] = {"ls", "env"};
+	char arr[2][20] = {"ls", "env"};
 
 	if (fd != 1) {
 		for (int line = 0; line < 2; line++) {
-			cr_assert_str_eq(get_next_line(fd), tab[line]);
+			cr_assert_str_eq(get_next_line(fd), arr[line]);
 		}
 	}
 }

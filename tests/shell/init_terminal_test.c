@@ -23,7 +23,7 @@ Test(init_terminal, no_term_variable, .timeout = 0.5)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	cr_assert_not_null(shell);
-	cr_assert_eq(shell->term, false);
+	cr_assert_eq(shell->terminal.term, false);
 }
 
 Test(init_terminal, valid_term_variable_not_tty, .timeout = 0.5)
@@ -40,5 +40,5 @@ Test(init_terminal, valid_term_variable_not_tty, .timeout = 0.5)
 	env[5] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	cr_assert_not_null(shell);
-	cr_assert_eq(shell->term, false);
+	cr_assert_eq(shell->terminal.term, false);
 }

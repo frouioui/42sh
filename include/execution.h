@@ -15,7 +15,7 @@
 #include "shell.h"
 #include "instruction.h"
 
-#define NB_BUILTIN 8
+#define NB_BUILTIN 10
 
 /* --- functions redirection sturcture --- */
 typedef struct redirect_flag_s {
@@ -69,5 +69,8 @@ int alias_built(shell_t *, pipe_t *);
 char *get_full_alias(char **);
 bool update_alias(shell_t *, pipe_t *);
 bool alias_match(char *, char **);
+int set_built(shell_t *, pipe_t *);
+int get_pos_key(char *, char **);
+int unset_built(shell_t *, pipe_t *);
 
 #endif /* end of include guard: EXECUTION_H */

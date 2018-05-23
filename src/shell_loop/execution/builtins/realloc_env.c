@@ -23,7 +23,7 @@ char **realloc_env(char **old_env, int pos, int size_pos)
 		free(old_env[i]);
 	}
 	free(old_env);
-	env[pos] = malloc(size_pos);
+	env[pos] = malloc(sizeof(char) * size_pos);
 	if (env[pos] == NULL)
 		exit(84);
 	env[pos + 1] = NULL;

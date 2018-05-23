@@ -13,11 +13,12 @@
 
 static bool external_init(shell_t *shell)
 {
+	shell->local = init_local();
 	shell->backup = initialisation_backup(shell->env);
 	shell->paths = init_paths(shell->env);
 	shell->terminal.term = init_terminal(shell);
 	shell->binding = init_bindings(shell);
-	if (!shell->backup || !shell->paths)
+	if (!shell->backup || !shell->paths || !shell->local)
 		return (false);
 	return (true);
 }

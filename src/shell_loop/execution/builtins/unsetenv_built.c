@@ -14,11 +14,11 @@
 
 static int display_unsetenv_error(shell_t *shell, int fd)
 {
-	char str[] = "unsetenv: Too few arguments.";
+	char str[] = "unsetenv: Too few arguments.\n";
 
 	shell->code = 1;
 	write(fd, str, strlen(str));
-	return (0);
+	return (-1);
 }
 
 int unsetenv_built(shell_t *shell, pipe_t *pipe)
