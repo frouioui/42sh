@@ -9,6 +9,8 @@
 
 void free_array_string(char **array)
 {
+	if (!array)
+		return;
 	for (int i = 0; array[i]; i++) {
 		free(array[i]);
 	}

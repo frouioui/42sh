@@ -7,7 +7,7 @@
 
 #include "script.h"
 
-FILE *open_script(char *path)
+FILE *open_script(char *path, shell_t *shell)
 {
 	FILE *fd = NULL;
 
@@ -15,5 +15,6 @@ FILE *open_script(char *path)
 		return (NULL);
 	if (!(fd = fopen(path, "r")))
 		return (NULL);
+	shell->script = true;
 	return (fd);
 }

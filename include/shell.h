@@ -41,8 +41,8 @@ typedef struct shell_s {
 	state_t state;
 	int code;
 	bool bonus;
-	char **paths;
 	bool script;
+	char **paths;
 } shell_t;
 
 int check_args(int, char **);

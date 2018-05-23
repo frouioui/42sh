@@ -24,6 +24,7 @@ shell_t *initialisation_shell(int argc, char **argv, char **env)
 		return (NULL);
 	shell->bonus = true;
 	shell->backup = initialisation_backup(shell->env);
+	shell->script = false;
 	shell->command_line = NULL;
 	shell->code = 0;
 	shell->state = OK;

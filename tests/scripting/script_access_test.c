@@ -23,10 +23,10 @@ Test(script_access, access_ok)
 
 Test(script_access, access_exist_ko, .init = redirect_all_std)
 {
-	bool status = check_script_access("./script.sh");
+	bool status = check_script_access("./scripting.sh");
 
 	cr_assert_eq(status, false);
-	cr_assert_stdout_eq_str("./script.sh: Command not found.\n");
+	cr_assert_stdout_eq_str("./scripting.sh: Command not found.\n");
 }
 
 Test(script_access, access_exec_ko, .init = redirect_all_std)
