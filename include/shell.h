@@ -56,6 +56,7 @@ typedef struct terminal_s {
 
 typedef struct shell_s {
 	char **env;
+	char **local;
 	char **paths;
 	int code;
 	backup_t *backup;
@@ -73,13 +74,14 @@ void display_bonus_prompt(int, char *, char *, char *);
 void update_backup(shell_t *);
 bool init_terminal(shell_t *);
 bool is_bonus(int, char **);
-int display_prompt(shell_t *shell);
+int display_prompt(shell_t *);
 int check_args(int);
 int destroy_shell(shell_t *);
-int find_option_env(char **env, char *str);
-int find_separator_env(char *str);
+int find_option_env(char **, char *);
+int find_separator_env(char *);
 unsigned int shell_loop(shell_t *);
 unsigned int redirect_loop(shell_t *, char *);
+char **init_local(void);
 
 /* --- basic init functions --- */
 shell_t *initialisation_shell(int, char **, char **);
