@@ -39,7 +39,7 @@ static char *up_history(shell_t *shell, char *input, int *i, int *hist_i)
 	new = get_line_history(shell, *hist_i);
 	if (new == NULL)
 		return (input);
-	for (int i = 0; i < (int)strlen(input); i++)
+	for (int a = 0; a < *i; a++)
 		my_putstr("\033[1D");
 	my_putstr(CLEAR_END_LINE);
 	write(0, new, strlen(new));
@@ -56,7 +56,7 @@ static char *down_history(shell_t *shell, char *input, int *i, int *hist_i)
 	new = get_line_history(shell, (*hist_i) - 1);
 	if (new == NULL)
 		return (input);
-	for (int i = 0; i < (int)strlen(input); i++)
+	for (int a = 0; a < *i; a++)
 		my_putstr("\033[1D");
 	my_putstr(CLEAR_END_LINE);
 	write(1, new, strlen(new));

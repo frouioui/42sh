@@ -31,7 +31,7 @@ Test(setenv_builtin, crash_test_1)
 	env[1] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	for (int i = 0; i < 11; i++)
-		redirect_loop(shell, cmd[i]);
+		redirect_loop(shell, cmd[i], strdup(cmd[i]));
 }
 
 Test(setenv_builtin, crash_test_2)
@@ -54,5 +54,5 @@ Test(setenv_builtin, crash_test_2)
 	env[1] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	for (int i = 0; i < 14; i++)
-		redirect_loop(shell, cmd[i]);
+		redirect_loop(shell, cmd[i], strdup(cmd[i]));
 }

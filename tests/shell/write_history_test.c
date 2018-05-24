@@ -23,15 +23,15 @@ Test(write_command_history, simple_command_1)
 		"PWD=/home/marvin"};
 	FILE *fp;
 
-	close(open(".history", O_RDWR | O_TRUNC));
+	close(open(".history42", O_RDWR | O_TRUNC));
 	for (int i = 0; i < 4; i++) {
 		env[i] = malloc(sizeof(char) * my_strlen(str[i]));
 		env[i] = my_strcpy(env[i], str[i]);
 	}
 	env[4] = NULL;
 	cmd = get_command_line(true, "ls -l", env, NULL);
-	write_command_history(true, cmd);
-	fp = fopen (".history","r");
+	write_command_history(cmd->full_command, NULL);
+	fp = fopen (".history42","r");
 	cr_assert_file_contents_eq_str(fp, "ls -l\n");
 }
 
@@ -43,16 +43,16 @@ Test(write_command_history, simple_command_2)
 		"PWD=/home/marvin"};
 	FILE *fp;
 
-	close(open(".history", O_RDWR | O_TRUNC));
+	close(open(".history42", O_RDWR | O_TRUNC));
 	for (int i = 0; i < 4; i++) {
 		env[i] = malloc(sizeof(char) * my_strlen(str[i]));
 		env[i] = my_strcpy(env[i], str[i]);
 	}
 	env[4] = NULL;
 	cmd = get_command_line(true, "ls -l", env, NULL);
-	write_command_history(true, cmd);
+	write_command_history(cmd->full_command, NULL);
 	cmd = get_command_line(true, "env", env, NULL);
-	write_command_history(true, cmd);
-	fp = fopen (".history","r");
+	write_command_history(cmd->full_command, NULL);
+	fp = fopen (".history42","r");
 	cr_assert_file_contents_eq_str(fp, "ls -l\nenv\n");
 }

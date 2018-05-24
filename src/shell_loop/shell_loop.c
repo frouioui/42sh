@@ -20,31 +20,32 @@ bool is_empty_input(char *user_input)
 	return (false);
 }
 
-unsigned int redirect_loop(shell_t *shell, char *user_input)
+unsigned int redirect_loop(shell_t *shell, char *input, char *copy_input)
 {
-	if (is_empty_input(user_input) == true) {
-		user_input = apply_transformation(shell->bonus, user_input,
+	if (is_empty_input(input) == true && copy_input != NULL) {
+		input = apply_transformation(shell->bonus, input,
 			shell->paths);
 		shell->command_line = get_command_line(shell->bonus,
-			user_input, shell->env, shell->local);
+			input, shell->env, shell->local);
 		if (shell->command_line == NULL)
 			return (FAILURE);
 		shell->code = execute_command(shell, shell->command_line);
-		write_command_history(shell->command_line, shell->paths);
+		write_command_history(copy_input, shell->paths);
 		free_command(shell->command_line);
 		update_backup(shell);
-		free(user_input);
+		free(input);
+		free(copy_input);
 	}
 	return (SUCCESS);
 }
 
 unsigned int shell_loop(shell_t *shell)
 {
-	char *user_input = NULL;
+	char *input = NULL;
 
 	while (shell->state == OK && display_prompt(shell) &&
-		(user_input = get_input(shell, 1, 0)) != NULL) {
-		if (redirect_loop(shell, user_input) == FAILURE)
+		(input = get_input(shell, 1, 0)) != NULL) {
+		if (redirect_loop(shell, input, strdup(input)) == FAILURE)
 			return (FAILURE);
 	}
 	return (SUCCESS);

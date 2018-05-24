@@ -80,7 +80,7 @@ int destroy_shell(shell_t *);
 int find_option_env(char **, char *);
 int find_separator_env(char *);
 unsigned int shell_loop(shell_t *);
-unsigned int redirect_loop(shell_t *, char *);
+unsigned int redirect_loop(shell_t *, char *, char *);
 char **init_local(void);
 
 /* --- basic init functions --- */
@@ -89,7 +89,7 @@ backup_t *initialisation_backup(char **);
 char **init_paths(char **);
 
 /* --- history function --- */
-void write_command_history(command_line_t *, char **);
+void write_command_history(char *, char **);
 
 /* --- binding functions / redirection struct / macros --- */
 binding_t *init_bindings(shell_t *shell);

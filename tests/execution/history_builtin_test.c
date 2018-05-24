@@ -40,8 +40,7 @@ Test(history_built, display_full_history)
 	FILE *fp = NULL;
 
 	close(open(shell->paths[1], O_RDONLY | O_TRUNC));
-	write_command_history(get_command_line(true, "echo a > z",
-		shell->env, NULL), shell->paths);
+	write_command_history("echo a > z", shell->paths);
 	shell->command_line = get_command_line(true, "history > buf",
 		shell->env, NULL);
 	execute_command(shell, shell->command_line);
@@ -55,10 +54,8 @@ Test(history_built, display_full_history_2)
 	FILE *fp = NULL;
 
 	close(open(shell->paths[1], O_RDONLY | O_TRUNC));
-	write_command_history(get_command_line(true, "echo a > z",
-		shell->env, NULL), shell->paths);
-	write_command_history(get_command_line(true, "vald",
-		shell->env, NULL), shell->paths);
+	write_command_history("echo a > z", shell->paths);
+	write_command_history("vald", shell->paths);
 	shell->command_line = get_command_line(true, "history > buf2",
 		shell->env, NULL);
 	execute_command(shell, shell->command_line);
@@ -72,12 +69,9 @@ Test(history_built, display_2)
 	FILE *fp = NULL;
 
 	close(open(shell->paths[1], O_RDONLY | O_TRUNC));
-	write_command_history(get_command_line(true, "echo a > z",
-		shell->env, NULL), shell->paths);
-	write_command_history(get_command_line(true, "vald",
-		shell->env, NULL), shell->paths);
-	write_command_history(get_command_line(true, "valdgrind ; toto",
-		shell->env, NULL), shell->paths);
+	write_command_history("echo a > z", shell->paths);
+	write_command_history("vald", shell->paths);
+	write_command_history("valdgrind ; toto", shell->paths);
 	shell->command_line = get_command_line(true, "history 2 > buf2",
 		shell->env, NULL);
 	execute_command(shell, shell->command_line);
@@ -91,12 +85,9 @@ Test(history_built, display_too_big)
 	FILE *fp = NULL;
 
 	close(open(shell->paths[1], O_RDONLY | O_TRUNC));
-	write_command_history(get_command_line(true, "echo a > z",
-		shell->env, NULL), shell->paths);
-	write_command_history(get_command_line(true, "vald",
-		shell->env, NULL), shell->paths);
-	write_command_history(get_command_line(true, "valdgrind ; toto",
-		shell->env, NULL), shell->paths);
+	write_command_history("echo a > z", shell->paths);
+	write_command_history("vald", shell->paths);
+	write_command_history("valdgrind ; toto", shell->paths);
 	shell->command_line = get_command_line(true, "history 24 > buf2",
 		shell->env, NULL);
 	execute_command(shell, shell->command_line);
