@@ -31,12 +31,37 @@ char *cut_last_input(char *input)
 	return (new);
 }
 
+static char *concate_restore(char *input, char *new)
+{
+	char *str = malloc(sizeof(char) * (strlen(input) + strlen(new) + 1));
+	int i = 0;
+
+	if (new == NULL)
+		return (NULL);
+	str[i] = '\0';
+	for (int a = 0; input && input[a]; a++) {
+		str[i] = input[a];
+		str[i + 1] = '\0';
+		i++;
+	}
+	for (int a = 0; new && new[a]; a++) {
+		str[i] = new[a];
+		str[i + 1] = '\0';
+		i++;
+	}
+	return (str);
+}
+
 char *restore_input_autocompletion(char *input, char *new)
 {
-	char *new_input = strcat(input, new);
+	char *new_input = NULL;
 
+	new_input = concate_restore(input, new);
 	if (new_input == NULL) {
 		return (input);
+	} else {
+		free(input);
+		free(new);
 	}
 	return (new_input);
 }

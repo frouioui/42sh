@@ -25,7 +25,7 @@ static shell_t *test_instruction(char *str)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
-	shell->command_line = get_command_line(true, str, shell->env);
+	shell->command_line = get_command_line(true, str, shell->env, NULL);
 	return (shell);
 }
 

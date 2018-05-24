@@ -14,11 +14,12 @@ int my_strcmp_env(char *str, char *env)
 
 	if (str == NULL || env == NULL)
 		return (1);
-	for (i = 0; str[i] != '\0' && env[i] != '\0' && env[i] != '='; i++) {
+	for (i = 0; str[i] != '\0' && env[i] != '\0' && env[i] != '=' &&
+		env[i] != '\t'; i++) {
 		if (str[i] != env[i])
 			return (1);
 	}
-	if (env[i] != '=' || str[i] != '\0')
+	if (env[i] != '=' && env[i] != '\t' && str[i] != '\0')
 		return (1);
 	return (0);
 }

@@ -66,7 +66,7 @@ char *get_alias_match(char **args, char *user_input, char ***alias)
 /*
 ** Returns the new user_input if there is an alias, returns NULL if error.
 ** Returns the same string if there is no alias.
-** The char* home variable define the path of the .alias file. The path is
+** The (char*) home variable define the path of the .alias file. The path is
 ** defined at the initialisation of the shell.
 */
 char *get_alias(char **args, char *user_input, char *home)

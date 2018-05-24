@@ -20,7 +20,7 @@ Test(get_command_line_1, test_simple_valid_command)
 
 	user_input = my_strcpy(user_input, "/bin/ls ; cat toto");
 	env[0] = my_strcpy(env[0], "HOME=/home/gildas");
-	command = get_command_line(false, user_input, env);
+	command = get_command_line(false, user_input, env, NULL);
 	cr_assert_not_null(command);
 	cr_assert_eq(command->number_instruction, 2);
 	cr_assert_not_null(command->instruction);
@@ -44,7 +44,7 @@ Test(get_command_line_1_2, test_simple_valid_command)
 
 	user_input = my_strcpy(user_input, "/bin/ls ; cat toto");
 	env[0] = my_strcpy(env[0], "HOME=/home/gildas");
-	command = get_command_line(false, user_input, env);
+	command = get_command_line(false, user_input, env, NULL);
 	cr_assert_not_null(command);
 	cr_assert_str_eq(command->instruction[0]->pipe[0]->full_instruction,
 		inst[0]);
@@ -68,7 +68,7 @@ Test(get_command_line_2, test_pipe_valid_command)
 
 	user_input = my_strcpy(user_input, "/bin/ls | grep ; cat toto");
 	env[0] = my_strcpy(env[0], "HOME=/home/gildas");
-	command = get_command_line(false, user_input, env);
+	command = get_command_line(false, user_input, env, NULL);
 	cr_assert_not_null(command);
 	cr_assert_eq(command->number_instruction, 2);
 	cr_assert_not_null(command->instruction);
@@ -93,7 +93,7 @@ Test(get_command_line_2, test_pipe_not_valid_command)
 	cr_redirect_stdout();
 	user_input = my_strcpy(user_input, "/bin/ls | | grep ; cat toto");
 	env[0] = my_strcpy(env[0], "HOME=/home/gildas");
-	command = get_command_line(false, user_input, env);
+	command = get_command_line(false, user_input, env, NULL);
 	cr_assert_not_null(command);
 	cr_assert_eq(command->number_instruction, 2);
 	cr_assert_not_null(command->instruction);
@@ -114,7 +114,7 @@ Test(get_command_line_3, test_pipe_redirect_valid_command)
 
 	user_input = my_strcpy(user_input, "/bin/ls $HOME ; cat toto > salut");
 	env[0] = my_strcpy(env[0], "HOME=/home/gildas");
-	command = get_command_line(false, user_input, env);
+	command = get_command_line(false, user_input, env, NULL);
 	cr_assert_eq(command->valid, true);
 	cr_assert_eq(command->instruction[0]->number_of_pipe, 1);
 	cr_assert_eq(command->instruction[1]->number_of_pipe, 1);

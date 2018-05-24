@@ -36,7 +36,7 @@ Test(set_built, set_one_variable)
 	if (shell == NULL)
 		cr_assert_fail();
 	shell->command_line = get_command_line(true, "set toto=ok",
-		shell->env);
+		shell->env, NULL);
 	set_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_str_eq(shell->local[0], "toto\tok");
 	cr_assert_null(shell->local[1]);
@@ -49,7 +49,7 @@ Test(set_built, set_two_variables)
 	if (shell == NULL)
 		cr_assert_fail();
 	shell->command_line = get_command_line(true, "set toto=ok slt=no",
-		shell->env);
+		shell->env, NULL);
 	set_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_str_eq(shell->local[0], "toto\tok");
 	cr_assert_str_eq(shell->local[1], "slt\tno");
@@ -63,7 +63,7 @@ Test(set_built, update_one_variables)
 	if (shell == NULL)
 		cr_assert_fail();
 	shell->command_line = get_command_line(true, "set toto=ok toto=no",
-		shell->env);
+		shell->env, NULL);
 	set_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_str_eq(shell->local[0], "toto\tno");
 	cr_assert_null(shell->local[1]);
@@ -76,7 +76,7 @@ Test(set_built, wrong_syntax)
 	if (shell == NULL)
 		cr_assert_fail();
 	shell->command_line = get_command_line(true, "set = ",
-		shell->env);
+		shell->env, NULL);
 	set_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_eq(shell->code, 0);
 	cr_assert_null(shell->local[0]);

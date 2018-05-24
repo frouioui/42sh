@@ -63,6 +63,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/parsing/get_pipe.c \
 		$(PATH_SRC)/shell_loop/parsing/get_redirect.c \
 		$(PATH_SRC)/shell_loop/parsing/check_env_variable.c \
+		$(PATH_SRC)/shell_loop/parsing/check_local_variable.c \
 		$(PATH_SRC)/shell_loop/parsing/fix_extra_space.c \
 		$(PATH_SRC)/shell_loop/parsing/check_quote.c \
 		$(PATH_SRC)/shell_loop/parsing/get_condition.c \
@@ -120,6 +121,7 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/shell/init_terminal_test.c \
 			$(PATH_TEST)/shell/get_input_test.c \
 			$(PATH_TEST)/shell/modify_input_auto_test.c \
+			$(PATH_TEST)/shell/get_alias_test.c \
 			$(PATH_TEST)/parsing/analyse_redirect_test.c \
 			$(PATH_TEST)/parsing/analyse_redirect_2_test.c \
 			$(PATH_TEST)/parsing/check_env_variable_test.c \
