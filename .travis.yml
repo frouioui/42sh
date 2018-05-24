@@ -7,6 +7,16 @@ sudo: required
 instal:
   - gcov
 
+notifications:
+  email:
+    recipients:
+    - florent.poinsard@epitech.eu
+    - julien.ollivier@epitech.eu
+    - cecile.cadoule@epitech.eu
+    - florian.davasse@epitech.eu
+    on_success: always
+    on_failure: always
+
 script:
   - cd ./bonus/automated_test
   - chmod +x *.sh
