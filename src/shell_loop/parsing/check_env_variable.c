@@ -12,8 +12,8 @@
 
 static char *set_args_variable(char *arg, char **env, int start)
 {
-	int end = find_separator_env(start+arg)+start;
-	char *temp = malloc(sizeof(char) * (end-start + 2));
+	int end = find_separator_env(start + arg) + start;
+	char *temp = malloc(sizeof(char) * (end - start + 2));
 	int env_int = 0;
 	char *result = NULL;
 
@@ -36,7 +36,7 @@ static char *set_args_variable(char *arg, char **env, int start)
 
 static char *check_env_variable_next(char *arg, char **env)
 {
-	for (int i = 0; arg[i+1] != '\0'; i++) {
+	for (int i = 0; arg[i + 1] != '\0'; i++) {
 		if (arg[i] == '$')
 			arg = set_args_variable(arg, env, i + 1);
 	}
@@ -45,6 +45,7 @@ static char *check_env_variable_next(char *arg, char **env)
 
 void check_env_variable(char **args, char **env)
 {
-	for (int i = 0; args[i] != NULL; i++)
+	for (int i = 0; args[i] != NULL; i++) {
 		args[i] = check_env_variable_next(args[i], env);
+	}
 }

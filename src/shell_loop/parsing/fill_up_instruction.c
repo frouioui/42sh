@@ -11,7 +11,7 @@
 #include "instruction.h"
 
 unsigned int fill_up_instruction(bool bonus, instruction_t **instruction,
-	char **env)
+	char **env, char **local)
 {
 	for (unsigned int i = 0; instruction[i]; i++) {
 		get_pipe_number(instruction[i]);
@@ -21,7 +21,7 @@ unsigned int fill_up_instruction(bool bonus, instruction_t **instruction,
 		- 1;
 		if (instruction[i]->valid == true)
 			instruction[i]->pipe = get_pipe(bonus,
-				instruction[i], env);
+				instruction[i], env, local);
 		if (instruction[i]->valid && instruction[i]->pipe == NULL)
 			return (FAILURE);
 		if (instruction[i]->valid == false)

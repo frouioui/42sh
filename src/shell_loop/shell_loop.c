@@ -26,7 +26,7 @@ unsigned int redirect_loop(shell_t *shell, char *user_input)
 		user_input = apply_transformation(shell->bonus, user_input,
 			shell->paths);
 		shell->command_line = get_command_line(shell->bonus,
-			user_input, shell->env);
+			user_input, shell->env, shell->local);
 		if (shell->command_line == NULL)
 			return (FAILURE);
 		shell->code = execute_command(shell, shell->command_line);

@@ -20,7 +20,7 @@ Test(get_command_line_5, and_condition_instruction_easy)
 
 	user_input = my_strcpy(user_input, "/bin/ls && cat toto");
 	env[0] = my_strcpy(env[0], "HOME=/home/gildas");
-	command = get_command_line(false, user_input, env);
+	command = get_command_line(false, user_input, env, NULL);
 	cr_assert_not_null(command);
 	cr_assert_eq(command->number_instruction, 2);
 	cr_assert_not_null(command->instruction);
@@ -44,7 +44,7 @@ Test(get_command_line_6, or_condition_instruction_easy)
 
 	user_input = my_strcpy(user_input, "/bin/ls || cat toto");
 	env[0] = my_strcpy(env[0], "HOME=/home/gildas");
-	command = get_command_line(false, user_input, env);
+	command = get_command_line(false, user_input, env, NULL);
 	cr_assert_not_null(command);
 	cr_assert_eq(command->number_instruction, 2);
 	cr_assert_not_null(command->instruction);
@@ -68,7 +68,7 @@ Test(get_command_line_7, and_condition_instruction_check_condition)
 
 	user_input = my_strcpy(user_input, "/bin/ls&&cat toto");
 	env[0] = my_strcpy(env[0], "HOME=/home/gildas");
-	command = get_command_line(false, user_input, env);
+	command = get_command_line(false, user_input, env, NULL);
 	cr_assert_not_null(command);
 	cr_assert_eq(command->number_instruction, 2);
 	cr_assert_not_null(command->instruction);
@@ -88,7 +88,7 @@ Test(get_command_line_8, or_and_condition_instruction_check_condition)
 
 	user_input = my_strcpy(user_input, "/bin/ls || cat toto && toto");
 	env[0] = my_strcpy(env[0], "HOME=/home/gildas");
-	command = get_command_line(false, user_input, env);
+	command = get_command_line(false, user_input, env, NULL);
 	cr_assert_not_null(command);
 	cr_assert_eq(command->number_instruction, 3);
 	cr_assert_not_null(command->instruction);
@@ -108,7 +108,7 @@ Test(get_command_line_9, or_condition_instruction_check_condition)
 
 	user_input = my_strcpy(user_input, "/bin/ls||cat toto");
 	env[0] = my_strcpy(env[0], "HOME=/home/gildas");
-	command = get_command_line(false, user_input, env);
+	command = get_command_line(false, user_input, env, NULL);
 	cr_assert_not_null(command);
 	cr_assert_eq(command->number_instruction, 2);
 	cr_assert_not_null(command->instruction);

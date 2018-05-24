@@ -29,7 +29,7 @@ Test(write_command_history, simple_command_1)
 		env[i] = my_strcpy(env[i], str[i]);
 	}
 	env[4] = NULL;
-	cmd = get_command_line(true, "ls -l", env);
+	cmd = get_command_line(true, "ls -l", env, NULL);
 	write_command_history(true, cmd);
 	fp = fopen (".history","r");
 	cr_assert_file_contents_eq_str(fp, "ls -l\n");
@@ -49,9 +49,9 @@ Test(write_command_history, simple_command_2)
 		env[i] = my_strcpy(env[i], str[i]);
 	}
 	env[4] = NULL;
-	cmd = get_command_line(true, "ls -l", env);
+	cmd = get_command_line(true, "ls -l", env, NULL);
 	write_command_history(true, cmd);
-	cmd = get_command_line(true, "env", env);
+	cmd = get_command_line(true, "env", env, NULL);
 	write_command_history(true, cmd);
 	fp = fopen (".history","r");
 	cr_assert_file_contents_eq_str(fp, "ls -l\nenv\n");

@@ -27,7 +27,8 @@ Test(execute_command_1, simple_command, .timeout = 0.2)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
-	shell->command_line = get_command_line(false, "ls -l", shell->env);
+	shell->command_line = get_command_line(false, "ls -l", shell->env,
+		NULL);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
 }
 
@@ -46,8 +47,9 @@ Test(execute_command_2, invalid_command, .timeout = 0.2)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
-	shell->command_line = get_command_line(false, "exitt", shell->env);
-	cr_assert_eq(execute_command(shell, shell->command_line), 1, "was %d");
+	shell->command_line = get_command_line(false, "exitt", shell->env,
+		NULL);
+	cr_assert_eq(execute_command(shell, shell->command_line), 1);
 }
 
 Test(execute_command_3, simple_command, .timeout = 0.2)
@@ -65,7 +67,8 @@ Test(execute_command_3, simple_command, .timeout = 0.2)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
-	shell->command_line = get_command_line(false, "echo toto", shell->env);
+	shell->command_line = get_command_line(false, "echo toto", shell->env,
+		NULL);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
 }
 
@@ -85,7 +88,7 @@ Test(execute_command_4, bad_syntax, .timeout = 0.2)
 	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
 	shell->command_line = get_command_line(false, "echo|||toto",
-		shell->env);
+		shell->env, NULL);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
 }
 
@@ -104,6 +107,6 @@ Test(execute_command_5, bad_syntax, .timeout = 0.2)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
-	shell->command_line = get_command_line(false, "\0", shell->env);
+	shell->command_line = get_command_line(false, "\0", shell->env, NULL);
 	cr_assert_eq(execute_command(shell, shell->command_line), 0);
 }

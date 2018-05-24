@@ -21,7 +21,7 @@ Test(get_pipe_1, 1_pipe_value, .timeout = 0.2)
 	inst->full_instruction = my_strcpy(inst->full_instruction, str);
 	inst->number_of_pipe = 1;
 	inst->actual_pipe = 0;
-	pipe = get_pipe(false, inst, env);
+	pipe = get_pipe(false, inst, env, NULL);
 	cr_assert_not_null(pipe);
 	cr_assert_str_eq(pipe[0]->full_instruction, "ls -l");
 	cr_assert_str_eq(pipe[0]->args[0], "ls");
@@ -39,7 +39,7 @@ Test(get_pipe_1, 2_pipes_value, .timeout = 0.2)
 	inst->full_instruction = my_strcpy(inst->full_instruction, str);
 	inst->number_of_pipe = 2;
 	inst->actual_pipe = 0;
-	pipe = get_pipe(false, inst, env);
+	pipe = get_pipe(false, inst, env, NULL);
 	cr_assert_not_null(pipe);
 	cr_assert_not_null(pipe[0]);
 	cr_assert_not_null(pipe[1]);

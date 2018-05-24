@@ -27,6 +27,7 @@ Test(get_execution_filepath, simple_roll_back)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
-	shell->command_line = get_command_line(false, "../a.out", shell->env);
+	shell->command_line = get_command_line(false, "../a.out", shell->env,
+		NULL);
 	cr_assert_eq(execute_command(shell, shell->command_line), 1);
 }

@@ -41,7 +41,8 @@ Test(alias_built, empty_display_alias)
 
 	if (shell == NULL)
 		cr_assert_fail();
-	shell->command_line = get_command_line(true, "alias", shell->env);
+	shell->command_line = get_command_line(true, "alias", shell->env,
+		NULL);
 	if (shell->command_line == NULL)
 		cr_assert_fail();
 	cr_redirect_stdout();
@@ -55,12 +56,13 @@ Test(alias_built, create_one_and_display)
 	if (shell == NULL)
 		cr_assert_fail();
 	shell->command_line = get_command_line(true, "alias ll ls",
-		shell->env);
+		shell->env, NULL);
 	if (shell->command_line == NULL)
 		cr_assert_fail();
 	cr_redirect_stdout();
 	alias_built(shell, shell->command_line->instruction[0]->pipe[0]);
-	shell->command_line = get_command_line(true, "alias", shell->env);
+	shell->command_line = get_command_line(true, "alias", shell->env,
+		NULL);
 	alias_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_stdout_eq_str("ll ls\n");
 }
@@ -72,12 +74,13 @@ Test(alias_built, complete_command_alias)
 	if (shell == NULL)
 		cr_assert_fail();
 	shell->command_line = get_command_line(true, "alias ll ls -l",
-		shell->env);
+		shell->env, NULL);
 	if (shell->command_line == NULL)
 		cr_assert_fail();
 	cr_redirect_stdout();
 	alias_built(shell, shell->command_line->instruction[0]->pipe[0]);
-	shell->command_line = get_command_line(true, "alias", shell->env);
+	shell->command_line = get_command_line(true, "alias", shell->env,
+		NULL);
 	alias_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_stdout_eq_str("ll ls -l\n");
 }
@@ -89,11 +92,11 @@ Test(usage_of_alias, should_not_crash_wrong_syntax)
 	if (shell == NULL)
 		cr_assert_fail();
 	shell->command_line = get_command_line(true, "alias to ",
-		shell->env);
+		shell->env, NULL);
 	if (shell->command_line == NULL)
 		cr_assert_fail();
 	cr_redirect_stdout();
 	alias_built(shell, shell->command_line->instruction[0]->pipe[0]);
-	shell->command_line = get_command_line(true, "to", shell->env);
+	shell->command_line = get_command_line(true, "to", shell->env, NULL);
 	execute_command(shell, shell->command_line);
 }

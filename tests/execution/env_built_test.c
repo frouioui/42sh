@@ -25,7 +25,7 @@ Test(env_built, check_output_function)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
-	shell->command_line = get_command_line(true, "str", shell->env);
+	shell->command_line = get_command_line(true, "str", shell->env, NULL);
 	env_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_stdout_eq_str("PATH=/bin\nUSER=pflorent\nHOME=/home\n"\
 	"PWD=/home/marvin\n");

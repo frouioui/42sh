@@ -27,7 +27,8 @@ Test(cd_built_6, check_new_pwd, .timeout = 2)
 	env[3] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	cr_redirect_stdout();
-	shell->command_line = get_command_line(false, "cd ./", shell->env);
+	shell->command_line = get_command_line(false, "cd ./", shell->env,
+		NULL);
 	for (int i = 0; i < 10; i++)
 		cd_built(shell, shell->command_line->instruction[0]->pipe[0]);
 }

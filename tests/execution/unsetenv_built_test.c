@@ -29,7 +29,7 @@ Test(unsetenv_built, simple_environement_unsetenv_one, .init = redirection)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	shell->command_line = get_command_line(false, "unsetenv USER",
-		shell->env);
+		shell->env, NULL);
 	unsetenv_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_str_eq(shell->env[0], "PATH=/bin");
 	cr_assert_str_eq(shell->env[1], "HOME=/home");
@@ -51,7 +51,7 @@ Test(unsetenv_built, error_management, .init = redirection)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	shell->command_line = get_command_line(false, "unsetenv",
-		shell->env);
+		shell->env, NULL);
 	unsetenv_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_eq(shell->code, 1);
 }

@@ -14,5 +14,4 @@ Test(write_alias_test, simple_alias)
 	char *alias[] = "ll ls -l";
 
 	write_new_alias(alias);
-	
 }

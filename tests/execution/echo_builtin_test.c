@@ -31,7 +31,8 @@ Test(echo_built, without_opt, .init = redirect_all_std)
 	}
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
-	shell->command_line = get_command_line(false, "echo toto", shell->env);
+	shell->command_line = get_command_line(false, "echo toto", shell->env,
+		NULL);
 	echo_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_stdout_eq_str("toto\n");
 }
@@ -51,7 +52,7 @@ Test(echo_built, with_opt, .init = redirect_all_std)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	shell->command_line = get_command_line(false, "echo -n toto",
-	shell->env);
+	shell->env, NULL);
 	echo_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_stdout_eq_str("toto");
 }

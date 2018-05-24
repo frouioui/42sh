@@ -20,7 +20,7 @@ static void check_clear(int c, char *input, int *i, shell_t *shell)
 	}
 }
 
-static void check_exit(int c, char *input, int *i, shell_t *shell)
+static char *check_exit(int c, char *input, int *i, shell_t *shell)
 {
 	if (c == shell->binding->exit) {
 		exit_built(shell, NULL);
@@ -32,10 +32,12 @@ static void check_exit(int c, char *input, int *i, shell_t *shell)
 		input = strdup("exit");
 		*i = strlen(input);
 	}
+	return (input);
 }
 
-void check_match_direct(char *input, int c, int *i, shell_t *shell)
+char *check_match_direct(char *input, int c, int *i, shell_t *shell)
 {
 	check_clear(c, input, i, shell);
-	check_exit(c, input, i, shell);
+	input = check_exit(c, input, i, shell);
+	return (input);
 }

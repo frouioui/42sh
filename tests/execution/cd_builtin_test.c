@@ -28,7 +28,8 @@ Test(cd_built_1, check_new_pwd)
 	shell = initialisation_shell(1, NULL, env);
 	if (shell == NULL)
 		cr_assert_fail();
-	shell->command_line = get_command_line(false, "cd ../../", shell->env);
+	shell->command_line = get_command_line(false, "cd ../../", shell->env,
+		NULL);
 	cd_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_str_eq(shell->env[3], "PWD=/");
 }
@@ -47,7 +48,8 @@ Test(cd_built_2, check_new_pwd)
 	}
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
-	shell->command_line = get_command_line(false, "cd /", shell->env);
+	shell->command_line = get_command_line(false, "cd /", shell->env,
+		NULL);
 	cd_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_str_eq(shell->env[3], "PWD=/");
 }
@@ -66,7 +68,8 @@ Test(cd_built_3, check_new_pwd_with_old_path)
 	}
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
-	shell->command_line = get_command_line(false, "cd -", shell->env);
+	shell->command_line = get_command_line(false, "cd -", shell->env,
+		NULL);
 	cd_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_str_eq(shell->env[3], "PWD=/home/marvin");
 }
@@ -85,7 +88,8 @@ Test(cd_built_4, check_new_pwd_home_variable)
 	}
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
-	shell->command_line = get_command_line(false, "cd", shell->env);
+	shell->command_line = get_command_line(false, "cd", shell->env,
+		NULL);
 	cd_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_str_eq(shell->env[3], "PWD=/home");
 }
@@ -105,7 +109,7 @@ Test(cd_built_5, wrong_folder_check_output)
 	env[4] = NULL;
 	shell = initialisation_shell(1, NULL, env);
 	shell->command_line = get_command_line(false, "cd packers/cheez",
-		shell->env);
+		shell->env, NULL);
 	cr_redirect_stdout();
 	cd_built(shell, shell->command_line->instruction[0]->pipe[0]);
 	cr_assert_str_eq(shell->env[3], "PWD=/home/marvin");

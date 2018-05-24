@@ -87,13 +87,14 @@ typedef struct command_line_s {
 void free_command(command_line_t *);
 void free_array_string(char **);
 unsigned int get_number_instruction(char *);
-command_line_t *get_command_line(bool, char *, char **);
-unsigned int fill_up_instruction(bool, instruction_t **, char **);
+command_line_t *get_command_line(bool, char *, char **, char **);
+unsigned int fill_up_instruction(bool, instruction_t **, char **, char **);
 unsigned int get_pipe_number(instruction_t *);
-pipe_t **get_pipe(bool, instruction_t *, char **);
+pipe_t **get_pipe(bool, instruction_t *, char **, char **);
 unsigned int get_redirect(bool , pipe_t **, unsigned int);
 unsigned int analyse_redirect(bool , pipe_t *);
 void check_env_variable(char **, char **);
+void check_local_variable(char **, char **);
 void fix_extra_spaces(char *);
 void display_error_instruction(instruction_t *);
 bool is_empty_input(char *);

@@ -13,7 +13,7 @@
 #include "alias.h"
 #include "mylib.h"
 
-static unsigned int get_args_pipe(pipe_t **pipe, char **env)
+static unsigned int get_args_pipe(pipe_t **pipe, char **env, char **local)
 {
 	int a = 0;
 
@@ -22,6 +22,7 @@ static unsigned int get_args_pipe(pipe_t **pipe, char **env)
 		if (pipe[i]->args == NULL)
 			return (FAILURE);
 		check_env_variable(pipe[i]->args, env);
+		check_local_variable(pipe[i]->args, local);
 	}
 	return (SUCCESS);
 }
@@ -56,7 +57,8 @@ static unsigned int get_full_pipe(pipe_t **pipe, instruction_t *inst)
 	return (SUCCESS);
 }
 
-pipe_t **get_pipe(bool bonus, instruction_t *instruction, char **env)
+pipe_t **get_pipe(bool bonus, instruction_t *instruction, char **env,
+	char **local)
 {
 	pipe_t **pipe = malloc(sizeof(pipe_t *) *
 	(instruction->number_of_pipe + 1));
@@ -73,8 +75,9 @@ pipe_t **get_pipe(bool bonus, instruction_t *instruction, char **env)
 		pipe[i + 1] = NULL;
 	}
 	if (get_full_pipe(pipe, instruction) == FAILURE ||
-	get_args_pipe(pipe, env) == FAILURE || get_glob_args(pipe) == FAILURE
-	|| get_redirect(bonus, pipe, instruction->number_of_pipe) == FAILURE)
+	get_args_pipe(pipe, env, local) == FAILURE || get_glob_args(pipe) ==
+	FAILURE || get_redirect(bonus, pipe, instruction->number_of_pipe) ==
+	FAILURE)
 		return (NULL);
 	return (pipe);
 }

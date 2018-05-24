@@ -23,6 +23,8 @@ int destroy_shell(shell_t *shell)
 
 	if (shell->terminal.term == true)
 		tcsetattr(0, TCSANOW, &(shell->terminal.old));
+	if (shell->local != NULL)
+		free_array_string(shell->local);
 	destroy_backup(shell->backup);
 	free_array_string(shell->env);
 	free_array_string(shell->paths);
