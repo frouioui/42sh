@@ -10,7 +10,9 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 #include "instruction.h"
 #include "mylib.h"
 
@@ -61,5 +63,9 @@ void display_bonus_prompt(int, char *, char *, char *);
 int find_option_env(char **env, char *str);
 int find_separator_env(char *str);
 char **init_paths(char **);
+int count_words(char *str);
+char *get_word(char *str, int reset);
+char *my_strcpy_words_parse(char *str, int start, int end);
+char **my_str_to_words(char *str);
 
 #endif /* end of include guard: SHELL_H */

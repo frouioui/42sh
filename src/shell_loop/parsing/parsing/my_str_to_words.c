@@ -5,7 +5,7 @@
 ** florian.davasse@epitech.eu
 */
 
-#include "minishell.h"
+#include "shell.h"
 
 char **my_str_to_words(char *str)
 {

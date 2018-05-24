@@ -5,7 +5,7 @@
 ** florian.davasse@epitech.eu
 */
 
-#include "minishell.h"
+#include "shell.h"
 
 char *my_strcpy_words_parse(char *str, int start, int end)
 {

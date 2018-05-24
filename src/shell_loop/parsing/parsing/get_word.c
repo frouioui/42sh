@@ -5,27 +5,50 @@
 ** florian.davasse@epitech.eu
 */
 
-#include "minishell.h"
-
-/*int check_inib(char *str, int j)
+#include "shell.h"
+static void check_reset(int *i, int *j, int reset)
 {
-	for (int i = j; str[i] )
-}*/
+	if (reset == 1) {
+		*i = 0;
+		*j = 0;
+	}
+}
+
+static void check_inib(char *str, int *i, char *c)
+{
+	if (str[*i] == '\'' || str[*i] == '"') {
+		*c = str[*i];
+		*i = *i + 1;
+	}
+}
 
 char *get_word(char *str, int reset)
 {
 	static int i = 0;
 	static int j = 0;
+	char c = ' ';
 
-	if (reset == 1) {
-		i = 0;
-		j = 0;
-	}
-	while ((str[i] == ' ' || str[i] == '\t') && str[i] != '\0')
+	check_reset(&i, &j, reset);
+	while ((str[i] != '"' || str[i] != '\'') && str[i] != '\0'
+	&& isspace(str[i]))
 		i++;
+	check_inib(str, &i, &c);
 	j = i;
-	while (str[i] != ' ' && str[i] != '\t' && str[i] != '\0')
+	while (str[i] != '\0') {
+		if ((c == str[i]) || (c == ' ' && isspace(str[i])))
+			break;
 		i++;
-	check_inib(str, j);
-	return (my_strcpy_words_parse(str, j, i));
+	}
+	return (my_strcpy_words_parse(str, j, i++));
+}
+
+int main(void)
+{
+	//gcc get_word.c my_strcpy_words.c -I../../../../include -g3 && ./a.out
+	char *str = "\"lol c un test \"mdr 'xd sa march lol'     ptdr";
+	char **st = malloc(sizeof(char*) * 4);
+	for (int i = 0; i < 4; i++) {
+		printf("LE MOT : '%s'\n", get_word(str, 0));
+	}
+	return (0);
 }
