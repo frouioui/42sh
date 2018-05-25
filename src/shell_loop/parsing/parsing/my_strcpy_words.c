@@ -13,6 +13,8 @@ char *my_strcpy_words_parse(char *str, int start, int end)
 	int j = 0;
 	char *new_str = malloc(sizeof(char) * ((end - start) + 2));
 
+	if (start == end)
+		return (NULL);
 	while (i < end && str[i] != '\0') {
 		new_str[j] = str[i];
 		i++;

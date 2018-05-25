@@ -49,10 +49,8 @@ char **cut_line(char *line)
 	tab_arg = malloc(sizeof(*tab_arg) * (nb_arg + 1));
 	if (tab_arg == NULL)
 		return (NULL);
-	for (int i = 0; i < nb_arg; i += 1) {
+	for (int i = 0; i < nb_arg; i += 1)
 		tab_arg[i] = copy_args(line, &j);
-		printf("%s\n", tab_arg[i]);
-	}
 	tab_arg[nb_arg] = NULL;
 	return (tab_arg);
 }

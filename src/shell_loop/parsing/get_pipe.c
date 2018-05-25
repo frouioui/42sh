@@ -18,7 +18,7 @@ static unsigned int get_args_pipe(pipe_t **pipe, char **env, char **local)
 	int a = 0;
 
 	for (unsigned int i = 0; pipe[i]; i++) {
-		pipe[i]->args = cut_line(pipe[i]->full_instruction);
+		pipe[i]->args = my_str_to_words(pipe[i]->full_instruction);
 		if (pipe[i]->args == NULL)
 			return (FAILURE);
 		check_env_variable(pipe[i]->args, env);
