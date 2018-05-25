@@ -35,7 +35,7 @@ bool check_script_name(char *path)
 
 	if (!tmp)
 		return (false);
-	for (int i = strlen(path) - 1; SH_CHAR(path[i]); i -= 1) {
+	for (int i = strlen(path) - 1; SH_CHAR(path[i]) && j < 3; i -= 1) {
 		tmp[j] = path[i];
 		j += 1;
 	}
