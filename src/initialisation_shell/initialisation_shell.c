@@ -33,6 +33,7 @@ shell_t *initialisation_shell(int argc, char **argv, char **env)
 	if (shell->env == NULL)
 		return (NULL);
 	shell->bonus = true;
+	shell->script = false;
 	shell->command_line = NULL;
 	shell->code = 0;
 	shell->prompt = true;

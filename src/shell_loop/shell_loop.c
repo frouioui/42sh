@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "shell.h"
 #include "mylib.h"
+#include "script.h"
 #include "execution.h"
 #include "input.h"
 
@@ -39,12 +40,29 @@ unsigned int redirect_loop(shell_t *shell, char *input, char *copy_input)
 	return (SUCCESS);
 }
 
-unsigned int shell_loop(shell_t *shell)
+char *redirect_script(shell_t *shell, FILE *fd)
 {
-	char *input = NULL;
+	char *line = NULL;
+	size_t n = 0;
 
-	while (shell->state == OK && display_prompt(shell) &&
-		(input = get_input(shell, 1, 0)) != NULL) {
+	if (shell->script) {
+		if ((line = run_script(shell, fd)))
+			return (line);
+		shell->script = false;
+		return (NULL);
+	}
+	if(!display_prompt(shell))
+		return (NULL);
+	line = get_next_line(0);
+	return (line);
+}
+
+unsigned int shell_loop(shell_t *shell, FILE *fd)
+{
+	char *user_input = NULL;
+
+	while (shell->state == OK &&
+		(user_input = redirect_script(shell, fd)) != NULL) {
 		if (redirect_loop(shell, input, strdup(input)) == FAILURE)
 			return (FAILURE);
 	}
