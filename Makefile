@@ -45,6 +45,9 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/prompt/display_bonus_prompt.c \
 		$(PATH_SRC)/shell_loop/prompt/display_prompt.c \
 		$(PATH_SRC)/shell_loop/parsing/get_command_line.c \
+		$(PATH_SRC)/shell_loop/parsing/parsing/get_word.c \
+		$(PATH_SRC)/shell_loop/parsing/parsing/my_str_to_words.c \
+		$(PATH_SRC)/shell_loop/parsing/parsing/my_strcpy_words.c \
 		$(PATH_SRC)/shell_loop/parsing/get_number_instruction.c \
 		$(PATH_SRC)/shell_loop/parsing/get_pipe_number.c \
 		$(PATH_SRC)/shell_loop/parsing/fill_up_instruction.c \

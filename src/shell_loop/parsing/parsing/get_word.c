@@ -6,9 +6,10 @@
 */
 
 #include "shell.h"
+
 static void check_reset(int *i, int *j, int reset)
 {
-	if (reset == 1) {
+	if (reset == 0) {
 		*i = 0;
 		*j = 0;
 	}
@@ -40,15 +41,4 @@ char *get_word(char *str, int reset)
 		i++;
 	}
 	return (my_strcpy_words_parse(str, j, i++));
-}
-
-int main(void)
-{
-	//gcc get_word.c my_strcpy_words.c -I../../../../include -g3 && ./a.out
-	char *str = "\"lol c un test \"mdr 'xd sa march lol'     ptdr";
-	char **st = malloc(sizeof(char*) * 4);
-	for (int i = 0; i < 4; i++) {
-		printf("LE MOT : '%s'\n", get_word(str, 0));
-	}
-	return (0);
 }
