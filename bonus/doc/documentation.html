@@ -36,7 +36,7 @@
                                 <h4>Go to the <span class="badge badge-pill badge-info">download page</span> and click on download. You can either download the full source code or just the binary.</h4>
                                 <h4>Make sure to have the ncurses library on your computer.</h4><br><br>
                                 <h2 class="text font-weight-bold">After install</h2>
-                                <h4>Once you've downloaded the project use <span class="badge badge-pill badge-info">make</span> to comile the source code.</h4>
+                                <h4>Once you've downloaded the project use <span class="badge badge-pill badge-info">make</span> to compile the source code.</h4>
                                 <h4>Once the compilation is done or if you've downloaded the binary instead of the full source code, use <span class="badge badge-pill badge-info">sudo mv ./42sh /bin/42sh</span> to move it to the bin.</h4>
                                 <h4>To execute the shell : <span class="badge badge-pill badge-info">42sh</span></h4><br><br>
                                 <h2 class="text font-weight-bold">Alias</h2>
@@ -47,14 +47,26 @@
                                 <h2 class="text font-weight-bold">History</h2>
                                 <h4>To look at the history use the command <span class="badge badge-pill badge-info">history</span></h4>
                                 <h4>If you want to use an old command us <span class="badge badge-pill badge-info">!-x</span> x being the number of the command you want to use</h4>
-                                <h4>When you want to use the last command, you'd use : <span class="badge badge-pill badge-info">!-1</span></h4>
+                                <h4>When you want to use the last command, you'd use : <span class="badge badge-pill badge-info">!-1</span></h4><br><br>
+                                <h2 class="text font-weight-bold">Scripting</h2>
+                                <h4>The 42sh can interprete command on a command shell, ex: <span class="badge badge-pill badge-info">script.sh</span></h4>
+                                <h4>You can use the scripting built in this way : <span class="badge badge-pill badge-info">./42sh script.sh</span> or <span class="badge badge-pill badge-info">$42sh_prompt> ./script.sh</span></h4>
+                                <h4>The script syntax is available on shell tutorial.</h4><br><br>
+                                <h2 class="text font-weight-bold">Globbing</h2>
+                                <h4>You can use the globbing system this way, ex: <span class="badge badge-pill badge-info">ls *.c</span></h4>
+                                <h4>This command will append all the .c files in your current directories to the <span class="badge badge-pill badge-info">ls</span> command.</h4><br><br>
+                                <h2 class="text font-weight-bold">Jobs control</h2>
+                                <h4>You can use the job control builtin this way, ex: <span class="badge badge-pill badge-info">./prog &</span> will execute the prog binary in the background; <span class="badge badge-pill badge-info">jobs</span> will display all the backgroud jobs; <span class="badge badge-pill badge-info">fg</span> will the put a background program to the foregroud.</h4><br><br> 
                         </div>
                 </div>
                 <div class="card text-center">
                         <div class="card-body">
                                 <h5 class="card-title">Support the team!</h5>
                                 <p class="card-text">Check out our GitHub and report any bug!</p>
-                                <a href="https://github.com/frouioui/42sh" class="btn btn-dark center">GitHub</a>
+                                <div class="center">
+                                        <a href="https://github.com/frouioui/42sh" class="btn btn-dark">GitHub</a>
+                                        <a href="https://travis-ci.com/frouioui/42sh" class="btn btn-success">Travis</a>
+                                </div>
                         </div>
                 </div>
                 <br>
