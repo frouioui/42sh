@@ -55,6 +55,7 @@ bool change_action_of_signal(int signum,
 void (*act)(int, siginfo_t *, void *));
 bool init_connection(struct sigaction *save_one, struct sigaction *save_two,
 void (*do_it_to_child)(int, siginfo_t *, void *));
+bool init_child_connection(void);
 bool finish_connection(struct sigaction *save_one,
 struct sigaction *save_two);
 void do_it_to_child(int signum, siginfo_t *info, void *env);

@@ -15,6 +15,8 @@ bool change_action_of_signal(int signum, void (*act)(int, siginfo_t *, void *))
 		return true;
 	changed_signal.sa_flags = SA_SIGINFO;
 	changed_signal.sa_sigaction = act;
+	if (sigemptyset(&changed_signal.sa_mask) == SYS_CALL_ERR)
+		return true;
 	if (sigaction(signum, &changed_signal, NULL) == SYS_CALL_ERR)
 		return true;
 	return false;

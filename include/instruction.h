@@ -71,6 +71,7 @@ typedef struct pipe_s {
 	int pipe[2];
 	bool valid;
 	bool redirect;
+	bool ampersand;
 	error_syntax_t error;
 	execution_t running;
 	redirect_t type_redirect;

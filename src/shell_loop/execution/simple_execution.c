@@ -22,6 +22,7 @@ static void execute_child(shell_t *shell, pipe_t *pipe)
 
 	(pid == -1) ? exit(84) : get_or_set_pid(false, pid, true, false);
 	if (pid == 0) {
+		init_child_connection();
 		redirect_pipe(shell->bonus, pipe);
 		if (execve(pipe->path_exec, pipe->args, shell->env) == -1)
 			errno == 8 ? bad_archi(shell, pipe->args[0])

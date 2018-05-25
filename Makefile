@@ -75,6 +75,7 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/process/update.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/process/connection.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/process/jobs.c \
+		$(PATH_SRC)/shell_loop/execution/builtins/process/child_protection.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/cd_special_cases.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/put_new_old_pwd.c \
 		$(PATH_SRC)/shell_loop/execution/builtins/error_wrong_folder.c \
