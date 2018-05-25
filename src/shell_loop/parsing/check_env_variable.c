@@ -18,7 +18,7 @@ static char *set_args_variable(char *arg, char **env, int start)
 	char *result = NULL;
 
 	temp[0] = '\0';
-	env_int = find_option_env(env, strncat(temp, arg + start, end - 1));
+	env_int = find_option_env(env, strncat(temp, start + arg, end - 1));
 	if (env_int < 0)
 		return (arg);
 	result = malloc(strlen(env[env_int]) + 1 + start + 1 + strlen(arg)
@@ -34,10 +34,36 @@ static char *set_args_variable(char *arg, char **env, int start)
 	return (realloc(result, strlen(result) + 1));
 }
 
+static char *set_args_variable_spe(char *arg, char **env, int start)
+{
+	int end = find_separator_env(start + arg) + start;
+	char *temp = malloc(sizeof(char) * (end - start + 2));
+	int env_int = 0;
+	char *result = NULL;
+
+	temp[0] = '\0';
+	env_int = find_option_env(env, strncat(temp, start + arg, end - 2));
+	if (env_int < 0)
+		return (arg);
+	result = malloc(strlen(env[env_int]) + 1 + start + 1 + strlen(arg)
+		- end + 1);
+	if (result == NULL)
+		return (arg);
+	result[0] = '\0';
+	if (start != 2)
+		result = strncat(result, arg, start - 2);
+	result = strcat(result, my_get_env_parse(env, env_int));
+	if (arg[end] != '\0')
+		result = strcat(result, 1 + end + arg);
+	return (realloc(result, strlen(result) + 1));
+}
+
 static char *check_env_variable_next(char *arg, char **env)
 {
 	for (int i = 0; arg[i + 1] != '\0'; i++) {
-		if (arg[i] == '$')
+		if (arg[i] == '$' && arg[i + 1] == '{' && arg[i + 2] != '\0')
+			arg = set_args_variable_spe(arg, env, i + 2);
+		else if (arg[i] == '$')
 			arg = set_args_variable(arg, env, i + 1);
 	}
 	return (arg);

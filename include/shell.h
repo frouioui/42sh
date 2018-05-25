@@ -10,8 +10,10 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <ctype.h>
 #include <string.h>
 #include <term.h>
+#include <stdlib.h>
 #include "instruction.h"
 #include "mylib.h"
 
@@ -91,6 +93,10 @@ char **init_local(void);
 shell_t *initialisation_shell(int, char **, char **);
 backup_t *initialisation_backup(char **);
 char **init_paths(char **);
+int count_words(char *str);
+char *get_word(char *str, int reset);
+char *my_strcpy_words_parse(char *str, int start, int end);
+char **my_str_to_words(char *str);
 
 /* --- history function --- */
 void write_command_history(char *, char **);

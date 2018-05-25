@@ -9,7 +9,7 @@
 
 bool my_ischar(char c)
 {
-	if ((c <= 'Z' && c >= 'A') || (c >= 'a' && c <= 'z'))
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
 		return (true);
 	return (false);
 }
