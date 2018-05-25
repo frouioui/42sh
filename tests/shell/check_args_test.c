@@ -11,24 +11,19 @@
 
 Test(check_args_1, valid_args)
 {
-	cr_assert_eq(check_args(1), SUCCESS);
+	cr_assert_eq(check_args(1, NULL), SUCCESS);
 }
 
 Test(check_args_2, not_valid_args)
 {
 	cr_redirect_stdout();
-	cr_assert_eq(check_args(8), FAILURE);
+	cr_assert_eq(check_args(8, NULL), FAILURE);
 	cr_assert_stdout_eq_str("You must give 0 arguments to the program.\n");
 }
 
 Test(check_args_3, negative_number_args)
 {
 	cr_redirect_stdout();
-	cr_assert_eq(check_args(0), FAILURE);
+	cr_assert_eq(check_args(0, NULL), FAILURE);
 	cr_assert_stdout_eq_str("You must give 0 arguments to the program.\n");
-}
-
-Test(check_args_4, valid_args)
-{
-	cr_assert_eq(check_args(2), SUCCESS);
 }

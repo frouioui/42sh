@@ -66,20 +66,24 @@ typedef struct shell_s {
 	terminal_t terminal;
 	bool bonus;
 	bool prompt;
+	bool script;
 } shell_t;
 
 char **copy_environement(char **);
+shell_t *initialisation_shell(int, char **, char **);
+char **copy_environement(char **);
+backup_t *initialisation_backup(char **);
 void free_array_string(char **);
 void display_bonus_prompt(int, char *, char *, char *);
 void update_backup(shell_t *);
 bool init_terminal(shell_t *);
 bool is_bonus(int, char **);
 int display_prompt(shell_t *);
-int check_args(int);
+int check_args(int, char **);
 int destroy_shell(shell_t *);
 int find_option_env(char **, char *);
 int find_separator_env(char *);
-unsigned int shell_loop(shell_t *);
+unsigned int shell_loop(shell_t *, FILE *);
 unsigned int redirect_loop(shell_t *, char *, char *);
 char **init_local(void);
 

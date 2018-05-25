@@ -107,6 +107,13 @@ SRCS	=	$(PATH_SRC)/check_args.c \
 		$(PATH_SRC)/shell_loop/execution/display_error_instruction.c \
 		$(PATH_SRC)/shell_loop/execution/redirect_stdin_double.c \
 		$(PATH_SRC)/shell_loop/execution/condition_instruction.c \
+		$(PATH_SRC)/scripting/check_script.c \
+		$(PATH_SRC)/scripting/fill_condition_script.c \
+		$(PATH_SRC)/scripting/get_valid_line_script.c \
+		$(PATH_SRC)/scripting/init_condition_script.c \
+		$(PATH_SRC)/scripting/keywords_script.c \
+		$(PATH_SRC)/scripting/open_script.c \
+		$(PATH_SRC)/scripting/run_script.c \
 
 SRC_MAIN	=	$(PATH_SRC)/main.c
 
@@ -156,6 +163,13 @@ SRCS_TEST	=	$(PATH_TEST)/shell/check_args_test.c \
 			$(PATH_TEST)/execution/env_built_test.c \
 			$(PATH_TEST)/execution/roll_back_path_test.c \
 			$(PATH_TEST)/execution/alias_built_test.c \
+			$(PATH_TEST)/scripting/script_name_test.c \
+			$(PATH_TEST)/scripting/script_access_test.c \
+			$(PATH_TEST)/scripting/script_shebang_test.c \
+			$(PATH_TEST)/scripting/script_fill_cond_test.c \
+			$(PATH_TEST)/scripting/script_if_keyword_test.c \
+			$(PATH_TEST)/scripting/script_no_keyword_test.c \
+			$(PATH_TEST)/scripting/script_other_keyword_test.c \
 
 ## ---- FLAGS ---- ##
 
