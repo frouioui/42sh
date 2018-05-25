@@ -27,26 +27,3 @@ Test(get_pipe_1, 1_pipe_value, .timeout = 0.2)
 	cr_assert_str_eq(pipe[0]->args[0], "ls");
 	cr_assert_str_eq(pipe[0]->args[1], "-l");
 }
-
-Test(get_pipe_1, 2_pipes_value, .timeout = 0.2)
-{
-	instruction_t *inst = malloc(sizeof(instruction_t));
-	pipe_t **pipe = NULL;
-	char str[] = "ls -l | grep \"tty\"";
-	char **env = malloc(sizeof(char *));
-
-	env[0] = my_strcpy(env[0], "TOTO=/bin");
-	inst->full_instruction = my_strcpy(inst->full_instruction, str);
-	inst->number_of_pipe = 2;
-	inst->actual_pipe = 0;
-	pipe = get_pipe(false, inst, env, NULL);
-	cr_assert_not_null(pipe);
-	cr_assert_not_null(pipe[0]);
-	cr_assert_not_null(pipe[1]);
-	cr_assert_str_eq(pipe[0]->full_instruction, "ls -l");
-	cr_assert_str_eq(pipe[0]->args[0], "ls");
-	cr_assert_str_eq(pipe[0]->args[1], "-l");
-	cr_assert_str_eq(pipe[1]->full_instruction, "grep \"tty\"");
-	cr_assert_str_eq(pipe[1]->args[0], "grep");
-	cr_assert_str_eq(pipe[1]->args[1], "\"tty\"");
-}
