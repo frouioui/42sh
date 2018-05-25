@@ -24,7 +24,3 @@ int main(int argc, char **argv, char **env)
 		return (FAILURE);
 	return (destroy_shell(shell));
 }
-// int main(int argc, char **argv, char **env)
-// {
-// 	check_args(argc, argv);
-// }

@@ -43,19 +43,23 @@ char *redirect_script(shell_t *shell, FILE *fd)
 	char *line = NULL;
 	size_t n = 0;
 
-	if (!fd)
-		return (line);
-	if (shell->script)
+	if (shell->script) {
 		if ((line = run_script(shell, fd)))
 			return (line);
-	return (line = get_next_line(0));
+		shell->script = false;
+		return (NULL);
+	}
+	if(!display_prompt(shell))
+		return (NULL);
+	line = get_next_line(0);
+	return (line);
 }
 
 unsigned int shell_loop(shell_t *shell, FILE *fd)
 {
 	char *user_input = NULL;
 
-	while (shell->state == OK && display_prompt(shell) &&
+	while (shell->state == OK &&
 		(user_input = redirect_script(shell, fd)) != NULL) {
 		if (redirect_loop(shell, user_input) == FAILURE)
 			return (FAILURE);

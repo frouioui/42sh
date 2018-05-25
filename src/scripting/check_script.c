@@ -14,22 +14,18 @@ bool check_script_shebang(char *path)
 	FILE *fd = fopen(path, "r");
 	size_t n = 0;
 	char *buf = NULL;
+	bool status = false;
 
 	if (!fd)
 		return (false);
-	if (getline(&buf, &n, fd) == -1) {
-		fclose(fd);
-		return (false);
-	}
-	if (buf && !strncmp(buf, "#!", 2)) {
-		free(buf);
-		fclose(fd);
-		return (true);
-	}
+	if (getline(&buf, &n, fd) == -1)
+		status = false;
+	else if (buf && !strncmp(buf, "#!", 2))
+		status = true;
 	if (buf)
 		free(buf);
 	fclose(fd);
-	return (false);
+	return (status);
 }
 
 bool check_script_name(char *path)

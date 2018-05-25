@@ -42,6 +42,7 @@ bool check_script_name(char *);
 bool check_script_shebang(char *);
 
 /* --- Script running --- */
+char *get_valid_line(FILE *, shell_t *);
 char *run_script(shell_t *, FILE *);
 FILE *open_script(char *, shell_t *);
 bool fill_cond(cond_t *, char *, char **);

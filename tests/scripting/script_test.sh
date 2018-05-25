@@ -1,3 +1,3 @@
-#!./42sh
+#!42sh
 
 echo toto
