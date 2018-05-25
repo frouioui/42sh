@@ -53,16 +53,16 @@ char *redirect_script(shell_t *shell, FILE *fd)
 	}
 	if(!display_prompt(shell))
 		return (NULL);
-	line = get_next_line(0);
+	line = get_input(shell, 1, 0);
 	return (line);
 }
 
 unsigned int shell_loop(shell_t *shell, FILE *fd)
 {
-	char *user_input = NULL;
+	char *input = NULL;
 
 	while (shell->state == OK &&
-		(user_input = redirect_script(shell, fd)) != NULL) {
+		(input = redirect_script(shell, fd)) != NULL) {
 		if (redirect_loop(shell, input, strdup(input)) == FAILURE)
 			return (FAILURE);
 	}
