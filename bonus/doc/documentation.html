@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                <meta charset="UTF-8">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                <title>42SH</title>
+        </head>
+        <body>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark text font-weight-bold">
+                        <a class="navbar-brand" href="/">Home</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                <ul class="navbar-nav">
+                                <li class="nav-item">
+                                        <a class="nav-link" href="/documentation">Documentation<span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                        <a class="nav-link" href="/about">About</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Download</a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                <a class="dropdown-item" href="/download" download="42sh.tar.gz">Source code</a>
+                                                <a class="dropdown-item" href="/download" download="42sh">Binary</a>
+                                        </div>
+                                </li>
+                                </ul>
+                        </div>
+                </nav>
+                <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                                <h1 class="display-3">Documentation</h1><br><br>
+                                <h2 class="text font-weight-bold">Install</h2>
+                                <h4>Go to the <span class="badge badge-pill badge-info">download page</span> and click on download. You can either download the full source code or just the binary.</h4>
+                                <h4>Make sure to have the ncurses library on your computer.</h4><br><br>
+                                <h2 class="text font-weight-bold">After install</h2>
+                                <h4>Once you've downloaded the project use <span class="badge badge-pill badge-info">make</span> to comile the source code.</h4>
+                                <h4>Once the compilation is done or if you've downloaded the binary instead of the full source code, use <span class="badge badge-pill badge-info">sudo mv ./42sh /bin/42sh</span> to move it to the bin.</h4>
+                                <h4>To execute the shell : <span class="badge badge-pill badge-info">42sh</span></h4><br><br>
+                                <h2 class="text font-weight-bold">Alias</h2>
+                                <h4>To add an alias to the shell use the command <span class="badge badge-pill badge-info">alias</span> this command takes two parameters, the first one being the original command and the second one being the new command.</h4>
+                                <h4>For exemple remplacing <span class="badge badge-pill badge-info">ll</span> by <span class="badge badge-pill badge-info">ls -l</span> you would use : <span class="badge badge-pill badge-info">alias ll ls -l</span></h4>
+                                <h4>Then use the command <span class="badge badge-pill badge-info">ll</span> and it will execute the linked alias.</h4>
+                                <h4>Then use the command to display all the alias is <span class="badge badge-pill badge-info">alias</span></h4><br><br>
+                                <h2 class="text font-weight-bold">History</h2>
+                                <h4>To look at the history use the command <span class="badge badge-pill badge-info">history</span></h4>
+                                <h4>If you want to use an old command us <span class="badge badge-pill badge-info">!-x</span> x being the number of the command you want to use</h4>
+                                <h4>When you want to use the last command, you'd use : <span class="badge badge-pill badge-info">!-1</span></h4>
+                        </div>
+                </div>
+                <div class="card text-center">
+                        <div class="card-body">
+                                <h5 class="card-title">Support the team!</h5>
+                                <p class="card-text">Check out our GitHub and report any bug!</p>
+                                <a href="https://github.com/frouioui/42sh" class="btn btn-dark center">GitHub</a>
+                        </div>
+                </div>
+                <br>
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>             
+        </body>
+</html>
