@@ -67,10 +67,13 @@ void display_bonus_prompt(int, char *, char *, char *);
 int find_option_env(char **env, char *str);
 int find_separator_env(char *str);
 char **init_paths(char **);
+void display_core_dump(char *base);
+
 // Process Gestion
 bool get_process(struct sigaction *saves[2], pid_t pid, shell_t *shell,
 pipe_t pipe);
 int fg_built(shell_t * /*shell*/, pipe_t * /*pipe*/);
+void check_signal(shell_t * /*shell*/, int /*stat*/);
 
 
 #endif /* end of include guard: SHELL_H */

@@ -13,7 +13,6 @@ void do_it_to_child(int signum, siginfo_t *info, void *env)
 
 	if (!pid.usabel)
 		return;
-	printf("Kill :%d\n", pid.pid);
 	if (kill(pid.pid, signum) == SYS_CALL_ERR)
 		fputs("KILL can't kill child process\n", stderr);
 	else if (signum == SIGTSTP)

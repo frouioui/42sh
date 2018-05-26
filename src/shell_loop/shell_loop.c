@@ -34,6 +34,7 @@ unsigned int redirect_loop(shell_t *shell, char *user_input)
 		update_backup(shell);
 		free(user_input);
 	}
+	update_running_process(&shell->process);
 	return (SUCCESS);
 }
 

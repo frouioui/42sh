@@ -34,7 +34,7 @@ static void wait_all(int *stat, shell_t *shell, instruction_t *inst, int **fd)
 			exit(shell->code);
 		stat[i] == 0 && shell->code != 0 ? 0 :
 		(shell->code = stat[i] / 256);
-		check_sig(shell, stat[i]);
+		check_sig(shell, stat[i], inst->pipe[i]->ampersand);
 	}
 }
 

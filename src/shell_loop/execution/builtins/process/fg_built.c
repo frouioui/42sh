@@ -28,7 +28,6 @@ static bool set_up_fg(pid_t pid_to_wait, struct sigaction *saves[2])
 		return (true);
 	}
 	get_or_set_pid(false, pid_to_wait, true, false);
-	printf("SIGCONT :%d\n", pid_to_wait);
 	if (kill(pid_to_wait, SIGCONT) == SYS_CALL_ERR)
 		return (true);
 	if (init_connection(saves[0], saves[1], do_it_to_child)) {
@@ -48,7 +47,6 @@ int fg_built(shell_t *shell, pipe_t *pipe)
 		return (0);
 	shell->process->state = RUNNING;
 	waitpid(pid_to_wait, &wstatus, WUNTRACED);
-	printf("%d\n", WEXITSTATUS(wstatus));
 	update_process(shell, wstatus, pid_to_wait);
 	if (finish_connection(&saves[0], &saves[1])) {
 		fputs("fg: can't finish correctly\n", stderr);

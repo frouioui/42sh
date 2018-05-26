@@ -6,7 +6,28 @@
 */
 
 #include <stdio.h>
-#include "process_gestion.h"
+#include <stdlib.h>
+#include "shell.h"
+
+void check_sign(int stat)
+{
+	char *str = NULL;
+	int nb = (stat >= 128 ? stat - 128 : stat);
+
+	if (WIFSIGNALED(stat) && nb == SIGFPE) {
+		if (WCOREDUMP(stat))
+			puts("Floating exception (core dumped)");
+		else
+			puts("Floating exception");
+		return;
+	}
+	if (WIFSIGNALED(stat)) {
+		str = strdup((char *)sys_siglist[nb]);
+		WCOREDUMP(stat) ? display_core_dump(str) : printf("%s\n", str);
+	} else if (WIFSTOPPED(stat))
+		puts("Stopped");
+	str != NULL ? free(str) : 0;
+}
 
 void display_process(running_process_t node)
 {
@@ -15,16 +36,28 @@ void display_process(running_process_t node)
 	printf("[%d]\t%s\t\t%s\n", node.id, tab[node.state - 1], node.name);
 }
 
+static void update_data(int wstatus, state_process_t *state)
+{
+	if (*state == SUSPEND)
+		return;
+	if (WIFEXITED(wstatus))
+		*state = DONE;
+}
+
 void update_running_process(running_process_t **node)
 {
 	running_process_t *tmp;
+	int wstatus;
 
 	if (!node)
 		return;
 	if (!*node)
 		return;
-	if ((*node)->next)
-		update_running_process(&(*node)->next);
+	if (waitpid((*node)->pid_process, &wstatus, WNOHANG) == 0)
+		return;
+	check_sign(wstatus);
+	update_data(wstatus, &(*node)->state);
+	update_running_process(&(*node)->next);
 	if ((*node)->state == DONE) {
 		display_process(**node);
 		tmp = *node;

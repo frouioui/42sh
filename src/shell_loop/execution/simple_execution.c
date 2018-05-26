@@ -14,6 +14,18 @@
 #include "instruction.h"
 #include "execution.h"
 
+static bool wait_correctly(shell_t *shell, pipe_t pipe, int *status, pid_t pid)
+{
+	if (!shell)
+		return true;
+	if (!pipe.ampersand) {
+		!waitpid(pid, status, WUNTRACED) ? perror(pipe.args[0]) : 0;
+		return false;
+	}
+	waitpid(pid, status, WNOHANG);
+	return false;
+}
+
 static void execute_child(shell_t *shell, pipe_t *pipe)
 {
 	int status = 0;
@@ -22,7 +34,6 @@ static void execute_child(shell_t *shell, pipe_t *pipe)
 
 	(pid == -1) ? exit(84) : get_or_set_pid(false, pid, true, false);
 	if (pid == 0) {
-		init_child_connection();
 		redirect_pipe(shell->bonus, pipe);
 		if (execve(pipe->path_exec, pipe->args, shell->env) == -1)
 			errno == 8 ? bad_archi(shell, pipe->args[0])
@@ -30,10 +41,10 @@ static void execute_child(shell_t *shell, pipe_t *pipe)
 		exit(shell->code);
 	} else {
 		get_process(SAVES, pid, shell, *pipe);
-		!waitpid(pid, &status, WUNTRACED) ? perror(pipe->args[0]) : 0;
+		wait_correctly(shell, *pipe, &status, pid);
 		shell->code = status >= 256 ? status / 256 : status;
 		finish_connection(&saves[0], &saves[1]);
-		check_sig(shell, status);
+		check_sig(shell, status, pipe->ampersand);
 	}
 }
 

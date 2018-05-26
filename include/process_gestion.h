@@ -70,8 +70,6 @@ running_process_t *get_process_from_pid(running_process_t * /*node*/,
 pid_t /*pid*/);
 void display_process(running_process_t /*node*/);
 
-
-
 // Free -------------------------
 void free_a_running_process(running_process_t ** /*node*/);
 void free_all_running_process(running_process_t ** /*node*/);

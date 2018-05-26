@@ -116,6 +116,7 @@ instruction_t *new_instruction(char *);
 /* --- functions for direct transformation (inside shell_loop) --- */
 char *apply_transformation(bool, char *, char **);
 char *get_history(char **, char **);
+void get_ampersand(pipe_t *);
 
 /* --- functions for the history --- */
 unsigned int size_history(char **);

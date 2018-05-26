@@ -43,7 +43,6 @@ void free_a_running_process(running_process_t **node)
 /*
 ** FREE all running process struct
 */
-
 void free_all_running_process(running_process_t **node)
 {
 	if (!node)
