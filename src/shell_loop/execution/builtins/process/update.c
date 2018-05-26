@@ -44,6 +44,7 @@ static void update_data(int wstatus, state_process_t *state)
 	if (WIFEXITED(wstatus))
 		*state = DONE;
 }
+
 static void update(running_process_t **node, int safe)
 {
 	int wstatus = 0;

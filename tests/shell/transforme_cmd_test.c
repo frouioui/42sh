@@ -15,7 +15,7 @@
 #include "execution.h"
 #include "mylib.h"
 
-static void redirection()
+static void redirection(void)
 {
 	cr_redirect_stdout();
 }

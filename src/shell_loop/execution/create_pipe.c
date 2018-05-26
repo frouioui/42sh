@@ -22,11 +22,6 @@ int **create_pipe(int nb)
 		fd[i][0] = -1;
 		fd[i][1] = -1;
 		fd[i + 1] = NULL;
-		// if (pipe(fd[i]) == -1) {
-		// 	perror("pipe");
-		// 	exit(84);
-		// 	return (NULL);
-		// }
 	}
 	return (fd);
 }
