@@ -16,7 +16,8 @@ int exec_builtins(shell_t *shell, pipe_t *pipe)
 	{"env", env_built}, {"setenv", setenv_built}, {"exit", exit_built},
 	{"unsetenv", unsetenv_built}, {"echo", echo_built},
 	{"history", history_built}, {"alias", alias_built},
-	{"set", set_built}, {"unset", unset_built}};
+	{"set", set_built}, {"unset", unset_built}, {"fg", fg_built},
+	{"jobs", jobs_built}};
 	int err = 0;
 
 	for (unsigned short i = 0; i < NB_BUILTIN; i++) {

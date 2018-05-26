@@ -12,16 +12,21 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <sys/types.h>
 #include <term.h>
 #include <stdlib.h>
 #include "instruction.h"
+#include "process_gestion.h"
 #include "mylib.h"
 
 #define PATH_HISTORY_FILE ".history"
 
-#define SUCCESS 0
-#define SKIP 21
-#define FAILURE 84
+#define SUCCESS (0)
+#define SKIP (21)
+#define FAILURE (84)
+
+// jobs control
+#define CHANGED_SIGNAL (2)
 
 
 typedef struct backup_s {
@@ -67,6 +72,7 @@ typedef struct shell_s {
 	state_t state;
 	terminal_t terminal;
 	bool bonus;
+	running_process_t *process;
 	bool prompt;
 	bool script;
 } shell_t;
@@ -93,6 +99,14 @@ char **init_local(void);
 shell_t *initialisation_shell(int, char **, char **);
 backup_t *initialisation_backup(char **);
 char **init_paths(char **);
+void display_core_dump(char *base);
+
+// Process Gestion
+bool get_process(struct sigaction *saves[2], pid_t pid, shell_t *shell,
+pipe_t pipe);
+int fg_built(shell_t * /*shell*/, pipe_t * /*pipe*/);
+void check_signal(shell_t * /*shell*/, int /*stat*/);
+
 int count_words(char *str);
 char *get_word(char *str, int reset);
 char *my_strcpy_words_parse(char *str, int start, int end);

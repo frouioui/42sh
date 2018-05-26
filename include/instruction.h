@@ -28,6 +28,11 @@
 #define ALPHA(c) ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 #define ALPHANUM(c) (DIGIT(c) || ALPHA(c))
 #define HISTORY_FLAG(c) (c[0] == '!' && c[1] == '-' && c[2])
+#define UNSET_PIPE (fd[instruction->actual_pipe][0] == -1 || \
+fd[instruction->actual_pipe][1] == -1)
+
+// Grammar
+#define NB_PIPE (instruction->number_of_pipe - 1)
 
 typedef enum type_redirect_s {
 	EMPTY_REDIR,
@@ -52,6 +57,11 @@ typedef enum condition_s {
 	OR
 } condition_t;
 
+typedef enum execution_s {
+	FORGROUND,
+	BACKGROUND
+} execution_t;
+
 typedef struct pipe_s {
 	char *full_instruction;
 	char **args;
@@ -61,7 +71,9 @@ typedef struct pipe_s {
 	int pipe[2];
 	bool valid;
 	bool redirect;
+	bool ampersand;
 	error_syntax_t error;
+	execution_t running;
 	redirect_t type_redirect;
 } pipe_t;
 
@@ -105,6 +117,7 @@ instruction_t *new_instruction(char *);
 /* --- functions for direct transformation (inside shell_loop) --- */
 char *apply_transformation(bool, char *, char **);
 char *get_history(char **, char **);
+void get_ampersand(pipe_t *);
 
 /* --- functions for the history --- */
 unsigned int size_history(char **);

@@ -29,7 +29,7 @@ CC	=	gcc $(HEADER)
 
 HEADER	=	-I../include/
 
-CFLAGS	=	-W -Wextra -g3
+CFLAGS	=	-W -Wextra -Wall
 
 all:	$(NAME)
 
