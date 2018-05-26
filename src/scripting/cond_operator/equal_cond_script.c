@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** PSU_42sh_2017
 ** File description:
-** Check equal and diff conditions
+** Check equal conditions
 */
 
 #include "script.h"

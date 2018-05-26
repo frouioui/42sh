@@ -15,7 +15,6 @@ FILE *fd)
 	if (cond_line->end == true) {
 		free_cond_line(cond_line);
 		cond_line = init_conditional_line();
-
 	}
 	if (cond_line->key == EMPTY) {
 		if ((status = search_keyword(cond_line, line)) == FAILURE) {
