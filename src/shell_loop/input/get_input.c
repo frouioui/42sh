@@ -21,7 +21,7 @@ char *get_input(shell_t *shell, int fd_term, int fd_gnl)
 	} else {
 		input = get_chars_from_term(shell, fd_term);
 	}
-	if (input != NULL)
+	if (shell->terminal.term == true && input != NULL)
 		write(fd_term, "\n", 1);
 	return (input);
 }
