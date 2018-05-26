@@ -73,7 +73,7 @@ int get_pos_key(char *key, char **local)
 
 	for (int pos = 0; local[pos]; pos++) {
 		for (i = 0; key[i] && local[pos][i] && local[pos][i]
-			!= '\t'; i++);
+			!= '\t' && key[i] == local[pos][i]; i++);
 		if (key[i] == '\0' && (local[pos][i] == '\0' ||
 			local[pos][i] == '\t'))
 			return (pos);
