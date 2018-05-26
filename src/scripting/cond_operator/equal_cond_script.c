@@ -28,10 +28,10 @@ static int get_value(shell_t *shell, char **local_var)
 	if (!(*local_var))
 		return (-1);
 	if ((*local_var)[0] == '$') {
-		(*local_var) = sup_value_symbol((*local_var));
-		value = get_value_from_var(shell, (*local_var));
+		*local_var = sup_value_symbol(*local_var);
+		value = get_value_from_var(shell, *local_var);
 	} else
-		value = atoi((*local_var));
+		value = atoi(*local_var);
 	return (value);
 }
 
