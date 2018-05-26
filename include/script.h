@@ -38,7 +38,7 @@ typedef struct cond_script_s {
 
 typedef struct ope_s {
 	char *ope;
-	int (*redir_comp)(shell_t *, cond_t *, char *, char *);
+	int (*redir_comp)(shell_t *, cond_t *, char **, char **);
 } ope_t;
 
 typedef struct cond_redir_s {
@@ -67,12 +67,12 @@ void print_error_var(char *, char *, int, int);
 /* --- Conditions management --- */
 char *sup_value_symbol(char *);
 int check_script_condition(shell_t *, cond_t *);
-int op_diff(shell_t *, cond_t *, char *, char *);
-int op_equal(shell_t *, cond_t *, char *, char *);
-int op_inf(shell_t *, cond_t *, char *, char *);
-int op_inf_eq(shell_t *, cond_t *, char *, char *);
-int op_sup(shell_t *, cond_t *, char *, char *);
-int op_sup_eq(shell_t *, cond_t *, char *, char *);
+int op_diff(shell_t *, cond_t *, char **, char **);
+int op_equal(shell_t *, cond_t *, char **, char **);
+int op_inf(shell_t *, cond_t *, char **, char **);
+int op_inf_eq(shell_t *, cond_t *, char **, char **);
+int op_sup(shell_t *, cond_t *, char **, char **);
+int op_sup_eq(shell_t *, cond_t *, char **, char **);
 
 /* --- Initialization --- */
 cond_t *init_conditional_line(void);

@@ -15,6 +15,7 @@ FILE *fd)
 	if (cond_line->end == true) {
 		free_cond_line(cond_line);
 		cond_line = init_conditional_line();
+
 	}
 	if (cond_line->key == EMPTY) {
 		if ((status = search_keyword(cond_line, line)) == FAILURE) {
@@ -28,10 +29,26 @@ FILE *fd)
 			free_cond_line(cond_line);
 		return (line);
 	}
+	return (line);
+}
+
+static char *check_end_condition(shell_t *shell, cond_t *cond_line, char *line,
+FILE *fd)
+{
+	if (!line)
+		return (NULL);
+	if (!strcmp(line, "endif\n") || !strcmp(line, "endif")) {
+		free(line);
+		line = get_valid_line(fd, shell);
+		cond_line->end = true;
+	}
+	return (line);
 }
 
 static char *remove_new_line(char *line)
 {
+	if (!line)
+		return (NULL);
 	for (int i = 0; line[i] != '\0'; i += 1)
 		if (line[i] == '\n')
 			line[i] = '\0';
@@ -51,6 +68,7 @@ char *run_script(shell_t *shell, FILE *fd)
 	if (!(line = get_valid_line(fd, shell)))
 		return (NULL);
 	line = is_conditional_line(shell, cond_line, line, fd);
+	line = check_end_condition(shell, cond_line, line, fd);
 	line = remove_new_line(line);
 	return (line);
 }

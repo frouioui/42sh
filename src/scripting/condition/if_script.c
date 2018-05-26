@@ -7,12 +7,27 @@
 
 #include "script.h"
 
+static char *get_the_next_line(shell_t *shell, char *line, FILE *fd)
+{
+	size_t n = 0;
+
+	free(line);
+	line = NULL;
+	if (getline(&line, &n, fd) == -1) {
+		shell->script = false;
+		fclose(fd);
+		return (NULL);
+	}
+	return (line);
+}
+
 char *pass_all_lines(shell_t *shell, FILE *fd)
 {
 	char *line = NULL;
 	size_t n = 0;
+	int status = 1;
 
-	while (!line || !strcmp(line, "endif") || !strcmp(line, "else")) {
+	while (status == 1) {
 		if (line) {
 			free(line);
 			line = NULL;
@@ -23,7 +38,10 @@ char *pass_all_lines(shell_t *shell, FILE *fd)
 			fclose(fd);
 			return (NULL);
 		}
+		if (!strcmp(line, "endif\n") || !strcmp(line, "else\n"))
+			status = 0;
 	}
+	line = get_the_next_line(shell, line, fd);
 	return (line);
 }
 
