@@ -7,7 +7,7 @@
 
 #include "script.h"
 
-char *is_conditional_line(shell_t *sell, cond_t *cond_line, char *line,
+char *is_conditional_line(shell_t *shell, cond_t *cond_line, char *line,
 FILE *fd)
 {
 	int status = 0;
@@ -23,7 +23,19 @@ FILE *fd)
 		}
 		if (status == SKIP)
 			return (line);
+		free(line);
+		if (!(line = condition_management(shell, cond_line, fd)))
+			free_cond_line(cond_line);
+		return (line);
 	}
+}
+
+static char *remove_new_line(char *line)
+{
+	for (int i = 0; line[i] != '\0'; i += 1)
+		if (line[i] == '\n')
+			line[i] = '\0';
+	return (line);
 }
 
 char *run_script(shell_t *shell, FILE *fd)
@@ -39,5 +51,6 @@ char *run_script(shell_t *shell, FILE *fd)
 	if (!(line = get_valid_line(fd, shell)))
 		return (NULL);
 	line = is_conditional_line(shell, cond_line, line, fd);
+	line = remove_new_line(line);
 	return (line);
 }
