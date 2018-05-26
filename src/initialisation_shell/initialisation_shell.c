@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <unistd.h>
 #include <stdbool.h>
 #include "shell.h"
 #include "echec.h"
@@ -36,7 +37,7 @@ shell_t *initialisation_shell(int argc, char **argv, char **env)
 	shell->script = false;
 	shell->command_line = NULL;
 	shell->code = 0;
-	shell->prompt = true;
+	shell->prompt = !isatty(0) ? false : true;
 	shell->state = OK;
 	if (external_init(shell) == false)
 		return (NULL);

@@ -66,5 +66,6 @@ unsigned int shell_loop(shell_t *shell, FILE *fd)
 		if (redirect_loop(shell, input, strdup(input)) == FAILURE)
 			return (FAILURE);
 	}
+	shell->code == 250 ? shell->code = 0 : 0;
 	return (SUCCESS);
 }
