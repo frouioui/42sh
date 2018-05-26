@@ -22,14 +22,18 @@ static unsigned int right_pos_arg(char *arg)
 static char *set_args_variable(char *arg, char **env, int start)
 {
 	int pos = get_pos_key(arg + right_pos_arg(arg), env);
+	char *buf = malloc(sizeof(char) * 4);
 	unsigned int i = 0;
 
-	if (pos == -1) {
+	if (pos == -1 || buf == NULL)
 		return (arg);
-	}
+	buf[0] = '\0';
+	buf[1] = '\0';
+	buf[2] = '\0';
+	buf[3] = '\0';
 	for (i = 0; env[pos][i] && env[pos][i] != '\t'; i++);
 	if (env[pos][i] == '\0')
-		return ("");
+		return (buf);
 	free(arg);
 	arg = strdup(env[pos] + i + 1);
 	return (arg);
@@ -39,7 +43,7 @@ static char *check_env_variable_next(char *arg, char **env)
 {
 	for (int i = 0; arg[i + 1] != '\0'; i++) {
 		if (arg[i] == '$')
-			arg = set_args_variable(arg, env, i + 1);
+			return (set_args_variable(arg, env, i + 1));
 	}
 	return (arg);
 }

@@ -52,7 +52,7 @@ char *redirect_script(shell_t *shell, FILE *fd)
 		shell->script = false;
 		return (NULL);
 	}
-	if(!display_prompt(shell))
+	if (!display_prompt(shell))
 		return (NULL);
 	line = get_input(shell, 1, 0);
 	return (line);
@@ -67,5 +67,6 @@ unsigned int shell_loop(shell_t *shell, FILE *fd)
 		if (redirect_loop(shell, input, strdup(input)) == FAILURE)
 			return (FAILURE);
 	}
+	shell->code == 250 ? shell->code = 0 : 0;
 	return (SUCCESS);
 }

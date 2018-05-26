@@ -16,6 +16,8 @@ void put_new_old_pwd(shell_t *shell, char *buffer)
 	char name[] = "OLDPWD=";
 	int j = 0;
 
+	if (buffer == NULL)
+		return;
 	shell->env[pos_old_pwd] = malloc(sizeof(char) *
 		(strlen(buffer) + 8));
 	if (shell->env[pos_old_pwd] == NULL)
