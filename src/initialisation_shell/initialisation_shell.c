@@ -37,6 +37,7 @@ shell_t *initialisation_shell(int argc, char **argv, char **env)
 	shell->script = false;
 	shell->command_line = NULL;
 	shell->code = 0;
+	shell->process = NULL;
 	shell->prompt = !isatty(0) ? false : true;
 	shell->state = OK;
 	if (external_init(shell) == false)

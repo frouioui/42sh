@@ -17,8 +17,7 @@ unsigned int fill_up_instruction(bool bonus, instruction_t **instruction,
 		get_pipe_number(instruction[i]);
 		if (instruction[i]->valid == false)
 			return (SKIP);
-		instruction[i]->actual_pipe = instruction[i]->number_of_pipe
-		- 1;
+		instruction[i]->actual_pipe = 0;
 		if (instruction[i]->valid == true)
 			instruction[i]->pipe = get_pipe(bonus,
 				instruction[i], env, local);

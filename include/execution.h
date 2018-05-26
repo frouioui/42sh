@@ -15,7 +15,7 @@
 #include "shell.h"
 #include "instruction.h"
 
-#define NB_BUILTIN 10
+#define NB_BUILTIN (12)
 
 /* --- functions redirection sturcture --- */
 typedef struct redirect_flag_s {
@@ -37,7 +37,7 @@ void display_error_execution(char *);
 char *get_path_exec(pipe_t *, shell_t *);
 char *get_execution_file_path(char *, shell_t *);
 void simple_execution(shell_t *, instruction_t *);
-void check_sig(shell_t *, int);
+void check_sig(shell_t *, int, bool);
 void bad_archi(shell_t *, char *);
 char *get_redirect_filename(pipe_t *);
 void redirect_stdin_double(pipe_t *);
@@ -53,6 +53,7 @@ int env_built(shell_t *, pipe_t *);
 int exit_built(shell_t *, pipe_t *);
 int setenv_built(shell_t *, pipe_t *);
 int unsetenv_built(shell_t *, pipe_t *);
+int fg_built(shell_t * /*shell*/, pipe_t * /*pipe*/);
 void folder_error(shell_t *, int, char *, int);
 unsigned int check_rollback_path(shell_t *, char *, unsigned int, int);
 void go_home_cd(shell_t *, int);
@@ -69,6 +70,7 @@ int alias_built(shell_t *, pipe_t *);
 char *get_full_alias(char **);
 bool update_alias(shell_t *, pipe_t *);
 bool alias_match(char *, char **);
+int jobs_built(shell_t *, pipe_t *);
 int set_built(shell_t *, pipe_t *);
 int get_pos_key(char *, char **);
 int unset_built(shell_t *, pipe_t *);

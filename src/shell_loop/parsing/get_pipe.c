@@ -23,6 +23,7 @@ static unsigned int get_args_pipe(pipe_t **pipe, char **env, char **local)
 			return (FAILURE);
 		check_env_variable(pipe[i]->args, env);
 		check_local_variable(pipe[i]->args, local);
+		get_ampersand(pipe[i]);
 	}
 	return (SUCCESS);
 }
@@ -66,12 +67,13 @@ pipe_t **get_pipe(bool bonus, instruction_t *instruction, char **env,
 	if (pipe == NULL)
 		return (NULL);
 	for (unsigned int i = 0; i < instruction->number_of_pipe; i++) {
-		pipe[i] = malloc(sizeof(pipe_t));
-		if (pipe[i] == NULL)
+		if (!(pipe[i] = malloc(sizeof(pipe_t))))
 			return (NULL);
 		pipe[i]->valid = true;
 		pipe[i]->fd = 1;
+		pipe[i]->type_redirect = EMPTY_REDIR;
 		pipe[i]->path_exec = NULL;
+		pipe[i]->ampersand = false;
 		pipe[i + 1] = NULL;
 	}
 	if (get_full_pipe(pipe, instruction) == FAILURE ||

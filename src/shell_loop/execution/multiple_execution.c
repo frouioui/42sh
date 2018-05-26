@@ -24,8 +24,8 @@ static void wait_all(int *stat, shell_t *shell, instruction_t *inst, int **fd)
 	if (stat == NULL)
 		exit(84);
 	while (i < inst->number_of_pipe - 1) {
-		close(fd[i][0]);
-		close(fd[i][1]);
+		(fd[i][0] != -1) ? close(fd[i][0]) : 0;
+		(fd[i][1] != -1) ? close(fd[i][1]) : 0;
 		i++;
 	}
 	for (i = 0; i < inst->number_of_pipe - 1; i++) {
@@ -34,12 +34,16 @@ static void wait_all(int *stat, shell_t *shell, instruction_t *inst, int **fd)
 			exit(shell->code);
 		stat[i] == 0 && shell->code != 0 ? 0 :
 		(shell->code = stat[i] / 256);
-		check_sig(shell, stat[i]);
+		check_sig(shell, stat[i], inst->pipe[i]->ampersand);
 	}
 }
 
 static void free_pipes(int **fd)
 {
+	for (int i = 0; fd[i]; i++) {
+		(fd[i][0] != -1) ? close(fd[i][0]) : 0;
+		(fd[i][1] != -1) ? close(fd[i][1]) : 0;
+	}
 	for (int i = 0; fd[i]; i++)
 		free(fd[i]);
 	free(fd);
@@ -48,9 +52,9 @@ static void free_pipes(int **fd)
 static int init_stat(int *stat, instruction_t *instruction)
 {
 	if (stat == NULL)
-		return (-1);
+		return (0);
 	for (unsigned int i = 0; i < instruction->number_of_pipe + 1; i++) {
-		stat = 0;
+		stat[i] = 0;
 	}
 	return (1);
 }
@@ -65,12 +69,15 @@ void multiple_execution(shell_t *shell, instruction_t *instruction)
 	fd = create_pipe(instruction->number_of_pipe);
 	if (fd == NULL)
 		return;
-	if (!fd || !init_stat(stat, instruction) || (pid = fork()) == -1)
+	if (!init_stat(stat, instruction) || !fd)
+		exit(84);
+	if ((pid = fork()) == -1)
 		exit(84);
 	if (pid == 0)
 		exec_pipe(shell, instruction, fd, pid);
-	else
+	else {
 		wait_all(stat, shell, instruction, fd);
-	free_pipes(fd);
+		free_pipes(fd);
+	}
 	free(stat);
 }

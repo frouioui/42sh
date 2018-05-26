@@ -30,6 +30,7 @@ int destroy_shell(shell_t *shell)
 	free_array_string(shell->paths);
 	if (shell->binding != NULL)
 		free(shell->binding);
+	free_all_running_process(&shell->process);
 	free(shell);
 	return (code);
 }
