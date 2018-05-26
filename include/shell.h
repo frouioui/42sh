@@ -104,8 +104,8 @@ void display_core_dump(char *base);
 // Process Gestion
 bool get_process(struct sigaction *saves[2], pid_t pid, shell_t *shell,
 pipe_t pipe);
-int fg_built(shell_t * /*shell*/, pipe_t * /*pipe*/);
-void check_signal(shell_t * /*shell*/, int /*stat*/);
+int fg_built(shell_t *, pipe_t *);
+void check_signal(shell_t *, int);
 
 int count_words(char *str);
 char *get_word(char *str, int reset);

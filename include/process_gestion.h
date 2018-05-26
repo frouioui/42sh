@@ -62,18 +62,15 @@ void do_it_to_child(int signum, siginfo_t *info, void *env);
 pid_connection_t get_or_set_pid(bool get, pid_t pid, bool usabel, bool stop);
 
 // Core Function -------------------------
-void update_running_process(running_process_t ** /*node*/);
-running_process_t *get_process_from_args(running_process_t * /*node*/,
-char ** /*args*/);
-bool add_running_process(running_process_t ** /*node*/, pid_t /*pid_process*/,
-unsigned int /*id*/, char * /*name*/);
-running_process_t *get_the_unset_state(running_process_t * /*node*/);
-running_process_t *get_process_from_pid(running_process_t * /*node*/,
-pid_t /*pid*/);
-void display_process(running_process_t /*node*/);
+void update_running_process(running_process_t **);
+running_process_t *get_process_from_args(running_process_t *, char **);
+bool add_running_process(running_process_t **, pid_t, unsigned int, char *);
+running_process_t *get_the_unset_state(running_process_t *);
+running_process_t *get_process_from_pid(running_process_t *, pid_t);
+void display_process(running_process_t);
 
 // Free -------------------------
-void free_a_running_process(running_process_t ** /*node*/);
-void free_all_running_process(running_process_t ** /*node*/);
+void free_a_running_process(running_process_t **);
+void free_all_running_process(running_process_t **);
 
 #endif

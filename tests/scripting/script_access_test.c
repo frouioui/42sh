@@ -34,6 +34,6 @@ Test(script_access, access_exec_ko, .init = redirect_all_std)
 	bool status = check_script_access("./tests/scripting/script_exec.sh");
 
 	cr_assert_eq(status, false);
-	cr_assert_stdout_eq_str("./tests/scripting/script_exec.sh:\
- Permission denied.\n");
+	cr_assert_stdout_eq_str("./tests/scripting/script_exec.sh:"\
+	"Permission denied.\n");
 }

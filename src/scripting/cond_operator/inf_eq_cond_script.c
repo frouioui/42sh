@@ -35,7 +35,8 @@ static int get_value(shell_t *shell, char **local_var)
 	return (value);
 }
 
-int op_inf_eq(shell_t *shell, cond_t *cond_line, char **var_one, char **var_two)
+int op_inf_eq(shell_t *shell, cond_t *cond_line, char **var_one,
+	char **var_two)
 {
 	int value_one = 0;
 	int value_two = 0;

@@ -11,12 +11,14 @@
 Test(script_shebang, shebang_ok)
 {
 	bool status = check_script_shebang("./tests/scripting/script_test.sh");
+
 	cr_assert_eq(status, true);
 }
 
 Test(script_shebang, shebang_ko)
 {
-	bool status = check_script_shebang("./tests/scripting/\
-script_shebang.sh");
+	bool status = check_script_shebang("./tests/scripting/"\
+	"script_shebang.sh");
+
 	cr_assert_eq(status, false);
 }
