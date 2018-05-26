@@ -51,7 +51,7 @@ char *redirect_script(shell_t *shell, FILE *fd)
 		shell->script = false;
 		return (NULL);
 	}
-	if(!display_prompt(shell))
+	if (!display_prompt(shell))
 		return (NULL);
 	line = get_input(shell, 1, 0);
 	return (line);
