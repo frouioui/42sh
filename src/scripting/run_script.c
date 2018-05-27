@@ -8,7 +8,7 @@
 #include "script.h"
 
 char *is_conditional_line(shell_t *shell, cond_t *cond_line, char *line,
-FILE *fd)
+	FILE *fd)
 {
 	int status = 0;
 
@@ -32,7 +32,7 @@ FILE *fd)
 }
 
 static char *check_end_condition(shell_t *shell, cond_t *cond_line, char *line,
-FILE *fd)
+	FILE *fd)
 {
 	if (!line)
 		return (NULL);

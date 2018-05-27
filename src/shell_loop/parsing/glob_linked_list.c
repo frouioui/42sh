@@ -12,7 +12,7 @@
 #include <string.h>
 
 args_list_t *add_new_path(args_list_t *old_args, args_list_t *new_args,
-args_list_t **tmp)
+	args_list_t **tmp)
 {
 	args_list_t *old_tmp = old_args;
 	args_list_t *new_tmp = new_args;

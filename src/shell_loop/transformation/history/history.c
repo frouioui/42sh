@@ -15,7 +15,6 @@
 #include "mylib.h"
 #include "instruction.h"
 
-/* Gets the size of the whole history and returns it. */
 unsigned int size_history(char **paths)
 {
 	unsigned int size = 0;
@@ -32,7 +31,6 @@ unsigned int size_history(char **paths)
 	return (size);
 }
 
-/* Returns the whole history file in a (char **) */
 char **get_whole_history(char **paths)
 {
 	char **history = malloc(sizeof(char *) * (size_history(paths) + 1));

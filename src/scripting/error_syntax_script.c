@@ -30,7 +30,7 @@ static void print_error(char *var)
 }
 
 void print_error_var(char *var_one, char *var_two, int value_one,
-int value_two)
+	int value_two)
 {
 	if (value_one == -1)
 		print_error(var_one);

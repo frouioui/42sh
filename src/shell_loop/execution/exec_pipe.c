@@ -51,8 +51,8 @@ void exec_pipe(shell_t *shell, instruction_t *instruction, int **fd, pid_t pid)
 	int stat = 0;
 
 	if (UNSET_PIPE)
-		 if (pipe(fd[instruction->actual_pipe]) == SYS_CALL_ERR)
-		 	exit(84);
+		if (pipe(fd[instruction->actual_pipe]) == SYS_CALL_ERR)
+			exit(84);
 	if ((pid2 = fork()) == -1)
 		exit(84);
 	if (pid2 != 0) {

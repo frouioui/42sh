@@ -22,7 +22,7 @@ unsigned int shearch_better_id(running_process_t *node)
 }
 
 bool get_process(struct sigaction *saves[2], pid_t pid, shell_t *shell,
-pipe_t pipe)
+	pipe_t pipe)
 {
 	unsigned int id = shearch_better_id(shell->process);
 
@@ -35,7 +35,7 @@ pipe_t pipe)
 }
 
 bool add_running_process(running_process_t **node, pid_t pid_process,
-unsigned int id, char *name)
+	unsigned int id, char *name)
 {
 	if (!node)
 		return true;

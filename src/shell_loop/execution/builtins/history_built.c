@@ -13,7 +13,6 @@
 #include "execution.h"
 #include "mylib.h"
 
-/* integration of the shell struct for future use (variable size_history) */
 static void display_full_history(shell_t *shell, int fd)
 {
 	char **history = get_whole_history(shell->paths);
@@ -27,7 +26,6 @@ static void display_full_history(shell_t *shell, int fd)
 	free_array_string(history);
 }
 
-/* integration of the shell struct for future use (variable size_history) */
 static void display_line_history(shell_t *shell, int fd, int line_display)
 {
 	char **history = get_whole_history(shell->paths);

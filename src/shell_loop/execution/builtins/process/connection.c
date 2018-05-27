@@ -20,7 +20,7 @@ void do_it_to_child(int signum, siginfo_t *info, void *env)
 }
 
 bool init_connection(struct sigaction *save_one, struct sigaction *save_two,
-void (*do_it_to_child)(int, siginfo_t *, void *))
+	void (*do_it_to_child)(int, siginfo_t *, void *))
 {
 	if (sigaction(SIGINT, NULL, save_one) == SYS_CALL_ERR)
 		return true;
