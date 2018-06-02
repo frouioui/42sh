@@ -274,7 +274,7 @@ wc:
 
 clean:
 	make clean -C./lib/
-	rm -f $(OBJS) *.gc* a u y b i z buf buf2 *.txt alias_test* 42sh_tester -Rf report rapport.info
+	rm -f $(OBJS) *.gc* a u y b i z buf buf2 *.txt alias_test* 42sh_tester -Rf report rapport.info .alias* .binding* .history*
 	rm -f ./include/*.gch
 
 fclean: clean
