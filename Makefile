@@ -15,7 +15,7 @@ TEST_BINARY_NAME	=	42sh_test
 
 ## ---- FUNCTIONS ---- ##
 
-CC	=	gcc $(HEADER) $(CDFLAG)
+CC	=	gcc
 
 ## ---- PATHS ---- ##
 
@@ -205,7 +205,9 @@ DEBUG_FLAG	=	-g3
 
 HEADER	=	-I./include/
 
-CDFLAG	=	-W -Wextra
+CFLAGS	=	-W -Wall -Wextra $(WRNIGN) $(HEADER)
+
+WRNIGN	=	-Wno-pedantic -Wno-unused-variable -Wno-unused -Wno-parentheses
 
 ## ---- OBJS ---- ##
 
@@ -220,7 +222,7 @@ $(BINARY_NAME): $(OBJS)
 	$(CC) -o $(BINARY_NAME) $(HEADER) $(OBJS) $(LIB)
 
 compile:
-	gcc $(HEADER) $(CDFLAG) -std=gnu99 $(SRCS) $(SRC_MAIN) ./lib/my/*.c -o $(BINARY_NAME) -lncurses
+	gcc $(HEADER) $(CDFLAG) -std=gnu17 $(SRCS) $(SRC_MAIN) ./lib/my/*.c -o $(BINARY_NAME) -lncurses
 
 ## -- TESTING RULES -- ##
 

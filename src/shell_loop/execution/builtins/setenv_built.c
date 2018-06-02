@@ -35,20 +35,6 @@ static char **update_env_variable(char **env, int pos, char *str)
 	return (env);
 }
 
-static int env_compare(char *env, char *args)
-{
-	int i = 0;
-
-	if (env == NULL)
-		return (0);
-	while (env[i] && args[i] && env[i] == args[i] && env[i] != '=') {
-		i++;
-	}
-	if (args[i] == '\0')
-		return (0);
-	return (1);
-}
-
 static char **add_env_variable(char **env, char **args, int pos)
 {
 	int j = 0;
