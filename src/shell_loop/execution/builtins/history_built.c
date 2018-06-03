@@ -60,4 +60,5 @@ int history_built(shell_t *shell, pipe_t *pipe)
 		display_line_history(shell, pipe->fd, atoi(pipe->args[1]));
 	else
 		error_history(pipe->fd);
+	return (0);
 }
